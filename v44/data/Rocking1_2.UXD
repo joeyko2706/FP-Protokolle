@@ -1,0 +1,107 @@
+; C:\DIFFDAT1\Praktikum\KochVogt\Rocking1_2.raw(Diffrac Plus V1.01 file) converted by XCH V1.0
+_FILEVERSION=2
+_SITE='Deutschland'
+_USER='Administrator'
+_GONIOMETER_CODE=4885
+; D8 Theta/Theta; Special
+_SAMPLE_CHANGER_CODE=0
+_ATTACHMENTS_CODE=0
+_GONIOMETER_RADIUS=350.000000
+_FIXED_DIVSLIT=0.600000
+_FIXED_SAMPLESLIT=0.000000
+_FIXED_DETSLIT=11.660000
+_MONOCHROMATOR=0
+; None
+_THIN_FILM='N'
+_BETA_FILTER='Y'
+_FIXED_ANTISLIT=8.340000
+_ANALYZER_CODE=0
+; None
+_DATEMEASURED='28-Oct-2024 10:12:44'
+_WL_UNIT='A'
+_WL1=1.540600
+_WL2=1.544390
+_WL3=1.392220
+_WLRATIO=0.500000
+_ANODE='Cu'
+; (Data for Range number 1)
+_DRIVE='THETA'
+_STEPTIME=1.000000
+_STEPSIZE=0.040000
+_STEPMODE='S'
+_START=-1.000000
+_THETA=-1.000000
+_2THETA=0.000000
+_KHI=0.000000
+_PHI=90.000000
+_X=4.611000
+_Y=0.600000
+_Z=0.389000
+_DIVERGENCE=0.000000
+_ANTISCATTER=0.000000
+_DETECTOR=5
+_DETECTORSLIT='unkn'
+_AUX1=0.000000
+_AUX2=0.000000
+_AUX3=0.000000
+_TIMESTARTED=2.000000
+_TEMP_RATE=-1.000000
+_TEMP_DELAY=-1.000000
+_KV=35
+_MA=35
+_RANGE_WL=1.540600
+_3DPLANE=0
+_GONIOMETER=0.000000
+_PSDCHANNEL0=0
+_2THETACOUNTS
+  -1.0000         1
+  -0.9600         0
+  -0.9200         0
+  -0.8800         3
+  -0.8400         2
+  -0.8000         5
+  -0.7600         6
+  -0.7200         4
+  -0.6800         3
+  -0.6400        12
+  -0.6000         8
+  -0.5600        15
+  -0.5200        30
+  -0.4800        38
+  -0.4400        64
+  -0.4000       200
+  -0.3600      3659
+  -0.3200     16313
+  -0.2800     35990
+  -0.2400     58045
+  -0.2000     77694
+  -0.1600     97595
+  -0.1200    116553
+  -0.0800    134732
+  -0.0400    152292
+   0.0000    167921
+   0.0400    170516
+   0.0800    153450
+   0.1200    134272
+   0.1600    115516
+   0.2000     96549
+   0.2400     75306
+   0.2800     53153
+   0.3200     30484
+   0.3600     12931
+   0.4000      2275
+   0.4400       131
+   0.4800        48
+   0.5200        31
+   0.5600        28
+   0.6000        22
+   0.6400        18
+   0.6800        11
+   0.7200         3
+   0.7600         8
+   0.8000         5
+   0.8400         7
+   0.8800         2
+   0.9200         5
+   0.9600         2
+   1.0000         0

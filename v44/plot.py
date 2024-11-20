@@ -21,7 +21,7 @@ params, covariance = curve_fit(gaussian_fit, theta, hits, bounds=bounds)
 
 errors = np.sqrt(np.diag(covariance))
 sigma = ufloat(params[1], errors[1])
-FWHM = 2*np.sqrt(2*np.log(2))*sigma         # Standardformel der FWHM
+FWHM = 2*unp.sqrt(2*np.log(2))*sigma        # Standardformel der FWHM
 hline = params[2]/(2*np.sqrt(2*np.pi*params[1]**2)) - params[3]
 vline = [params[0] - 1/2*FWHM.nominal_value, params[0] + 1/2*FWHM.nominal_value]
 
@@ -29,7 +29,7 @@ x = np.linspace(-0.5, 0.5, 1000)
 plt.plot(x, gaussian_fit(x, *params), color = "b", label="Fit")
 plt.plot(theta, hits, "x", color="r", label="Messwerte")
 plt.hlines(hline, xmin = -0.5, xmax = 0.5, color = "gray", ls = "dashed", label = r"$\frac{1}{2} \;I_0$")
-plt.vlines(vline , 0, 400000, color = "gray", alpha=.7, label = f"FWHM: {2*unp.sqrt(2*np.log(2))*sigma:.3f}°")
+plt.vlines(vline , 0, 400000, color = "gray", alpha=.7, label = f"FWHM: {FWHM.nominal_value:.3f}({FWHM.std_dev:.3f})°")
 
 plt.xlim(-0.5, 0.5)
 plt.ylim(-0.9, 400000)
@@ -60,15 +60,15 @@ lowerLimit = 32
 strahlbreite = np.round(z[upperLimit]- z[lowerLimit],2)
 
 plt.errorbar(z, hits, yerr=np.sqrt(hits), fmt="rx", label="Messwerte")
-plt.vlines([z[lowerLimit], z[upperLimit]], ymin=0, ymax= 4e5, color="b", label = f"Strahlbreite: {strahlbreite} mm")    # counted 25 + 3 = 28
+plt.vlines([z[lowerLimit], z[upperLimit]], ymin=0, ymax= 4e5, color="b", label = f"Strahlbreite: {strahlbreite} $mm$")    # counted 25 + 3 = 28
 
 plt.xlim(-1, 1)
 plt.ylim(-0.9, 400000)
-plt.xlabel(r"$z / \text{mm}$")
-plt.ylabel(r"$I / \text{Hits/s}$")
+plt.xlabel(r"$z\,/\text{mm}$")
+plt.ylabel(r"$I\,/\,\text{Hits/s}$")
 plt.grid()
 plt.legend(loc="best")
-plt.savefig("build/ZScan1.pdf")
+plt.savefig("build/ZScan.pdf")
 plt.clf()
 
 print("-------------------------------------------------------")
@@ -90,11 +90,11 @@ plt.vlines([theta[lowerLimit], theta[upperLimit]], ymin=0, ymax= 175e3, color="b
 plt.xlim(-1, 1)
 plt.ylim(-0, 17.5e4)
 plt.ticklabel_format(axis="y", style="sci", scilimits=(0,0), useMathText=True)
-plt.xlabel(r"$\theta / \text{DEG}$")
-plt.ylabel(r"$I / \text{Hits/s}$")
+plt.xlabel(r"$\theta\,/\, \text{DEG}$")
+plt.ylabel(r"$I\,/\,\text{Hits/s}$")
 plt.grid()
-plt.legend(loc="upper right")
-plt.savefig("build/Rocking1.pdf")
+plt.legend(loc="upper left")
+plt.savefig("build/RockingScan.pdf")
 plt.clf()
 
 
@@ -121,8 +121,8 @@ plt.plot(thetaReflect, hitsReflect - hitsDiffuser[:thetaReflect.size], linestyle
 
 plt.xlim(0,1.5)
 plt.yscale("log")
-plt.xlabel(r"$\theta / \text{DEG}$")
-plt.ylabel(r"$I / \text{Hits/s}$")
+plt.xlabel(r"$\theta\,/\, \text{DEG}$")
+plt.ylabel(r"$I\,/\,\text{Hits/s}$")
 plt.grid()
 plt.legend(loc="best")
 plt.savefig("build/ReflectDiffuserScan.pdf")
@@ -145,22 +145,23 @@ def fresnel(alpha):
 
 
 minima = []
-for i in range(len(thetaReflect)):
-    if thetaReflect[i] > 0.2 and thetaReflect[i] < 1 and reflectivity_corrected[i] <= reflectivity_corrected[i-1] and reflectivity_corrected[i] <= reflectivity_corrected[i+1] and reflectivity_corrected[i] < thetaReflect[i+2] and reflectivity_corrected[i] < reflectivity_corrected[i-2]:
-        if all(reflectivity_corrected[i] < reflectivity_corrected[i+k] for k in range(1, 5)) and all(reflectivity_corrected[i] < reflectivity_corrected[i-k] for k in range(1, 5)):
-            minima.append(i)
+for i in range(6,len(thetaReflect)):
+    if (thetaReflect[i] > 0.2) and (thetaReflect[i] < 1) and all(reflectivity_corrected[i] < reflectivity_corrected[i+k] for k in range(1, 5)) and all(reflectivity_corrected[i] < reflectivity_corrected[i-k] for k in range(1, 5)):
+        minima.append(i)
 
 
 plt.errorbar(thetaReflect, reflectivity, label="Reflect ohne Korrekturfaktor", color="r")
 plt.errorbar(thetaReflect, reflectivity_corrected, label="Reflect mit Korrekturfaktor", color="darkred", linestyle="dashed", alpha=0.7)
-plt.plot(x, fresnel(x), label="Fresnel", color="b")
+plt.plot(x, fresnel(x), label="Fresnelreflektivität", color="b")
 plt.plot(x2, 2*[fresnel(critical_angle)], color="b")
 plt.plot(thetaReflect[minima], reflectivity[minima], "x", color="k", label="Minima")
+plt.vlines(critical_angle, 0, 10**2, color="gray", linestyle="dashed", label=r"Kritischer Winkel $\alpha_c$")
 
 plt.xlim(0,1.5)
+plt.ylim(10**(-5),10**(2))
 plt.yscale("log")
-plt.xlabel(r"$\theta / \text{DEG}$")
-plt.ylabel(r"$I / \text{Hits/s}$")
+plt.xlabel(r"$\theta\,/\, \text{DEG}$")
+plt.ylabel(r"$R$")
 plt.grid()
 plt.legend(loc="best")
 plt.savefig("build/Reflectivity.pdf")
@@ -216,10 +217,17 @@ def parratt(alpha, delta2, delta3, b2, b3, d2, sigma1, sigma2): # Parratt-Algori
 plt.plot(x, parratt(x, *start_params), label="Parratt-Algorithmus", color="b", alpha=.8)
 plt.plot(thetaReflect, reflectivity_corrected, label="Reflektivitäten (mit Korrekturfaktor)", color="r", alpha=.8)
 
-start_params, covariance = curve_fit(parratt, thetaReflect, reflectivity_corrected, p0=start_params, bounds=boundaries)
-err = np.sqrt(np.diag(covariance))
 
-plt.xlabel(r"$\theta / \text{DEG}$")
+x = np.linspace(critical_angle, 1.5, 10000)
+x2 = np.linspace(0,critical_angle,2)
+plt.plot(x, fresnel(x), label="Fresnelreflektivität", color="gray", linestyle="dashed", alpha=.8)
+plt.plot(x2, 2*[fresnel(critical_angle)], color="gray", linestyle="dashed", alpha=.8)
+
+
+start_params, covariance = curve_fit(parratt, thetaReflect, reflectivity_corrected, p0=start_params, bounds=boundaries)
+# err = np.sqrt(np.diag(covariance))
+
+plt.xlabel(r"$\theta\,/\, \text{DEG}$")
 plt.ylabel(r"$R$")
 plt.xlim(0,1.5)
 plt.grid()
@@ -228,16 +236,14 @@ plt.yscale("log")
 plt.savefig("build/Parratt.pdf")
 
 
-
-
 print("-----------------Parratt-Algorithmus-----------------------")
-print(f"delta Silizium:                 {start_params[0]:.2e} +/- {err[0]:.2e}")
-print(f"delta Poly:                     {start_params[1]:.2e} +/- {err[1]:.2e}")
-print(f"b Silizium:                     {start_params[2]:.2e} +/- {err[2]:.2e}")
-print(f"b Poly:                         {start_params[3]:.2e} +/- {err[3]:.2e}")
-print(f"d:                              {start_params[4]:.2e} +/- {err[4]:.2e}")
-print(f"sigma Silizium:                 {start_params[5]:.2e} +/- {err[5]:.2e}")
-print(f"sigma Polysterol:               {start_params[6]:.2e} +/- {err[6]:.2e}")
+print(f"delta Silizium:                 {start_params[0]:.2e}")
+print(f"delta Poly:                     {start_params[1]:.2e}")
+print(f"b Silizium:                     {start_params[2]:.2e}")
+print(f"b Poly:                         {start_params[3]:.2e}")
+print(f"d:                              {start_params[4]:.2e}")
+print(f"sigma Silizium:                 {start_params[5]:.2e}")
+print(f"sigma Polysterol:               {start_params[6]:.2e}")
 print(f"Kritischer Winkel Silizium:     {crit_winkel_sili:.2}")
 print(f"Kritischer Winkel Polysterol:   {crit_winkel_poly:.2}")
 
@@ -260,13 +266,13 @@ Delta alpha:    (5.12+/-0.45)e-02
 Schichtdicke:   (8.62+/-0.75)e-08
 ---------------------------------------------------
 -----------------Parratt-Algorithmus-----------------------
-delta Silizium:                 9.53e-06 +/- 4.90e-06
-delta Poly:                     8.44e-06 +/- 1.40e-05
-b Silizium:                     1.00e-10 +/- 1.39e-06
-b Poly:                         3.74e-07 +/- 1.29e-05
-d:                              2.40e-08 +/- 1.21e-07
-sigma Silizium:                 1.40e-11 +/- 6.01e-08
-sigma Polysterol:               2.90e-10 +/- 5.64e-07
+delta Silizium:                 9.53e-06
+delta Poly:                     8.44e-06
+b Silizium:                     1.00e-10
+b Poly:                         3.74e-07
+d:                              2.40e-08
+sigma Silizium:                 1.40e-11
+sigma Polysterol:               2.90e-10
 Kritischer Winkel Silizium:     0.0047+/-0.0000
 Kritischer Winkel Polysterol:   0.0013+/-0.0001
 '''

@@ -1,31 +1,119 @@
 \section{Auswertung}
 \label{sec:Auswertung}
 
-\begin{figure}
-  \centering
-  \includegraphics{plot.pdf}
-  \caption{Plot.}
-  \label{fig:plot}
+Um auf die Eigenschaften des Siliziumwafers schließen zu können, muss das Messgerät zunächst kalibriert und die hinsichtlich dessen ausgewertet werden.
+
+\subsection{Bestimmung der Halbwertsbreite und der maximalen Intensität}
+\label{subsec:Halbwertsbreite}
+
+Um die Halbwertsbreite und auch die maximale Intensität zu bestimmen, wird an die Messdaten eines Detectorscans eine Gaußfunktion der Form aus Gleichung \ref{eq:Gauss} gefittet. 
+Dabei ist $I(\alpha)$ die Intensität in Abhängigkeit des Winkels $\alpha$, $I_0$ die maximale Intensität, $\alpha_0$ der Winkel bei dem die maximale Intensität auftritt, $\sigma$ die Halbwertsbreite und $B$ der Untergrund.
+Eine graphische Darstellung der Messdaten und des Fits ist in Abbildung \ref{fig:Gauss} zu sehen.
+\begin{align}
+    I(\alpha) = \frac{I_0}{\sqrt{2\pi\sigma^2}} \exp\left(-\frac{(\alpha-\alpha_0)^2}{2\sigma^2}\right) +B
+    \label{eq:Gauss}
+\end{align}
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.8\textwidth]{./build/DetectorScan.pdf}
+    \caption{Messdaten und Fit zur Bestimmung der Halbwertsbreite und der maximalen Intensität.}
+    \label{fig:Gauss}
 \end{figure}
+\noindent
+Die Grafik wurde mithilfe der Bibliotheken numpy \cite{numpy} und matplotlib \cite{matplotlib}, wobei der Fit mithilfe scipy \cite{scipy} durchgeführt wurde.
+Die freien Parameter des Fits ergeben sich zu
+\begin{align*}
+    \alpha_0 &= \SI{2.6767(0.4602)e-3}{\degree}, \\
+    \sigma &= \SI{3.6969(0.0041)e-2}{\degree}, \\
+    I_0 &= \si{3.4247(0.0411)e4},\\
+    B &= \si{5.1979(0.9178)e4}.\\
+\end{align*}
+Die Halbwertsbreite entspricht der Breite der Funktion an der die Intensität auf halber Höhe ist, weshalb man sie auch mit \textit{FWMH} (full width at half maximum) bezeichnet.
+Sie ergibt sich über $\text{FWHM} = 2\sqrt{2\ln(2)}\sigma$ zu
+\begin{align*}
+    \text{FWHM} = \SI{0.0871(0.0011)}{\degree}.
+\end{align*}
 
-\begin{table}
-  \centering
-  \caption{Eine Beispieltabelle mit Messdaten.}
-  \label{tab:tabelle}
-  \sisetup{table-format=1.1, per-mode=reciprocal}
-  \begin{tblr}{
-      colspec = {S[table-format=3.0] S[table-format=2.1] S},
-      row{1} = {guard, mode=math},
-      vline{4} = {2}{-}{text=\clap{$\pm$}},
-    }
-    \toprule
-    U \mathbin{/} \unit{\volt} & I \mathbin{/} \unit{\micro\ampere} & \SetCell[c=2]{c} N \mathbin{/} \unit{\per\second} & \\
-    \midrule
-    360 & 0.1 & 98.3 & 0.9 \\
-    400 & 0.2 & 99.8 & 1.0 \\
-    420 & 0.2 & 99.1 & 0.9 \\
-    \bottomrule
-  \end{tblr}
-\end{table}
 
-Siehe \autoref{fig:plot} und \autoref{tab:tabelle}!
+\subsection{Bestimmung der Strahlbreite}
+\label{subsec:Strahlbreite}
+
+Um die Strahlbreite zu bestimmen, wird ein Z-Scan durchgeführt.
+Da in diesem Test die z-Achse der Probe in den Strahlengang bewegt wird, der zunächst vollständig auf den Detektor fällt, wird die Intensität in Abhängigkeit der Position der Probe gemessen.
+Der Abstand, der benötigt wird, damit die Intensität vollständig auf null fällt, entspricht der Strahlbreite.
+Eine grafische Auswertung des Z-Scans ist in Abbildung \ref{fig:ZScan} zu sehen.
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.8\textwidth]{./build//ZScan.pdf}
+    \caption{Messdaten des Z-Scans zur Bestimmung der Strahlbreite.}
+    \label{fig:ZScan}
+\end{figure}
+\noindent
+Die Strahlbreite bestimmt sich zu $d_0\approx\SI{0.2}{\milli\meter}$.
+
+\subsection{Bestimmung des Geometriewinkels}
+\label{subsec:Geometriewinkel}
+
+Um den in \textbf{HIER ABSCHNITT EINFÜGEN} beschriebenen systematischen Fehler zu beheben, wird der Geometriewinkel bestimmt.
+Dazu wird ein Rockingscan durchgeführt, woraus sich der Geometriewinkel mithilfe der Breite der Messwerte bestimmt.
+Die Messdaten und die Breite, die zu dem Geometriewinkel führt, sind in Abbildung \ref{fig:RockingScan} zu sehen.
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.8\textwidth]{./build//RockingScan.pdf}
+    \caption{Messdaten des Rockingscans zur Bestimmung des Geometriewinkels.}
+    \label{fig:RockingScan}
+\end{figure}
+\noindent
+Der Geometriewinkel ergibt sich mithilfe von Formel \textbf{HIER FORMEL EINFÜGEN}, zu $\alpha_{\text G} = \SI{0.014}{\degree}$.
+
+\subsection{Auswertung der Dispersion und der Rauigkeit des Siliziumwafers}
+\label{subsec:Dispersion}
+
+Für die Auswertung des mit Plysterol beschichteten Siliziumwafers und dessen Oberflächenrauigkeit und auch die Schichtdicken zu bestimmen, werden Reflektivitätsscans durchgeführt.
+Zunächst werden ein normaler Reflektivitätsscan und ein Diffuser-Scan durchgeführt, um die Messdaten von dem Untergrund zu bereinigen.
+Eine grafische Auswertung der Messdaten und der Differenz der beiden Scans ist in Abbildung \ref{fig:Reflektivität} zu sehen.
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.8\textwidth]{./build//ReflectDiffuserScan.pdf}
+    \caption{Messdaten des Reflektivitäts- und Diffusorscans und die Differenz der beiden Scans.}
+    \label{fig:Reflektivität}
+\end{figure}
+\noindent
+In den nächsten Scans wird die Messzeit pro Messpunkt auf $\SI{5}{\second}$ erhöht, weshalb die Reflektivität $R$ betrachtet wird, die sich über
+\begin{align*}
+    R = \frac{I_{\text{Probe}}}{5\cdot I_{0}}.
+\end{align*}
+Es wird zusätzlich der Geometriefaktor berücksichtigt \textbf{HIER FORMEL EINFÜGEN}.
+Der Verlauf der Reflektivität einer idealen Probe ergibt sich über die Fresnelreflektivität \textbf{HIER FORMEL EINFÜGEN}, wobei sich der kritische Winkel der Probe über \textbf{HIER FORMEL EINFÜGEN} zu $\alpha_{\text{crit}} = \SI{0.223}{\degree}$ ergibt.
+Mithilfe der Wellenlänge der $K_{\alpha}$-Linie von Kupfer $\lambda = \SI{1.54}{\angstrom}$ und der periodischen Minima der Kiessing-Oszillationen, lässt sich die Schichtdicke der Probe bestimmen.
+Sie sind gemeinsam mit der korriegierten und unkorriegierten Reflektivität und der Fresnelreflektivität in Abbildung \ref{fig:Reflektivität2} dargestellt.
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.8\textwidth]{./build//Reflectivity.pdf}
+    \caption{(Un-)Bereinigte Reflektivität und die Fresnelreflektivität.}
+    \label{fig:Reflektivität2}
+\end{figure}
+\noindent
+Die Schichtdicke der Probe ergibt mit $\Delta\alpha= \SI{5.12(0.45)e-2}{\degree}$ zu $d = \SI{8.62(0.75)e-8}{\meter}$. \newline
+Mithilfe des Parrattalgorithmus \textbf{HIER REFERENZ EINFÜGEN} eines Mehrschichtsystems, lassen sich die Dispersion $\delta$, die Rauigkeit $\sigma$ und die Dicke der Polysterolschicht bestimmen.
+Die mit dem Parrattalgorithmus aus \textbf{???} berechnete Fit ist mit der bereinigten Reflektivität in Abbildung \ref{fig:Reflectivity3} dargestellt.
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.8\textwidth]{./build//Parratt.pdf}
+    \caption{Bereinigte Reflektivität und Fit des Parrattalgorithmus.}
+    \label{fig:Reflectivity3}
+\end{figure}
+\noindent
+Die Startwerte der freien Parameter wurde auf aus der Literatur bekannten Werte gesetzt.
+Die freien Parameter des Fits ergeben sich zu
+\begin{align*}
+    &\delta_{\text{Si}} = \SI{9.53e-6}, & & \delta_{\text{Poly}} = \SI{8.44e-6}, \\
+    &\beta_{\text{Si}} = \SI{1.0e-10}, & &\beta_{\text{Poly}} = \SI{3.74e-7}, \\
+    &\sigma_{\text{Luft, Poly}} = \SI{2.9e-10}, & & \sigma_{\text{Poly, SI}} = \SI{1.4e-11}, \\
+    &\alpha_{\text{c, Poly}} = \SI{0.0047}{\degree}, & & \alpha_{\text{c, SI}} = \SI{0.0013}{\degree}, 
+    % \\
+    % & &d_{\text{Poly}} = \SI{1.0e-6}.
+\end{align*}
+\begin{align*}
+    d_{\text{Poly}} = \SI{1.0e-6}.
+\end{align*}

@@ -1,14 +1,14 @@
 all: build/v44.pdf
 
 # hier Python-Skripte:
-build/plot.pdf: plot.py ../matplotlibrc ../header-matplotlib.tex | build
+build/DetectorScan.pdf build/Parratt.pdf build/ReflectDiffuserScan.pdf build/Reflectivity.pdf build/Rocking1.pdf build/Zscan1.pdf: plot.py ../matplotlibrc ../header-matplotlib.tex | build
 	# so that matplotlib can find the tex header when running
 	# LaTeX in the tmp directory
 	# and set the matplotlibrc
 	TEXINPUTS=$$(pwd)/..: MATPLOTLIBRC=../matplotlibrc python plot.py
 
 # hier weitere Abhängigkeiten für build/v44.pdf deklarieren:
-build/v44.pdf: build/plot.pdf
+build/v44.pdf: build/DetectorScan.pdf build/Parratt.pdf build/ReflectDiffuserScan.pdf build/Reflectivity.pdf build/Rocking1.pdf build/Zscan1.pdf
 
 build/v44.pdf: FORCE | build
 	# to find header and bib files in the main directory

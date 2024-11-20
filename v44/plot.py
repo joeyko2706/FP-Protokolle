@@ -28,8 +28,8 @@ vline = [params[0] - 1/2*FWHM.nominal_value, params[0] + 1/2*FWHM.nominal_value]
 x = np.linspace(-0.5, 0.5, 1000)
 plt.plot(x, gaussian_fit(x, *params), color = "b", label="Fit")
 plt.plot(theta, hits, "x", color="r", label="Messwerte")
-plt.hlines(hline, xmin = -0.5, xmax = 0.5, color = "gray", ls = "dashed")#, label = r"$\frac{1}{2} \;I_0$")
-plt.vlines(vline , 0, 400000, color = "gray", alpha=.7)#, label = f"FWHM: {2*unp.sqrt(2*np.log(2))*sigma:.3f}°")
+plt.hlines(hline, xmin = -0.5, xmax = 0.5, color = "gray", ls = "dashed", label = r"$\frac{1}{2} \;I_0$")
+plt.vlines(vline , 0, 400000, color = "gray", alpha=.7, label = f"FWHM: {2*unp.sqrt(2*np.log(2))*sigma:.3f}°")
 
 plt.xlim(-0.5, 0.5)
 plt.ylim(-0.9, 400000)
@@ -43,11 +43,11 @@ plt.clf()
 I0 = ufloat(params[2], errors[2])
 print("\n")
 print("--------------Parameter der Gaußfunktion---------------")
-print(f"alpha0      : {params[0]:.4e} +- {errors[0]:.4e}")
-print(f"sigma   :  {params[1]:.4e} +- {errors[1]:.4e}")
-print(f"I0      :  {I0:.4e}")
-print(f"B       :  {params[3]:.4e} +- {errors[3]:.4e}")
-print(f"FWHM    :  {FWHM}")
+print(f"alpha0  : {params[0]:.4e} +/- {errors[0]:.4e}")
+print(f"sigma   : {params[1]:.4e} +/- {errors[1]:.4e}")
+print(f"I0      : {I0:.4e}")
+print(f"B       : {params[3]:.4e} +/- {errors[3]:.4e}")
+print(f"FWHM    : {FWHM}")
 
 
 #######################################################
@@ -102,7 +102,7 @@ winkel_theorie = np.arcsin(strahlbreite/20) # rad
 winkel_experiment = np.deg2rad(theta[upperLimit]- theta[lowerLimit])
 print("-----------------Geometriewinkel-----------------------")
 print(f"Experiment: {winkel_experiment:.2}°")
-print(f"Theorie: {winkel_theorie:.2}°")
+print(f"Theorie:    {winkel_theorie:.2}°")
 print("-------------------------------------------------------")
 
 #######################################################
@@ -160,7 +160,7 @@ plt.plot(thetaReflect[minima], reflectivity[minima], "x", color="k", label="Mini
 plt.xlim(0,1.5)
 plt.yscale("log")
 plt.xlabel(r"$\theta / \text{DEG}$")
-plt.ylabel(r"$R$")
+plt.ylabel(r"$I / \text{Hits/s}$")
 plt.grid()
 plt.legend(loc="best")
 plt.savefig("build/Reflectivity.pdf")
@@ -173,8 +173,8 @@ delta_a = ufloat(np.mean(diff), np.std(diff))
 d = lambda_ka/(2*delta_a*np.pi/180)
 
 print("-----------------Schichtdicke-----------------------")
-print(f"Delta alpha: {delta_a:.2e}")
-print(f"Schichtdicke: {d:.2e}")
+print(f"Delta alpha:    {delta_a:.2e}")
+print(f"Schichtdicke:   {d:.2e}")
 print("---------------------------------------------------")
 
 #######################################################
@@ -216,6 +216,9 @@ def parratt(alpha, delta2, delta3, b2, b3, d2, sigma1, sigma2): # Parratt-Algori
 plt.plot(x, parratt(x, *start_params), label="Parratt-Algorithmus", color="b", alpha=.8)
 plt.plot(thetaReflect, reflectivity_corrected, label="Reflektivitäten (mit Korrekturfaktor)", color="r", alpha=.8)
 
+start_params, covariance = curve_fit(parratt, thetaReflect, reflectivity_corrected, p0=start_params, bounds=boundaries)
+err = np.sqrt(np.diag(covariance))
+
 plt.xlabel(r"$\theta / \text{DEG}$")
 plt.ylabel(r"$R$")
 plt.xlim(0,1.5)
@@ -223,3 +226,47 @@ plt.grid()
 plt.legend(loc="best")
 plt.yscale("log")
 plt.savefig("build/Parratt.pdf")
+
+
+
+
+print("-----------------Parratt-Algorithmus-----------------------")
+print(f"delta Silizium:                 {start_params[0]:.2e} +/- {err[0]:.2e}")
+print(f"delta Poly:                     {start_params[1]:.2e} +/- {err[1]:.2e}")
+print(f"b Silizium:                     {start_params[2]:.2e} +/- {err[2]:.2e}")
+print(f"b Poly:                         {start_params[3]:.2e} +/- {err[3]:.2e}")
+print(f"d:                              {start_params[4]:.2e} +/- {err[4]:.2e}")
+print(f"sigma Silizium:                 {start_params[5]:.2e} +/- {err[5]:.2e}")
+print(f"sigma Polysterol:               {start_params[6]:.2e} +/- {err[6]:.2e}")
+print(f"Kritischer Winkel Silizium:     {crit_winkel_sili:.2}")
+print(f"Kritischer Winkel Polysterol:   {crit_winkel_poly:.2}")
+
+
+'''
+--------------Parameter der Gaußfunktion---------------
+alpha0  : 2.6767e-03 +/- 4.6026e-04
+sigma   : 3.6969e-02 +/- 4.7823e-04
+I0      : (3.4247+/-0.0411)e+04
+B       : 5.1979e+03 +/- 9.1778e+02
+FWHM    : 0.0871+/-0.0011
+-------------------------------------------------------
+Strahlbreite: 0.2 mm
+-----------------Geometriewinkel-----------------------
+Experiment: 0.014°
+Theorie:    0.01°
+-------------------------------------------------------
+-----------------Schichtdicke-----------------------
+Delta alpha:    (5.12+/-0.45)e-02
+Schichtdicke:   (8.62+/-0.75)e-08
+---------------------------------------------------
+-----------------Parratt-Algorithmus-----------------------
+delta Silizium:                 9.53e-06 +/- 4.90e-06
+delta Poly:                     8.44e-06 +/- 1.40e-05
+b Silizium:                     1.00e-10 +/- 1.39e-06
+b Poly:                         3.74e-07 +/- 1.29e-05
+d:                              2.40e-08 +/- 1.21e-07
+sigma Silizium:                 1.40e-11 +/- 6.01e-08
+sigma Polysterol:               2.90e-10 +/- 5.64e-07
+Kritischer Winkel Silizium:     0.0047+/-0.0000
+Kritischer Winkel Polysterol:   0.0013+/-0.0001
+'''

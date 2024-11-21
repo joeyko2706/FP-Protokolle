@@ -2,6 +2,7 @@
 \label{sec:Auswertung}
 
 Um auf die Eigenschaften des Siliziumwafers schließen zu können, muss das Messgerät zunächst kalibriert und die hinsichtlich dessen ausgewertet werden.
+Die Auswertung erfolgt mithilfe der python Bibliotheken numpy \cite{numpy}, scipy \cite{scipy} und uncertainties \cite{uncertainties}, während die Grafiken mit matplotlib \cite{matplotlib} erstellt werden.
 
 \subsection{Bestimmung der Halbwertsbreite und der maximalen Intensität}
 \label{subsec:Halbwertsbreite}
@@ -16,17 +17,16 @@ Eine graphische Darstellung der Messdaten und des Fits ist in Abbildung \ref{fig
 \begin{figure}[H]
     \centering
     \includegraphics[width=0.8\textwidth]{./build/DetectorScan.pdf}
-    \caption{Messdaten und Fit zur Bestimmung der Halbwertsbreite und der maximalen Intensität.}
+    \caption{Messdaten des Detectorscans und Fit zur Bestimmung der Halbwertsbreite und der maximalen Intensität.}
     \label{fig:Gauss}
 \end{figure}
 \noindent
-Die Grafik wurde mithilfe der Bibliotheken numpy \cite{numpy} und matplotlib \cite{matplotlib}, wobei der Fit mithilfe scipy \cite{scipy} durchgeführt wurde.
 Die freien Parameter des Fits ergeben sich zu
 \begin{align*}
     \alpha_0 &= \SI{2.6767(0.4602)e-3}{\degree}, \\
     \sigma &= \SI{3.6969(0.0041)e-2}{\degree}, \\
-    I_0 &= \si{3.4247(0.0411)e4},\\
-    B &= \si{5.1979(0.9178)e4}.\\
+    I_0 &= \SI{3.4247(0.0411)e4},\\
+    B &= \SI{5.1979(0.9178)e4}.\\
 \end{align*}
 Die Halbwertsbreite entspricht der Breite der Funktion an der die Intensität auf halber Höhe ist, weshalb man sie auch mit \textit{FWMH} (full width at half maximum) bezeichnet.
 Sie ergibt sich über $\text{FWHM} = 2\sqrt{2\ln(2)}\sigma$ zu
@@ -96,12 +96,12 @@ Sie sind gemeinsam mit der korriegierten und unkorriegierten Reflektivität und 
 \noindent
 Die Schichtdicke der Probe ergibt mit $\Delta\alpha= \SI{5.12(0.45)e-2}{\degree}$ zu $d = \SI{8.62(0.75)e-8}{\meter}$. \newline
 Mithilfe des Parrattalgorithmus \textbf{HIER REFERENZ EINFÜGEN} eines Mehrschichtsystems, lassen sich die Dispersion $\delta$, die Rauigkeit $\sigma$ und die Dicke der Polysterolschicht bestimmen.
-Die mit dem Parrattalgorithmus aus \textbf{???} berechnete Fit ist mit der bereinigten Reflektivität in Abbildung \ref{fig:Reflectivity3} dargestellt.
+Die mit dem Parrattalgorithmus aus \textbf{HIER FORMEL EINFÜGEN} berechnete Fit ist mit der bereinigten Reflektivität in Abbildung \ref{fig:Reflektivität3} dargestellt.
 \begin{figure}[H]
     \centering
     \includegraphics[width=0.8\textwidth]{./build//Parratt.pdf}
     \caption{Bereinigte Reflektivität und Fit des Parrattalgorithmus.}
-    \label{fig:Reflectivity3}
+    \label{fig:Reflektivität3}
 \end{figure}
 \noindent
 Die Startwerte der freien Parameter wurde auf aus der Literatur bekannten Werte gesetzt.

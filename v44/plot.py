@@ -29,7 +29,7 @@ x = np.linspace(-0.5, 0.5, 1000)
 plt.plot(x, gaussian_fit(x, *params), color = "b", label="Fit")
 plt.plot(theta, hits, "x", color="r", label="Messwerte")
 plt.hlines(hline, xmin = -0.5, xmax = 0.5, color = "gray", ls = "dashed", label = r"$\frac{1}{2} \;I_0$")
-plt.vlines(vline , 0, 400000, color = "gray", alpha=.7, label = f"FWHM: {FWHM.nominal_value:.3f}({FWHM.std_dev:.3f})°")
+plt.vlines(vline , 0, 400000, color = "gray", label = f"FWHM: {FWHM.nominal_value:.3f}({FWHM.std_dev:.3f})°")
 
 plt.xlim(-0.5, 0.5)
 plt.ylim(-0.9, 400000)
@@ -197,7 +197,8 @@ theta_max = 0.8     #Endwert Fit
 x = np.linspace(0,1.5,1000)
 
 start_params = [d_poly, d_Sili, b_poly, b_sili, d, sigma_poly, sigma_sili]
-boundaries = ([1e-7, 1e-7, 1e-10, 1e-10, 1e-9, 5e-12, 5e-12], [5e-5, 5e-5, 1e-6, 1e-6, 1e-7, 1e-9, 1e-9]) # Limits der Parameter
+boundaries = ([1e-7, 1e-7, 1e-10, 1e-10, 1e-9, 5e-12, 5e-12], 
+                [5e-5, 5e-5, 1e-6, 1e-6, 1e-7, 1e-9, 1e-9]) # Limits der Parameter
 err = np.zeros(len(start_params))
 
 delta_Sili = ufloat(params[1], errors[1])
@@ -206,12 +207,31 @@ crit_winkel_sili = unp.sqrt(2*delta_Sili)*np.pi/180
 crit_winkel_poly = unp.sqrt(2*delta_poly)*np.pi/180
 
 
-def parratt(alpha, delta2, delta3, b2, b3, d2, sigma1, sigma2): # Parratt-Algorithmus
-    n2, n3 = 1.0 - delta2 - 1j*b2, 1.0 - delta3 - 1j*b3         # Brechungsindizes
-    alpha = np.deg2rad(alpha)                                   # Umrechnung in Bogenmaß
-    kz1, kz2, kz3 = k * np.sqrt(n1**2 - np.cos(alpha)**2), k * np.sqrt(n2**2 - np.cos(alpha)**2), k * np.sqrt(n3**2 - np.cos(alpha)**2)         # Wellenvektoren k_z_j
-    r12, r23 = ((kz1 - kz2)/(kz1 + kz2)) * np.exp(-2 * kz1 * kz2 * sigma1**2), ((kz2 - kz3)/(kz2 + kz3)) * np.exp(-2 * kz2 * kz3 * sigma2**2)   # Reflektivitäten
-    return np.abs((r12 + np.exp(-2j * kz2 * d2) * r23) / (1 + r12 * np.exp(-2j * kz2 * d2) * r23))**2                                           # Gesamtreflektivität                                         
+def parratt(alpha, delta2, delta3, b2, b3, d2, sigma1, sigma2):
+    # Convert angle to radians
+    alpha_rad = np.deg2rad(alpha)
+    
+    # Calculate refractive indices
+    n2, n3 = 1.0 - delta2 - 1j * b2, 1.0 - delta3 - 1j * b3
+    
+    # Calculate wave vectors
+    kz1 = k * np.sqrt(n1**2 - np.cos(alpha_rad)**2)
+    kz2 = k * np.sqrt(n2**2 - np.cos(alpha_rad)**2)
+    kz3 = k * np.sqrt(n3**2 - np.cos(alpha_rad)**2)
+    
+    # Calculate exponential factors for roughness
+    exp_factor1 = np.exp(-2 * kz1 * kz2 * sigma1**2)
+    exp_factor2 = np.exp(-2 * kz2 * kz3 * sigma2**2)
+    
+    # Calculate reflectivities
+    r12 = ((kz1 - kz2) / (kz1 + kz2)) * exp_factor1
+    r23 = ((kz2 - kz3) / (kz2 + kz3)) * exp_factor2
+    
+    # Calculate exponential factor for layer thickness
+    exp_factor3 = np.exp(-2j * kz2 * d2)
+    
+    # Calculate total reflectivity
+    return np.abs((r12 + exp_factor3 * r23) / (1 + r12 * exp_factor3 * r23))**2
 
 
 plt.plot(x, parratt(x, *start_params), label="Parratt-Algorithmus", color="b", alpha=.8)

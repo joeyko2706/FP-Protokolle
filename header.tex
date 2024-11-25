@@ -131,6 +131,48 @@
 % Listings zum Einbinden von Quellcode
 \usepackage{listings}
 
+% BraKet-Notation
+\usepackage{braket}
+
+% Feynman Slashed
+\usepackage{slashed}
+
+% New Commands Axel
+% aquation = aligned equations
+\newenvironment{aquation}{\begin{equation}\begin{aligned}}{\end{aligned}\end{equation}}
+% \text{ .}/, 
+\newcommand{\tp}{\text{ . }}
+\newcommand{\tc}{\text{ , }}
+% shorthand for 1/2 
+\newcommand{\oh}{\frac{1}{2}}
+\newcommand{\ih}{\frac{i}{2}}
+% shorthand for f(x)=1/x 
+\newcommand{\odiv}[1]{\frac{1}{#1}}
+\newcommand{\idiv}[1]{\frac{i}{#1}}
+
+%%%%% shorthands for left/right brackets (r for round, s for square, c for curly)
+% round brackets
+\newcommand{\lbr}{\left(}
+\newcommand{\rbr}{\right)}
+\newcommand{\brr}[1]{\left( #1 \right)}
+% square brackets 
+\newcommand{\lbs}{\left[}
+\newcommand{\rbs}{\right]}
+\newcommand{\brs}[1]{\left[ #1 \right]}
+% curly brackets 
+\newcommand{\lbc}{\left{}
+\newcommand{\rbc}{\right}}
+\newcommand{\brc}[1]{\left{ #1 \right}}
+% put stuff like \\ , \\& , etc. into brackets (by putting it outside)
+\newcommand{\brbr}[1]{\right. #1 \left.}
+
+%%%%% mathcal L, O (for Lagrangian densities and and SMEFT operators)
+\newcommand{\Lm}{\mathcal{L}}
+\newcommand{\Om}{\mathcal{O}}
+
+%%%%% horizintal .5mm
+\newcommand{\hsf}{\hspace{0.5mm}}
+
 \author{%
   Joel Koch\\%
   \href{mailto:joel.koch@tu-dortmund.de}{joel.koch@tu-dortmund.de}

@@ -1,2 +1,37 @@
 \section{Durchführung}
 \label{sec:Durchführung}
+Das hier verwendete Diffraktometer besteht aus einer Röntgenröhre auf der einen und einem Empfänger für Röntgenstrahlung auf der anderen Seite. Mittig zwischen ihnen ist ein Tisch für die Probe platziert. Zur Steuerung des Versuchsaufbau wird das Programm XRD-Commander verwendet.
+
+\subsection{Die Röntgenröhre}
+In diesem Versuch wird eine Röntgenröhre mit Cu-Anode verwendet. In dieser werden Elektronen aus einer Glühkathode in Richtung Cu-Anode beschleunigt. Die in die Cu-Anode einschlagenden Elektronen interagieren dann mit dem Kupfer, und zwar auf zweierlei Arten: Durch Stöße mit den Elektronen in den Kupferatomen werden diese auf höhere Niveaus angeregt. meistens werden die Atome sogar ionisiert. Dies macht Plätze auf niedrigeren Niveaus frei und führt damit dazu, dass Elektronen höherer Niveaus unter Emission von Röntgenstrahlung auf auf diese niedrigeren Niveaus zurückfallen. Außerdem wird bei der Bewegung der Elektronen im elektrischen Feld innerhalb des Kupfers Bremsstrahlung emittiert.\\
+In diesem Versuch wird die $\text{K}_\alpha$-Linie von Kupfer verwendet, also jene Röntgenstrahlung, welche beim Niveauüübergang von der zweiten auf die erste Schale entsteht. Sie besitzt eine Wellenlänge von $\lambda=1.54\text{Å}$. Um diese aus dem restlichen Spektrum der Röntgenröhre herauszufiltern, wird ein \textit{Göbelspiegel} verwendet. Dieser bündelt die Strahlung und filtert alle anderen Linien aus der Strahlung heraus.\\
+Die Strahlung fällt nach dem Göbelspiegel auf eine Blende, dann auf die Probe und dann auf eine weitere Blende. Die Blenden dienen dazu, den eingestellten Glanzwinkel der einfallenden und den gemessenen Glanzwinkel der ausfallenden Strahlung zu variieren.\\
+\\
+Bei sehr geringen Winkeln (kleiner als $\alpha_g$) schießt die Strahlung über die Probe hinaus. Dies äußert sich in einem reskalierenden Faktor vor der gemessenen reflektierten Intensität, dem \textit{Geometriefaktor} 
+\begin{aquation}
+    G &\coloneqq \left\{ \begin{matrix}
+        \frac{D \sin{\alpha_i}}{d_0} & \alpha_i < \alpha_g \\
+        1 & \text{sonst}
+    \end{matrix} \right. \tc
+\end{aquation}
+mit der Probenlänge $D$ und der Strahlbreite $d_0$.
+
+\subsection{Justage}
+Da die Probe, welche hier ein mit einer dünnen Polystyrolschicht überzogener Silizium-Wafer ist, nach dem Einbringen in den Versuchsaufbau noch nicht die richtige Ausrichtung hat, muss der Aufbau zunächst justiert werden. Ziel der Justage ist es, die Probe genau mittig zwischen Sender und Empfänger zu platzieren, sodass die gesamte Strahlung der Röntgenröhre auf die Probe trifft. Außerdem muss die Nullposition für Sender und Empfänger so justiert werden, dass die Probe bei einem Glanzwinkel von null genau parallel zum Strahl steht.\\
+\\
+Im ersten Schritt der Justage wird daher ein Detektorscan durchgeführt. Bei diesem wird die Röntgenröhre direkt auf den Detektor gerichtet. Der Detektor wird im Winkel variiert und durch den Strahl gefahren. Das Maximum dieser Gauß-verteilten Messung wird dann als neue Null-Position eingestellt.\\
+\\
+Als Nächstes wird die Probe in den Strahl eingebracht. Da zuvor die der gesamte Strahl den Detektor traf, lässt sich durch Hochfahren Bewegen der Probe im Strahl der Punkt in z-Richtung bestimmen, bei welchem ungefähr der halbe Strahl abgeschattet ist. Dies wird mithilfe eines \textit{Z-Scan}s bewerkstelligt. Auf diesen Punkt wird die Probe gesetzt. Da die Feinjustage später kommt, reicht hier ein ungefährer Wert.\\
+\\
+Der folgende Scan dient dazu, den Einfallswinkel gleich dessen Ausfallswinkel zu setzen. Dazu werden Röntgenröhre und Detektor um die Probe rotiert, ohne ihre relative Ausrichtung zu einander zu ändern. Dieser Scan heißt \textit{Rocking-Scan} (engl. \textit{to rock}: Schaukeln). Da dieser Scan den Strahl einmal mit der dem Emitter und einmal mit der dem Detektor zugewandten Kante der Probe verdeckt, liefert er Aufschluss über die Positionierung der Probe entlang des Strahls. Das Ergebnis dieses Scans sollte ein gleichseitiges Dreieck sein. Ist dies nicht der Fall, muss die Probe entlang des Strahls verschoben werden, bis ihre Ausrichtung passt, damit später auch wirklich der gesamte Strahl die Probe trifft. Nach dieser Justage wird das Maximum des Rockingscans als neue Nulllage des Emitter-Detektor-Paars gewählt, damit der Strahl nun genau parallel zur Oberfläche der Probe steht.\\
+\\
+Im Anschluss wird ein weiterer Z-Scan durchgeführt, um eine präzisere halbe Abschattung des Strahls zu erreichen.\\
+\\
+Ein anschließender Rocking-Scan, mit einem Glanzwinkel von $0.15^\circ$ verfeinert die Parallelität der Probe zum Strahl.\\
+\\
+Zum Schluss wird für den selben Glanzwinkel ein letzter Z-Scan durchgeführt und die Probe wieder auf die halbe Abschattung gesetzt. Dieser sorgt dafür, dass der Strahl genau mittig auf die Probe trifft.
+
+\subsection{Reflektivitätsmessung}
+Die eigentliche Messung dient zur Bestimmung der Reflektivität. Um diese zu bestimmen, muss wie zuvor beschrieben ein Winkelbereich abgefahren werden. Dabei werden Emitter und Detektor gleichzeitig immer um den selben Glanzwinkel verschoben, um so die Intensität des reflektierten Strahls unter verschiedenen Winkel zu messen. Hier wurde ein Winkelintervall von $[0^\circ,2.5^\circ]$ gewählt, mit einer Schrittweite von $0.005^\circ$.\\
+\\
+Um den Untergrund der Reflektivitätsmessung zu bestimmen, wird der selbe Scan erneut durchgeführt, allerdings mit um $0.1^\circ$ verschobenem Detektor, was als \textit{diffuser Scan} bezeichnet wird. 

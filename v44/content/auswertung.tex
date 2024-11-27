@@ -7,7 +7,7 @@ Die Auswertung erfolgt mithilfe der python Bibliotheken numpy \cite{numpy}, scip
 \subsection{Bestimmung der Halbwertsbreite und der maximalen Intensität}
 \label{subsec:Halbwertsbreite}
 
-Um die Halbwertsbreite und auch die maximale Intensität zu bestimmen, wird an die Messdaten eines Detectorscans eine Gaußfunktion der Form aus Gleichung \ref{eq:Gauss} gefittet. 
+Um die Halbwertsbreite und auch die maximale Intensität zu bestimmen, wird an die Messdaten eines Detectorscans eine Gaußfunktion der Form aus Gleichung (\ref{eq:Gauss}) gefittet. 
 Dabei ist $I(\alpha)$ die Intensität in Abhängigkeit des Winkels $\alpha$, $I_0$ die maximale Intensität, $\alpha_0$ der Winkel bei dem die maximale Intensität auftritt, $\sigma$ die Halbwertsbreite und $B$ der Untergrund.
 Eine graphische Darstellung der Messdaten und des Fits ist in Abbildung \ref{fig:Gauss} zu sehen.
 \begin{align}
@@ -54,7 +54,7 @@ Die Strahlbreite bestimmt sich zu $d_0\approx\SI{0.2}{\milli\meter}$.
 \subsection{Bestimmung des Geometriewinkels}
 \label{subsec:Geometriewinkel}
 
-Um den in \textbf{HIER ABSCHNITT EINFÜGEN} beschriebenen systematischen Fehler zu beheben, wird der Geometriewinkel bestimmt.
+Um den in \autoref{subsec:Röntgenröhre} beschriebenen systematischen Fehler zu beheben, wird der Geometriewinkel bestimmt.
 Dazu wird ein Rockingscan durchgeführt, woraus sich der Geometriewinkel mithilfe der Breite der Messwerte bestimmt.
 Die Messdaten und die Breite, die zu dem Geometriewinkel führt, sind in Abbildung \ref{fig:RockingScan} zu sehen.
 \begin{figure}[H]
@@ -64,7 +64,7 @@ Die Messdaten und die Breite, die zu dem Geometriewinkel führt, sind in Abbildu
     \label{fig:RockingScan}
 \end{figure}
 \noindent
-Der Geometriewinkel ergibt sich mithilfe von Formel \textbf{HIER FORMEL EINFÜGEN}, zu $\alpha_{\text G} = \SI{0.014}{\degree}$.
+Der Geometriewinkel ergibt sich mithilfe von Formel (\ref{eq:Geometriefaktor}) zu $\alpha_{\text G} = \SI{0.014}{\degree}$.
 
 \subsection{Auswertung der Dispersion und der Rauigkeit des Siliziumwafers}
 \label{subsec:Dispersion}
@@ -83,8 +83,9 @@ In den nächsten Scans wird die Messzeit pro Messpunkt auf $\SI{5}{\second}$ erh
 \begin{align*}
     R = \frac{I_{\text{Probe}}}{5\cdot I_{0}}.
 \end{align*}
-Es wird zusätzlich der Geometriefaktor berücksichtigt \textbf{HIER FORMEL EINFÜGEN}.
-Der Verlauf der Reflektivität einer idealen Probe ergibt sich über die Fresnelreflektivität \textbf{HIER FORMEL EINFÜGEN}, wobei sich der kritische Winkel der Probe über \textbf{HIER FORMEL EINFÜGEN} zu $\alpha_{\text{crit}} = \SI{0.223}{\degree}$ ergibt.
+Es wird zusätzlich der Geometriefaktor aus Formel (\ref{eq:Geometriefaktor}) berücksichtigt.
+Der Verlauf der Reflektivität einer idealen Probe ergibt sich über die Fresnelreflektivität nach Gleichung (\ref{eq:Fresnel}) %$\left(\frac{\alpha_{\text{crit}}}{2\cdot\alpha}\right)^4$, 
+wobei sich der kritische Winkel der Probe über Gleichung (\ref{eq:alpha_C}) zu $\alpha_{\text{crit}} = \SI{0.223}{\degree}$ ergibt.
 Mithilfe der Wellenlänge der $K_{\alpha}$-Linie von Kupfer $\lambda = \SI{1.54}{\angstrom}$ und der periodischen Minima der Kiessing-Oszillationen, lässt sich die Schichtdicke der Probe bestimmen.
 Sie sind gemeinsam mit der korriegierten und unkorriegierten Reflektivität und der Fresnelreflektivität in Abbildung \ref{fig:Reflektivität2} dargestellt.
 \begin{figure}[H]
@@ -95,8 +96,8 @@ Sie sind gemeinsam mit der korriegierten und unkorriegierten Reflektivität und 
 \end{figure}
 \noindent
 Die Schichtdicke der Probe ergibt mit $\Delta\alpha= \SI{5.12(0.45)e-2}{\degree}$ zu $d = \SI{8.62(0.75)e-8}{\meter}$. \newline
-Mithilfe des Parrattalgorithmus \textbf{HIER REFERENZ EINFÜGEN} eines Mehrschichtsystems, lassen sich die Dispersion $\delta$, die Rauigkeit $\sigma$ und die Dicke der Polysterolschicht bestimmen.
-Die mit dem Parrattalgorithmus aus \textbf{HIER FORMEL EINFÜGEN} berechnete Fit ist mit der bereinigten Reflektivität in Abbildung \ref{fig:Reflektivität3} dargestellt.
+Mithilfe des Parrattalgorithmus aus Gleichung (\ref{eq:Parratt}) eines Mehrschichtsystems, lassen sich die Dispersion $\delta$, die Rauigkeit $\sigma$ und die Dicke der Polysterolschicht bestimmen.
+Die mit dem Parrattalgorithmus berechnete Fit ist mit der bereinigten Reflektivität in Abbildung \ref{fig:Reflektivität3} dargestellt.
 \begin{figure}[H]
     \centering
     \includegraphics[width=0.8\textwidth]{./build//Parratt.pdf}

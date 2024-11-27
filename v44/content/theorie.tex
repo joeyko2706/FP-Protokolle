@@ -25,6 +25,7 @@ lässt sich der kritische Winkel als jener Einfallswinkel ableiten, bei welchem 
 Da im vorliegenden Fall der kritische Winkel für kleine $\delta$ benötigt wird, lässt sich dieser zu 
 \begin{aquation}
     \alpha_C &\approx \sqrt{2 \delta} \tp
+    \label{eq:alpha_C}
 \end{aquation}
 Nach der Streuung am Versuchsobjekt zerteilt sich die Welle in eine transmittierte Welle (Label $t$) und eine reflektierte Welle (Label $r$), wodurch sich die Gesamtwelle zu 
 \begin{aquation}
@@ -40,6 +41,7 @@ Diese Größen sind jedoch keine direkten Observablen, sondern Wahrscheinlichkei
 Außerdem sind sie linear abhängig voneinander, verknüft über die Relation $1 = R + T$. Aus diesem Grund genügt es, eine der beiden Größen zu messen. Für den Fall $\alpha_i > 3 \alpha_C$ ergibt sich die Reflektivität zu
 \begin{aquation}
     R &= \left(\frac{\alpha_C}{2 \alpha_i}\right) \tp
+    \label{eq:Fresnel}
 \end{aquation}
 
 
@@ -67,6 +69,7 @@ Im Falle mehrerer Schichten überlagern sich aufgrund der Tatsache, dass es mehr
 Dies führt dazu, dass sich die Osziellationen aus allen Schichten ergeben, weswegen das Endergebnis nicht mehr direkt mit der Dicke einer einzelnen Schicht verbunden ist. Um die einzelnen Schichtdicken zu bekommen, gibt muss daher der \textit{Parrat-Algorithmus} verwendet werden. Dieser leitet sich her, indem das Amplitudenverhältnis $Q_j \coloneqq \frac{R_j}{T_j} = \frac{R_j}{1-R_j}$ zweier benachbarter Schichten an der $j$-ten Grenzfläche bestimmt wird. Da sich hier nämlich der Anteil der transmittierten Welle direkt von dem der reflektierten Welle ableiten lässt, lässt sich so durch Umstellen aus den Fresnel-Gleichungen direkt die Einfallende Welle für die folgende Grenzfläche bestimmen. Dies führt zu der Rekursionsformel 
 \begin{aquation}
     Q_j &= e^{-2 i k_{z,j} z_j}\frac{r_{j,j+1} + Q_j e^{-2 i k_{z,j+1} z_j}}{1 + r_{j,j+1}  Q_j e^{-2 i k_{z,j+1} z_j}} \tc
+    \label{eq:Parratt}
 \end{aquation}
 bei der 
 \begin{aquation}

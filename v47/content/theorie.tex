@@ -1,4 +1,132 @@
-\section{Theorie}
-\label{sec:Theorie}
+\section{Goal}
+\label{sec:goal}
+The goal of this experiment is to measure the molar heat of copper as a function of temperature.
+To explain the temperature dependence, different models are compared.
+Finally, the Debye temperature $\theta_D$ is determined.
 
-\cite{sample}
+\section{Theory}
+\label{sec:theory}
+
+The information in this section is based on \cite{GrossMarx+2014}. \newline
+The heat capacity $C$ ist the amount of heat $\delta Q$ needed to raise the temperature of a substance by one degree Kelvin, therefore it is defined as $C = \frac{\delta Q}{\delta T}$.
+Often the molar heat capacity $c_m$ is used, which is the heat capacity of one mole of a substance.
+Analogously, the mass heat capacity $c_{\text{mass}}$ is the heat capacity of one kilogram of a substance.
+It is differentiated between the heat capacity at constant volume $C_V$ and the heat capacity at constant pressure $C_p$.
+The latter is defined as 
+\begin{align}
+    C_p = \left(\frac{\delta Q}{\delta T}\right)\Big|_p,
+    \label{eq:cp}
+\end{align}
+whereas the former is defined as
+\begin{align}
+    C_V = \left(\frac{\delta Q}{\delta T}\right)\Big|_V
+    \label{eq:cv}
+\end{align}
+with $\delta U$ as the change in internal energy.
+The two capacities are not interchangeable.
+This is because at a constant volume the heat is used to increase the internal energy, whereas at a constant pressure the heat is also used to do work.
+Gases expand with increasing temperature and thus do work against the surrounding pressure, which is why the heat capacity at constant pressure is higher than the heat capacity at constant volume $(C_p>C_V)$.
+In solids, however, the expansion is negligible, so that the heat capacities at constant volume and constant pressure are approximately equal.
+The difference between the two heat capacities is given by
+\begin{align}
+    C_p-C_V=TV\alpha^2_V B,
+    \label{eq:cp-cv}
+\end{align}
+with $B$ being the bulk modulus and $\alpha_V$ the volume expansion coefficient.
+
+\subsection{The classical theory of heat capacity}
+\label{sec:classical}
+
+Discussing a system of $n$ unit cells and $r$ atoms per unit cell, the mean internal energy of a system with $N=n\cdot r$ atoms can be calculated using the equipartition theorem as
+\begin{align}
+    U = U^{eq} + 3Nk_B T,
+    \label{eq:U}
+\end{align}
+where $U^{eq}$ is the equilibrium energy and $k_B$ is the Boltzmann constant.
+The heat capacity at constant volume is thus given by the \textit{Dulong-Petit law} as
+\begin{align}
+    C_V = 3R = 3N_A k_B,
+    \label{eq:dulong-petit}
+\end{align}
+where $R$ is the universal gas constant and $N_A$ is Avogadro's number.\newline
+The Dulong-Petit law is a good approximation for the heat capacity at high temperatures.
+However, at low temperatures the heat capacity was measured to be lower than predicted by the Dulong-Petit law.
+This is because quantum effects become more important at low temperatures.
+
+\subsection{The Einstein model of heat capacity}
+\label{sec:einstein}
+
+The Einstein model was the first model to explain the temperature dependence of the heat capacity at low temperatures using quantum mechanics.
+The theory describes excitations of an elastic arrangement of atoms as $N$ harmonic oscillators with the same frequency $\omega_E$.
+It quantizes these excitations using quais-particles called \textit{phonons} with energy $E_n = \hbar\omega_E$.
+Using bose-einstein statistics, the mean internal energy of the system can be calculated as
+\begin{align}
+    \braket U=3N\hbar\omega_E\left( \frac12+\frac1{\exp\left(\frac{\hbar\omega_E}{k_BT}\right)-1}\right).
+    \label{eq:U_einstein}
+\end{align}
+Thus, the heat capacity at constant volume $C_V$ is given by
+\begin{align}
+    C_V=\left(\frac{\partial U}{\partial T}\right)\Big|_{V=\text{constant}} = 3N\cdot\frac{(\hbar\omega_E)^2}{k_bT^2}\cdot\frac{\exp\left(\frac{\hbar\omega_E}{k_bT}\right)}{\left[\exp\left(\frac{\hbar\omega_E}{k_bT}\right)-1\right]^2}.
+    \label{eq:cv_einstein}
+\end{align}
+Expression (\ref{eq:cv_einstein}) can be simplified using the \textit{Einstein-temperature} $\theta_E=\hbar\omega_E/k_B$ as
+\begin{align}
+    C_V^E=3Nk_B\left(\frac{\theta_e}{T}\right)^2 \cdot 
+    \frac{\exp\left(\frac{\theta_e}{T}\right)}{\left[\exp\left(\frac{\theta_e}{T}\right)-1\right]^2}.
+    \label{eq:cv_einstein_simplified}
+\end{align}
+As approximation for low and high temperatures, the following limits are calculated using equation (\ref{eq:cv_einstein_simplified})
+\begin{align}
+    C_V^E=\begin{cases}
+        3Nk_B\left(\frac{\theta_e}{T}\right)^2e^{-\frac{\theta_e}{T}} &,\text{for } T\ll\theta_e, \\
+        3Nk_B &,\text{for } T\gg\theta_e.
+        \end{cases}
+    \label{eq:cv_einstein_limits}
+\end{align}
+The Einstein model is a good approximation for the heat capacity at high temperatures as it approaches the Dulong-Petit law.
+However, at low temperatures the heat capacity is 
+\begin{align}
+    \lim_{T \to 0}C_V\propto \exp(-\frac{\theta_B}{T}) =0.
+    \label{eq:cv_einstein_low}
+\end{align}
+Thus, the Einstein model does not explain the heat capacity at low temperatures.
+This is because the model assumes that all phonons have the same frequency, which is not the case as it is differentiated between optical and acoustical phonons.
+The atoms of a unit cell are all moving in phase for acoustical phonons, whereas they are moving out of phase for optical phonons.
+The Einstein model only takes the acoustical phonons into account, which is why it is not applicable at low temperatures as their occupation is negligible. %, whereas the Debye model considers optical phonons which are more important at low temperatures.
+
+\subsection{The Debye model of heat capacity}
+\label{sec:debye}
+
+The Debye model is an extension of the Einstein model and takes the different frequencies of the phonons into account.
+All phonon branches are considered as three branches with linear dispersion relation $\omega_i = v_i q_i$ with the wave vector $q_i$ of the $i$-th branch and the speed of sound on the $i$-th branch $v_i$.
+The Debye model only takes the optical phonons into account, which works at low temperatures because the occupation of acoustical phonons is negligible.
+It further simplifies the summation over all wave vectors $q$ by integrating over the first Brillouin zone.
+Because, however, areas of constant frequency are sphere surfaces for linear dispersions, the integration is done over a sphere with radius $q_D$.
+The wave vector has to be chosen so that the integral has exactly $N$ wave vectors to account for the three branches and thus for the $3N$ oscillation modes.
+A state in frequency space is given by $V_q = (2\pi/L)^3$, thus follows
+\begin{align}
+    N\left(\frac{2\pi}{L}\right)^3 &= \frac 43\pi q_D^3 \\
+    \iff q_D &= \left(6\pi^2\frac NV\right)^{1/3}.
+    \label{eq:q_D}
+\end{align}
+The heat capacity in the Debye model follows via the \textit{Debye-temperature} $\theta_D=\frac{\hbar v_s}{k_B}\left(6\pi^2\frac NV\right)^{1/3}$ as
+\begin{align}
+    C_V^D=9Nk_B\left(\frac{T}{\theta_D}\right)^3\int_0^{\theta_D/T}\frac{x^4e^x}{(e^x-1)^2}\text dx,
+    \label{eq:cv_debye}
+\end{align}
+with the following substitutions
+\begin{align}
+    \label{eq:substitution_x}
+    x &= \frac{\hbar v_s q}{k_BT}, \\
+    \text dx &= \frac{\hbar v_s}{k_BT}\text dq.
+    \label{eq:substitution_dx}
+\end{align}
+As approximation for low and high temperatures, the following limits are calculated using equation (\ref{eq:cv_debye})
+\begin{align}
+    C_V^D=\begin{cases}
+        \frac{12\pi^4}{5}Nk_B\left(\frac{T}{\theta_D} \right)^3 &,\text{for }T\ll\theta_D, \\
+        3Nk_b &,\text{for }T\gg\theta_D. \\
+        \end{cases}
+    \label{eq:cv_debye_final}
+\end{align}
+The Debye model reaches the Dulong-Petit law at high temperatures and yields a better approximation at low temperatures than the Einstein model.

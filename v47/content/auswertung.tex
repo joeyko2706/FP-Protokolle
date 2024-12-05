@@ -1,12 +1,24 @@
 \section{Auswertung}
 \label{sec:Auswertung}
+To compute the isobaric heat capacity $C_p$, the molar mass of copper $M = 63.546\frac{\text{g}}{\text{mol}}$, the sample's mass $m = \text{g}$, the energy $E$ that was added to the system and the temperature difference $\Delta T$ that was achieved by adding this amount of energy are required. \\
+To get the energy, the voltage $U$, the current $I$ and the time interval $\Delta t$ over which energy was added to the system were measured. To get the temperature $T$ of the system, the thermometre's resistance $R$ was measured, since the temperature can then be measured via
+\begin{aquation}
+  T\lbr R \rbr = 0.00134 R^2 + 2.296 R - 243.02 \tp
+\end{aquation}
+The resistance steps have been chosen carefully to ensure that $\Delta T$ is always $10\text{K}$. To get the isobaric heat capacity, the measured and computed values have to be plugged into the equation 
+\begin{aquation}
+  C_p &= \frac{M}{m} \frac{E}{\Delta T}\tp
+\end{aquation}
+Die dafür notwendigen Daten finden sich in 
+\input{results/table_new_data.tex}
 
-\begin{figure}
-  \centering
-  \includegraphics{plot.pdf}
-  \caption{Plot.}
-  \label{fig:plot}
-\end{figure}
+
+% \begin{figure}
+%   \centering
+%   \includegraphics{plot.pdf}
+%   \caption{Plot.}
+%   \label{fig:plot}
+% \end{figure}
 
 
 Siehe \autoref{fig:plot} und \autoref{tab:tabelle}!

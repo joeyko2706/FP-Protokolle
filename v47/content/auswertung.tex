@@ -1,4 +1,4 @@
-\section{Auswertung}
+\section{Analysis}
 \label{sec:Auswertung}
 To compute the isobaric heat capacity $C_p$, the molar mass of copper $M = 63.546\frac{\text{g}}{\text{mol}}$, the sample's mass $m = \text{g}$, the energy $E$ that was added to the system and the temperature difference $\Delta T$ that was achieved by adding this amount of energy are required. \\
 To get the energy, the voltage $U$, the current $I$ and the time interval $\Delta t$ over which energy was added to the system were measured. To get the temperature $T$ of the system, the thermometre's resistance $R$ was measured, since the temperature can then be measured via
@@ -9,16 +9,63 @@ The resistance steps have been chosen carefully to ensure that $\Delta T$ is alw
 \begin{aquation}
   C_p &= \frac{M}{m} \frac{E}{\Delta T}\tp
 \end{aquation}
-Die dafür notwendigen Daten finden sich in 
-\input{results/table_new_data.tex}
+The isochoric heat capacity is related to the isobaric heat capacity via 
+\begin{aquation}
+  C_V &= C_p - 9 V_0 \alpha^2 \kappa T \tc
+\end{aquation}
+has has been noted in \autoref{eq:cp-cv}.\\
+Here, $\kappa = 137.8 \text{GPa}$ is the bulk module, $V_0 = 7.092 \times 10^6 \frac{\text{m}^3}{\text{mol}}$ the molar volume and $\alpha$ the volumetric expansion. The latter one's values given in \cite{Anleitung47} do not match the temperatures that have been measured in this experiment. For this reason, a linear interpolation has to be performed, yielding approximate values for $\alpha$ at the measured temperature. These approximates are listed in \autoref{tab:alpha}\\
+The results for th \autoref{tab:Cp+CV}.
+\begin{table}
+  \centering
+  \input{results/new_data_table_modded.tex}
+  \caption{Values for the isobaric heat capacity $C_p$ and the isochorich heat capacity $C_V$.}
+  \label{tab:Cp+CV}
+\end{table}
+\begin{table}
+  \centering
+  \input{results/TplusAlpha_table_modded.tex}
+  \caption{Values for the volumetric expansion $\alpha$ received via linear extrapolation.}
+  \label{tab:alpha}
+\end{table}
 
+\subsection{The Debye Temperature}
+The Debye temperature can be computed via the table in \autoref{fig:debye}. The first column is the significand and the first line is the mantisse of $\frac{\\Theta_D}{T}$. The remaining values are the corresponding heat capacities $C_V$. Thus, to find a $\frac{\\Theta_D}{T}$-value for a $C_V$, the closest $C_V$ has to be found in within the table, which makes it possible to read the value from the table.\\
+The Debye temperature can the be derived by simply multiplying the value from the table with the according $T$. Doing so results in the values depicted in \autoref{tab:debye_results}. Only values $T<170\text{K}$ have been considered.\\
+The mean value for the Debye-temperature is then $\Theta_D = 330.42 \pm 7.11 \text{K}$.
+\begin{figure}[h!]
+  \centering
+  \includegraphics[width=\textwidth]{figures/Debye_values.png}
+  \caption{The value of $\frac{\\Theta_D}{T}$ can be read off this table. To do so, the closest value for $C_V$ has to be found within the table. Then, $\frac{\\Theta_D}{T} = \textit{row}.\textit{column}$}
+  \label{fig:debye}
+\end{figure}
 
-% \begin{figure}
-%   \centering
-%   \includegraphics{plot.pdf}
-%   \caption{Plot.}
-%   \label{fig:plot}
-% \end{figure}
+\begin{table}
+  \centering
+  \input{results/T_Debye_table_modded.tex}
+  \caption{Resulting Debye temperature $\Theta_D$}
+  \label{tab:debye_results}
+\end{table}
 
-
-Siehe \autoref{fig:plot} und \autoref{tab:tabelle}!
+\subsection{The Debye Frequency}
+The Debye frequency is 
+\begin{aquation}
+  \omega_D &= \frac{v_m k_D}{2\pi} \tp
+\end{aquation}
+Plugging in the Debye wavenumber 
+\begin{aquation}
+  k_\text{D} &= \lbr 6\pi^2 \frac{N_A}{V_0}\rbr^{1/3}
+\end{aquation}
+and the average speed of sound 
+\begin{aquation}
+  v_\text{m} &= \lbr \frac{1}{3} \lbs 2 \frac{1}{v_t^3} + \frac{1}{v_l^3} \rbs \rbr^{-1/3}
+\end{aquation}
+into this, the full expression becomes 
+\begin{aquation}
+  \omega_\text{D} &= \frac{1}{2\pi} \lbr 18\pi^2 \frac{N_A}{V_0} \lbs 2 \frac{1}{v_t^3} + \frac{1}{v_l^3} \rbs^{-1} \rbr^{1/3} \tp
+\end{aquation}
+Here, $N_A$ is the Avogadro-constant, and the velocities are $v_t = 4.7 \text{km/h}$ and $v_l = 2.26 \text{km/h}$. Plugging all these values in, the final result becomes $\omega_D = 43.39\cdot 10^{12} \frac{1}{1}{s}$, and thus, via 
+\begin{aquation}
+  \Theta_D &= \frac{\hbar \omega_D}{k_B}
+\end{aquation}
+the resulting Debye temperature is $\Theta_D = 330.7\text{K}$. 

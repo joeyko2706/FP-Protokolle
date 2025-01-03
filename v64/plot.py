@@ -8,21 +8,26 @@ theta, max, min = np.genfromtxt('data/contrast.csv', delimiter=';', unpack=True)
 theta = np.unique(theta)
 
 pressure, meas1, meas2, meas3, counts, std = np.genfromtxt('data/refrective_air.csv', delimiter=';', unpack=True, skip_header=1)
+n_glass = ufloat(np.mean([31, 34, 34, 33, 35]), np.std([31, 34, 34, 33, 35]))
 
 k = 0
 maximum_avg = []
 minimum_avg = []
+maximum_std = []
+minimum_std = []
 for i in range(len(max)):
     maximum_avg.append(np.mean(max[k] + max[k+1] + max[k+2]))
     minimum_avg.append(np.mean(min[k] + min[k+1] + min[k+2]))
+    maximum_std.append(np.std([max[k], max[k+1], max[k+2]]))
+    minimum_std.append(np.std([min[k], min[k+1], min[k+2]]))
 
     k += 3
     if k == len(max):
         break
 
 
-maximum = unumpy.uarray(maximum_avg, np.std(maximum_avg))
-minimum = unumpy.uarray(minimum_avg, np.std(minimum_avg))
+maximum = unumpy.uarray(maximum_avg, maximum_std)
+minimum = unumpy.uarray(minimum_avg, minimum_std)
 
 
 def contrast(i_max:ufloat, i_min:ufloat)->ufloat:
@@ -43,7 +48,7 @@ plt.plot(x, theory(x, *params), color="r", label='Fit')
 plt.grid()
 plt.xlabel(r'$\vartheta \,/\, ^\circ$')
 plt.ylabel(r'contrast')
-plt.legend()
+plt.legend(loc='upper left')
 plt.tight_layout()
 plt.savefig('build/contrast.pdf')
 # plt.show()
@@ -55,17 +60,25 @@ print(f'delta = {ufloat(params[1], np.sqrt(covariance[1,1]))}')
 
 
 R = constants.R
-T = 20.7 + 273.15 # in Kelvin
-lamda = 632.99e-9 # wavelength of the laser (meter)
+T = 20.7 + 273.15   # in Kelvin
+lamda = 632.99e-9   # wavelength of the laser (meter)
 L = ufloat(0.1, 0.1e-3)
+d = 1e-3            # thickness of the glass plate (meter)
+n_glas_theory = 1.5385  #https://refractiveindex.info
 
 
 def n_air_exp(M):
     return M*lamda/(L) + 1
 
 
-def refraction_index(p, a, b):
+def refraction_index(p, a, b, T=T, R=R):
     return 3/2 * p/(T*R) * a + b
+
+
+def refraction_index_glass(n):
+    # return d/lamda * (n-1)/(2*n) * (np.radians(10))**3
+    return 1+(n*lamda)/d
+    # return (d/lamda) * ((n-1)/(2*n)) * (np.radians(10))**3
 
 
 counting_rate = unumpy.uarray(counts, std)
@@ -84,18 +97,31 @@ plt.tight_layout()
 plt.savefig('build/refraction_index.pdf')
 # plt.show()
 
+
+
+
+
 print('--------Brechungsindexbestimmung--------')
+print(f'n_glass = {refraction_index_glass(n_glass)}')
 print(f'a = {ufloat(popt[0], np.sqrt(pcov[0,0]))}')
 print(f'b = {ufloat(popt[1], np.sqrt(pcov[1,1]))}')
+print(f'n_air = 1 - {1-refraction_index(0, *popt)}')
+print(f'n_standard_air = 1 - {1-refraction_index(1013, ufloat(popt[0], np.sqrt(pcov[0,0])), ufloat(popt[1], np.sqrt(pcov[1,1])), 15+273.15, R)}')
+
+print('--------Relative Abweichungen--------')
+print(f'Brechungsindex Glas: {100*(refraction_index_glass(n_glass)-1)/n_glas_theory:.2f}%')
+print(f'Brechungsindex Luft: {100*(refraction_index(0, *popt)-1)/1}%')
 
 
 # '''Print the data to use in Latex table'''
 
 # print('--------Kontrast--------')
 # for i in range(len(theta[:-1])):
-#     print(f'{theta[i]} & ${maximum[i]}$ & ${minimum[i]}$ & ${measured_contrast[i]}$ \\\\')
+#     print(f'{theta[i]} & ${maximum[i]:.2f}$ & ${minimum[i]:.2f}$ & ${measured_contrast[i]:.2f}$ \\\\')
 
 
 # print('--------Brechungsindex--------')
 # for i in range(len(pressure)):
 #     print(f'{pressure[i]} & ${counting_rate[i]}$\\\\')
+
+# print('\n', 'n_glass = ', n_glass)

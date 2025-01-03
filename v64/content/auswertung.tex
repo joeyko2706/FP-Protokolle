@@ -1,9 +1,16 @@
 \section{Analysis}
 \label{sec:Analysis}
 
+The following analysis is performed with the programming language python \cite{python} and the libraries numpy \cite{numpy} for numerical calculation, scipy \cite{scipy} for curve fitting and uncertainties \cite{uncertainties} for error calculation.
+Furthermore, the graphical representations are created with the matplotlib \cite{matplotlib} library.
+
 \subsection{Dependence of the contrast on the polarisation angle}
 \label{subsec:polarisation}
 
+The first analysis step is to determine the dependence of the contrast on the polarisation angle.
+For this, the maximum and minimum voltage of the photodiodes was measured in dependence of the polarisation angle.
+The original measurement values are shown in figure \ref{fig:original_data} in appendix \ref{sec:appendix}.
+The mean values of the measurements and the with equation (\textbf{HIER FORMEL EINFÜGEN}) calculated contrast is shown in table \ref{tab:values_polarisation}.
 
 \begin{table}[H]
     \centering
@@ -13,34 +20,46 @@
         \toprule
         $\vartheta \,/\, \si{\degree}$ & $I_{\text{max}}\,/\,\si{\volt}$ & $I_{\text{min}}\,/\,\si{\volt}$ & contrast \\
         \midrule
-        0.0 & $5\pm4$ & $4.5\pm1.5$ & $0.0\pm0.4$ \\
-        15.0 & $4\pm4$ & $2.4\pm1.5$ & $0.3\pm0.5$ \\
-        30.0 & $4\pm4$ & $1.1\pm1.5$ & $0.5\pm0.6$ \\
-        45.0 & $4\pm4$ & $0.8\pm1.5$ & $0.7\pm0.5$ \\
-        60.0 & $6\pm4$ & $1.1\pm1.5$ & $0.7\pm0.4$ \\
-        75.0 & $7\pm4$ & $2.3\pm1.5$ & $0.48\pm0.35$ \\
-        90.0 & $7\pm4$ & $5.4\pm1.5$ & $0.14\pm0.31$ \\
-        105.0 & $10\pm4$ & $4.4\pm1.5$ & $0.38\pm0.23$ \\
-        120.0 & $13\pm4$ & $2.7\pm1.5$ & $0.66\pm0.18$ \\
-        135.0 & $18\pm4$ & $1.7\pm1.5$ & $0.83\pm0.15$ \\
-        150.0 & $13\pm4$ & $2.5\pm1.5$ & $0.67\pm0.18$ \\
-        165.0 & $10\pm4$ & $3.9\pm1.5$ & $0.44\pm0.23$ \\
-        180.0 & $5\pm4$ & $4.8\pm1.5$ & $0.1\pm0.4$ \\
+        0.0 & $4.98$ & $4.52\pm0.01$ & $0.05$ \\
+        15.0 & $4.37\pm0.02$ & $2.35\pm0.01$ & $0.30$ \\
+        30.0 & $3.91$ & $1.15\pm0.01$ & $0.55$ \\
+        45.0 & $4.45$ & $0.81$ & $0.69$ \\
+        60.0 & $5.86\pm0.01$ & $1.07\pm0.01$ & $0.69$ \\
+        75.0 & $6.53\pm0.05$ & $2.29\pm0.01$ & $0.48$ \\
+        90.0 & $7.10\pm0.05$ & $5.38\pm0.04$ & $0.14$ \\
+        105.0 & $9.92\pm0.11$ & $4.42\pm0.07$ & $0.38\pm0.01$ \\
+        120.0 & $13.15\pm0.13$ & $2.71\pm0.04$ & $0.66$ \\
+        135.0 & $17.61\pm1.42$ & $1.65$ & $0.83\pm0.01$ \\
+        150.0 & $12.94\pm0.10$ & $2.53\pm0.01$ & $0.67$ \\
+        165.0 & $9.87\pm0.08$ & $3.86\pm0.03$ & $0.44$ \\
+        180.0 & $5.33\pm0.04$ & $4.78\pm0.01$ & $0.05$ \\
         \bottomrule
     \end{tabular}
-  \end{table}
+\end{table}
 
-
-  \begin{figure}[H]
+\noindent
+A graphical representation of the contrast in dependence on the polarisation angle is shown in figure \ref{fig:contrast}, while a theroetical prediction of the form
+\begin{align}
+    K = 2K_0\cdot|\sin(\vartheta-\delta)\cdot\cos(\vartheta-\delta)|
+\end{align}
+is fitted to the data.
+The offset of $\delta$ that is used to compensate for deviations of the experimental setup and the amplitude $K_0$ are determined to be
+\begin{align*}
+    K_0=\SI{0.697\pm0.004}{} \quad \text{and} \quad \delta=\SI{1.620\pm0.010}{\degree}.
+\end{align*}
+For the following measurements, the polarisation angle is set to $\SI{135}{\degree}$, as this angle provides the highest contrast.
+\begin{figure}[H]
     \centering
     \includegraphics[width=0.75\textwidth]{build/contrast.pdf}
     \caption{Graphical representation of the contrast in dependence on the polarisation angle.}
     \label{fig:contrast}
-  \end{figure}
+\end{figure}
 
 \subsection{Refraction index of glass}
 \label{subsec:refraction_glass}
 
+In order to analyse the refractive index of the glass, a total of five series of measurements were carried out in which the angle of the glass plate was varied by $\SI{10}{\degree}$.
+The measurements of the refraction index of glass are shown in table \ref{tab:refraction_glass}, giving a mean value of $\#M=\num{33.4\pm1.4}$.
 \begin{table}[htbp]
     \centering
     \begin{tabular}{c c c}
@@ -57,10 +76,19 @@
     \caption{Measured counts for the refraction index of glass for different measurement series with $\upDelta \vartheta=\SI{10}{\degree}$.}
     \label{tab:refraction_glass}
 \end{table}
+To calculate the refraction index of glass, equation (\textbf{HIER FORMEL EINFÜGEN}) is simplified to the form
+\begin{align}
+    % \bar M = \frac{d}{4\pi^2\lambda}\cdot \left(\frac{n-1}{2n}\cdot \Theta^2 \cdot \underbrace{\theta}_{\text{tilted glass plate}}\right),
+    n = 1+ \frac{\#M\cdot\lambda}{d}
+\end{align}
+where $d$ denotes the thickness of the glass plate, $\lambda$ the wavelength of the light in vacuum and $\#M$ the measured maxima.
+The refraction index of glass is then calculated to be $n=\num{1.37\pm0.06}$. %$M=\num{4.074\pm0.005}$.
 
 \subsection{Refraction index of air}
 \label{subsec:refraction_air}
 
+The refraction index of air is determined by measuring the number of maxima in dependence of the pressure.
+The original measurement values are shown in figure \ref{fig:original_data} in appendix \ref{sec:appendix}, while the mean values of the 3 measurement series are shown in table \ref{tab:refraction_air}.
 \begin{table}[htbp]
     \centering
     \begin{tabular}{c c}
@@ -91,6 +119,7 @@
     \caption{Measured counts for the refraction index of air in dependence of the pressure.}
     \label{tab:refraction_air}
 \end{table}
+
 
 \begin{figure}[H]
     \centering

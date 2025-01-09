@@ -58,13 +58,15 @@ print('--------Kontrastbestimmung--------')
 print(f'k_0 = {ufloat(params[0], np.sqrt(covariance[0,0]))}')
 print(f'delta = {ufloat(params[1], np.sqrt(covariance[1,1]))}')
 
+k_0 = ufloat(params[0], np.sqrt(covariance[0,0]))
+delta = ufloat(params[1], np.sqrt(covariance[1,1]))
 
 R = constants.R
-T = 20.7 + 273.15   # in Kelvin
+T = 20.2 + 273.15   # in Kelvin
 lamda = 632.99e-9   # wavelength of the laser (meter)
 L = ufloat(0.1, 0.1e-3)
 d = 1e-3            # thickness of the glass plate (meter)
-n_glas_theory = 1.5385  #https://refractiveindex.info
+n_glas_theory = 1.4570  #https://refractiveindex.info
 
 
 def n_air_exp(M):
@@ -78,18 +80,20 @@ def refraction_index(p, a, b, T=T, R=R):
 def refraction_index_glass(n):
     # return d/lamda * (n-1)/(2*n) * (np.radians(10))**3
     return 1+(n*lamda)/d
+    # return (lamda*n)/(2*np.pi)
     # return (d/lamda) * ((n-1)/(2*n)) * (np.radians(10))**3
 
 
 counting_rate = unumpy.uarray(counts, std)
 n = n_air_exp(counting_rate)
 popt, pcov = curve_fit(refraction_index, pressure, unumpy.nominal_values(n), sigma=unumpy.std_devs(n))#, p0=[.042, 0])
+err = np.sqrt(np.diag(pcov))
 
 x = np.linspace(50, 1000, 1000)
 plt.errorbar(pressure, unumpy.nominal_values(n), yerr=unumpy.std_devs(n), fmt='bx', label='Messwerte')
 plt.plot(x, refraction_index(x, *popt), color="r", label='Fit')
 plt.grid()
-plt.xlabel(r'$p \,/\, \si{\milli\bar}$')
+# plt.xlabel(r'$p \,/\, \si{\milli\bar}$')
 plt.ticklabel_format(axis='y', style='sci', scilimits=(-5, -5), useMathText=True)
 plt.ylabel(r'n')
 plt.legend()
@@ -97,20 +101,20 @@ plt.tight_layout()
 plt.savefig('build/refraction_index.pdf')
 # plt.show()
 
-
-
+n_air_exp = 1- refraction_index(0, ufloat(popt[0], np.sqrt(pcov[0,0])), ufloat(popt[1], np.sqrt(pcov[1,1])))
 
 
 print('--------Brechungsindexbestimmung--------')
 print(f'n_glass = {refraction_index_glass(n_glass)}')
 print(f'a = {ufloat(popt[0], np.sqrt(pcov[0,0]))}')
-print(f'b = {ufloat(popt[1], np.sqrt(pcov[1,1]))}')
-print(f'n_air = 1 - {1-refraction_index(0, *popt)}')
-print(f'n_standard_air = 1 - {1-refraction_index(1013, ufloat(popt[0], np.sqrt(pcov[0,0])), ufloat(popt[1], np.sqrt(pcov[1,1])), 15+273.15, R)}')
+print(f'b = 1 - {1-ufloat(popt[1], np.sqrt(pcov[1,1]))}')
+print(f'n_air_exp = 1 - {n_air_exp}')
+print(f'n_standard_air = {refraction_index(1013, ufloat(popt[0], np.sqrt(pcov[0,0])), ufloat(popt[1], np.sqrt(pcov[1,1])), T=288.15)}')
 
 print('--------Relative Abweichungen--------')
+print(f'Kontrast: {100*(k_0-1)/1:.2f}%')
 print(f'Brechungsindex Glas: {100*(refraction_index_glass(n_glass)-1)/n_glas_theory:.2f}%')
-print(f'Brechungsindex Luft: {100*(refraction_index(0, *popt)-1)/1}%')
+print(f'Brechungsindex Luft: {100*(refraction_index(0, *popt)-1)/1.00027653:.8f}%')
 
 
 # '''Print the data to use in Latex table'''

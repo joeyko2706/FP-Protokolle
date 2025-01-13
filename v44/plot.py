@@ -80,8 +80,10 @@ print(f"Strahlbreite: {strahlbreite} mm")
 #######################################################
 
 theta, hits = np.genfromtxt("./data/Rocking1_1.UXD", unpack=True, skip_header=56)
-upperLimit = 35
-lowerLimit = 15
+
+
+lowerLimit = 16
+upperLimit = lowerLimit + 10
 # print(f"Schrittweite bei dem Rockingscan: {theta[1]-theta[0]}") # --> 0.04 (alles richtig)
 
 plt.errorbar(theta, hits, yerr=np.sqrt(hits), fmt="rx", label="Messwerte") 
@@ -99,11 +101,30 @@ plt.clf()
 
 
 winkel_theorie = np.arcsin(strahlbreite/20) # rad
-winkel_experiment = np.deg2rad(theta[upperLimit]- theta[lowerLimit])
+winkel_experiment = (theta[upperLimit]- theta[lowerLimit])
 print("-----------------Geometriewinkel-----------------------")
 print(f"Experiment: {winkel_experiment:.2}°")
-print(f"Theorie:    {winkel_theorie:.2}°")
+print(f"Theorie:    {np.rad2deg(winkel_theorie):.2}°")
 print("-------------------------------------------------------")
+
+
+def geom_factor(thetaReflect, strahlbreite, winkel_theorie):
+    factor = np.ones(len(thetaReflect))
+    for index, angle in enumerate(thetaReflect):
+        if thetaReflect[index] < winkel_theorie:
+            print(index)
+            factor[index] = 20 * np.sin(np.deg2rad(thetaReflect)) / strahlbreite
+    return factor
+
+
+def factor(thetaReflect, strahlbreite, winkel_theorie):
+    factor = np.ones(len(thetaReflect))
+    for i in range(len(thetaReflect)):
+        if thetaReflect[i] < winkel_theorie:
+            factor[i] = 20 * np.sin(np.deg2rad(thetaReflect[i])) / strahlbreite
+    return factor
+
+
 
 #######################################################
 ### Bestimmung der Dispersion und Rauigkeit des Siliziumwafers
@@ -132,16 +153,37 @@ plt.clf()
 ### Schichtdicke des Siliziumwafers
 #######################################################
 
+
+
+
+geom_factor = factor(thetaReflect, strahlbreite, np.rad2deg(winkel_theorie))
 critical_angle = 0.223 # deg
 reflectivity = (hitsReflect - hitsDiffuser[thetaReflect.size]) / (5*I0.nominal_value) # 5s Messzeit
-x = np.linspace(critical_angle, 1.5, 10000)
-x2 = np.linspace(0,critical_angle,2)
+x = np.linspace(0, 1.5, 10000)
 reflectivity_corrected = reflectivity.copy()    
-reflectivity_corrected[(thetaReflect < winkel_experiment) & (thetaReflect > 0)] *= np.sin(np.deg2rad(winkel_experiment))/np.sin(np.deg2rad(thetaReflect[(thetaReflect < winkel_experiment) & (thetaReflect > 0)]))
+# reflectivity_corrected[(thetaReflect < winkel_experiment) & (thetaReflect > 0)] /= np.sin((winkel_experiment))/np.sin((thetaReflect[(thetaReflect < winkel_experiment) & (thetaReflect > 0)]))
+reflectivity_corrected /= geom_factor
+reflectivity_corrected[0] = 0
 
+LAMBDA = 1.54e-10  # m
 
-def fresnel(alpha):
-    return(critical_angle/(2*alpha))**4
+def fresnel_ideal(a_i):
+    """Calculates the reflectivity of an ideal, smooth surface of Si."""
+    k = 2 * np.pi / LAMBDA
+    n_1 = 1
+    delta_2 = 7.6e-6
+    beta_2 = LAMBDA / (4 * np.pi) * 141 / 100
+    n_2 = 1 - delta_2 - 1j * beta_2
+
+    # Berechnung von k_z1 und k_z2
+    k_z1 = k * np.sqrt(n_1**2 - np.square(np.cos(np.deg2rad(a_i))))
+    k_z2 = k * np.sqrt(n_2**2 - np.square(np.cos(np.deg2rad(a_i))))
+
+    # Reflexionskoeffizient
+    r = (k_z1 - k_z2) / (k_z1 + k_z2)
+
+    # Rückgabe der Reflexivität (Betrag von r zum Quadrat)
+    return abs(r)**2
 
 
 minima = []
@@ -150,15 +192,14 @@ for i in range(6,len(thetaReflect)):
         minima.append(i)
 
 
-plt.errorbar(thetaReflect, reflectivity, label="Reflect ohne Korrekturfaktor", color="r")
-plt.errorbar(thetaReflect, reflectivity_corrected, label="Reflect mit Korrekturfaktor", color="darkred", linestyle="dashed", alpha=0.7)
-plt.plot(x, fresnel(x), label="Fresnelreflektivität", color="b")
-plt.plot(x2, 2*[fresnel(critical_angle)], color="b")
+plt.errorbar(thetaReflect[-len(thetaReflect)+1:], reflectivity[-len(reflectivity)+1:], label="Reflect ohne Korrekturfaktor", color="r")
+plt.errorbar(thetaReflect[-len(thetaReflect)+1:], reflectivity_corrected[-len(reflectivity_corrected)+1:], label="Reflektivität mit Korrekturfaktor", color="darkred", linestyle="dashed", alpha=0.7)
+plt.plot(x, fresnel_ideal(x), label="Fresnelreflektivität", color="b")
 plt.plot(thetaReflect[minima], reflectivity[minima], "x", color="k", label="Minima")
-plt.vlines(critical_angle, 0, 10**2, color="gray", linestyle="dashed", label=r"Kritischer Winkel $\alpha_c$")
+plt.vlines(critical_angle, 0, np.max(reflectivity_corrected), color="gray", linestyle="dashed", label=r"Kritischer Winkel $\alpha_c$")
 
 plt.xlim(0,1.5)
-plt.ylim(10**(-5),10**(2))
+# plt.ylim(np.max(reflectivity_corrected))
 plt.yscale("log")
 plt.xlabel(r"$\theta\,/\, \text{DEG}$")
 plt.ylabel(r"$R$")
@@ -185,21 +226,39 @@ print("---------------------------------------------------")
 k = 2*np.pi/lambda_ka   # Wellenvektor
 n1 = 1
 d1 = 0
-d_poly = 4.2e-6 # 1. Schicht des Poiysterols
-d_Sili = 1.6e-5 # 1. Schicht des Siliziums
-b_poly = 2.7e-8
-b_sili = 9.8e-7
-d = 8.2e-8  
-sigma_poly = 4e-10
-sigma_sili = 3e-10
+
+# d_poly = 1.2e-6 # 1. Schicht des Poiysterols
+# d_Sili = 1.6e-6 # 1. Schicht des Siliziums
+# b_poly = 2e-8
+# b_sili = 9e-6
+# d = 8.5e-8                                          # Erhöht die Frequenz der Peaks, je kleiner die Werte sind
+# sigma_poly = 4e-10                                 # Erhöht die Höhe der Peaks, je höher die Werte sind
+# sigma_sili = 3e-10                                  # Zieht die Kurve gegen Ende nach oben, je höher die Werte sind
+
 theta_min = 0.2     #Startwert Fit
 theta_max = 0.8     #Endwert Fit
 x = np.linspace(0,1.5,1000)
 
+
+# d_poly = 7.95697e-6 # 1. Schicht Polysterol
+# d_Sili = 1.9556487691546e-6 # 2. Schicht Silizium
+# b_poly = .475864561213455e-8
+# b_sili = 1.46459454691654781564468489486465789649846e-5
+# d = 5.5487568618974561896e-8
+# sigma_poly = 2.23654852385236e-9
+# sigma_sili = 4.878964513689745168974651896513249123469123496513264132649132054e-10
+
+d_poly = 8.5e-6 # 1. Schicht Polysterol
+d_Sili = 8.5e-6 # 2. Schicht Silizium
+b_poly = 2.7e-8
+b_sili = 9.8e-7
+d = 7.5e-8
+sigma_poly = 4e-10
+sigma_sili = 3e-10
+
 start_params = [d_poly, d_Sili, b_poly, b_sili, d, sigma_poly, sigma_sili]
 boundaries = ([1e-7, 1e-7, 1e-10, 1e-10, 1e-9, 5e-12, 5e-12], 
-                [5e-5, 5e-5, 1e-6, 1e-6, 1e-7, 1e-9, 1e-9]) # Limits der Parameter
-err = np.zeros(len(start_params))
+                [5e-5, 5e-4, 1e-4, 1e-4, 1e-7, 1e-9, 1e-9]) # Limits der Parameter
 
 delta_Sili = ufloat(params[1], errors[1])
 delta_poly = ufloat(params[0], errors[0])
@@ -208,6 +267,12 @@ crit_winkel_poly = unp.sqrt(2*delta_poly)*np.pi/180
 
 
 def parratt(alpha, delta2, delta3, b2, b3, d2, sigma1, sigma2):
+    # alpha is the angle of incidence in degrees
+    # delta2, delta3 are the real parts of the refractive indices of the two materials
+    # b2, b3 are the imaginary parts of the refractive indices of the two materials
+    # d2 is the thickness of the second layer
+    # sigma1, sigma2 are the roughnesses of the interfaces    
+    
     # Convert angle to radians
     alpha_rad = np.deg2rad(alpha)
     
@@ -234,36 +299,33 @@ def parratt(alpha, delta2, delta3, b2, b3, d2, sigma1, sigma2):
     return np.abs((r12 + exp_factor3 * r23) / (1 + r12 * exp_factor3 * r23))**2
 
 
-plt.plot(x, parratt(x, *start_params), label="Parratt-Algorithmus", color="b", alpha=.8)
-plt.plot(thetaReflect, reflectivity_corrected, label="Reflektivitäten (mit Korrekturfaktor)", color="r", alpha=.8)
+plt.plot(x, parratt(x, *start_params), label="Parratt-Algorithmus", color="b")
+plt.plot(x, fresnel_ideal(x), label="Fresnelreflektivität", color="gray", linestyle="dashed", alpha=.8)
+plt.errorbar(thetaReflect[-len(thetaReflect)+1:], reflectivity_corrected[-len(reflectivity_corrected)+1:], label="Reflektivität mit Korrekturfaktor", color="red")
 
 
-x = np.linspace(critical_angle, 1.5, 10000)
-x2 = np.linspace(0,critical_angle,2)
-plt.plot(x, fresnel(x), label="Fresnelreflektivität", color="gray", linestyle="dashed", alpha=.8)
-plt.plot(x2, 2*[fresnel(critical_angle)], color="gray", linestyle="dashed", alpha=.8)
-
-
-start_params, covariance = curve_fit(parratt, thetaReflect, reflectivity_corrected, p0=start_params, bounds=boundaries)
 # err = np.sqrt(np.diag(covariance))
 
 plt.xlabel(r"$\theta\,/\, \text{DEG}$")
 plt.ylabel(r"$R$")
 plt.xlim(0,1.5)
+# plt.ylim(1.8*10**(-6),1.5*10**(1))
 plt.grid()
 plt.legend(loc="best")
 plt.yscale("log")
 plt.savefig("build/Parratt.pdf")
+# plt.clf()
+fit_params, covariance = curve_fit(parratt, thetaReflect, reflectivity_corrected, p0=start_params)#, bounds=boundaries)
 
 
 print("-----------------Parratt-Algorithmus-----------------------")
-print(f"delta Silizium:                 {start_params[0]:.2e}")
-print(f"delta Poly:                     {start_params[1]:.2e}")
-print(f"b Silizium:                     {start_params[2]:.2e}")
-print(f"b Poly:                         {start_params[3]:.2e}")
-print(f"d:                              {start_params[4]:.2e}")
-print(f"sigma Silizium:                 {start_params[5]:.2e}")
-print(f"sigma Polysterol:               {start_params[6]:.2e}")
+print(f"delta Silizium:                 {fit_params[0]:.2e}")
+print(f"delta Poly:                     {fit_params[1]:.2e}")
+print(f"b Silizium:                     {fit_params[2]:.2e}")
+print(f"b Poly:                         {fit_params[3]:.2e}")
+print(f"d:                              {fit_params[4]:.2e}")
+print(f"sigma Silizium:                 {fit_params[5]:.2e}")
+print(f"sigma Polysterol:               {fit_params[6]:.2e}")
 print(f"Kritischer Winkel Silizium:     {crit_winkel_sili:.2}")
 print(f"Kritischer Winkel Polysterol:   {crit_winkel_poly:.2}")
 
@@ -278,21 +340,28 @@ FWHM    : 0.0871+/-0.0011
 -------------------------------------------------------
 Strahlbreite: 0.2 mm
 -----------------Geometriewinkel-----------------------
-Experiment: 0.014°
-Theorie:    0.01°
+Experiment: 0.4°
+Theorie:    0.57°
 -------------------------------------------------------
 -----------------Schichtdicke-----------------------
-Delta alpha:    (5.12+/-0.45)e-02
-Schichtdicke:   (8.62+/-0.75)e-08
+Delta alpha:    (5.12+/-0.49)e-02
+Schichtdicke:   (8.62+/-0.82)e-08
 ---------------------------------------------------
 -----------------Parratt-Algorithmus-----------------------
-delta Silizium:                 9.53e-06
-delta Poly:                     8.44e-06
+delta Silizium:                 1.25e-05
+delta Poly:                     1.28e-05
 b Silizium:                     1.00e-10
-b Poly:                         3.74e-07
-d:                              2.40e-08
-sigma Silizium:                 1.40e-11
-sigma Polysterol:               2.90e-10
+b Poly:                         2.44e-08
+d:                              4.04e-08
+sigma Silizium:                 1.36e-10
+sigma Polysterol:               9.80e-10
 Kritischer Winkel Silizium:     0.0047+/-0.0000
 Kritischer Winkel Polysterol:   0.0013+/-0.0001
 '''
+
+# print(("-------------------------------------------------------"))
+# print(geom_factor)
+# print(thetaReflect)
+# print(reflectivity_corrected)
+
+# np.savetxt("build/thetaReflect_reflectivity_corrected.txt", np.column_stack((thetaReflect, reflectivity_corrected)), header="thetaReflect reflectivity_corrected", comments='')

@@ -13,9 +13,16 @@ The isochoric heat capacity is related to the isobaric heat capacity via
 \begin{aquation}
   C_V &= C_p - 9 V_0 \alpha^2 \kappa T \tc
 \end{aquation}
-has has been noted in \autoref{eq:cp-cv}.\\
+as has been noted in \autoref{eq:cp-cv}.\\
+The resulting heat capacities can be found in \autoref{fig:molar_heat}.\\
+\begin{figure}
+  \centering
+  \includegraphics[width=\textwidth]{figures/CVvsCP.png}
+  \caption{Comparison between $C_v$ and $C_p$}
+  \label{fig:molar_heat}
+\end{figure}
 Here, $\kappa = 137.8 \text{GPa}$ is the bulk module, $V_0 = 7.092 \times 10^6 \frac{\text{m}^3}{\text{mol}}$ the molar volume and $\alpha$ the volumetric expansion. The latter one's values given in \cite{Anleitung47} do not match the temperatures that have been measured in this experiment. For this reason, a linear interpolation has to be performed, yielding approximate values for $\alpha$ at the measured temperature. These approximates are listed in \autoref{tab:alpha}\\
-The results for th \autoref{tab:Cp+CV}.
+The results for the heat capacities can be found in \autoref{tab:Cp+CV}.
 \begin{table}
   \centering
   \input{results/new_data_table_modded.tex}
@@ -30,13 +37,13 @@ The results for th \autoref{tab:Cp+CV}.
 \end{table}
 
 \subsection{The Debye Temperature}
-The Debye temperature can be computed via the table in \autoref{fig:debye}. The first column is the significand and the first line is the mantisse of $\frac{\\Theta_D}{T}$. The remaining values are the corresponding heat capacities $C_V$. Thus, to find a $\frac{\\Theta_D}{T}$-value for a $C_V$, the closest $C_V$ has to be found in within the table, which makes it possible to read the value from the table.\\
-The Debye temperature can the be derived by simply multiplying the value from the table with the according $T$. Doing so results in the values depicted in \autoref{tab:debye_results}. Only values $T<170\text{K}$ have been considered.\\
+The Debye temperature can be computed via the table in \autoref{fig:debye}. The first column is the significand and the first line is the mantisse of $\frac{\Theta_D}{T}$. The remaining values are the corresponding heat capacities $C_V$. Thus, to find a $\frac{\Theta_D}{T}$-value for a $C_V$, the closest $C_V$ has to be found within the table, which makes it possible to read the value from the table.\\
+The Debye temperature can then be derived by simply multiplying the value from the table with the according $T$. Doing so results in the values depicted in \autoref{tab:debye_results}. Only values $T<170\text{K}$ have been considered.\\
 The mean value for the Debye-temperature is then $\Theta_D = 330.42 \pm 7.11 \text{K}$.
 \begin{figure}[h!]
   \centering
   \includegraphics[width=\textwidth]{figures/Debye_values.png}
-  \caption{The value of $\frac{\\Theta_D}{T}$ can be read off this table. To do so, the closest value for $C_V$ has to be found within the table. Then, $\frac{\\Theta_D}{T} = \textit{row}.\textit{column}$}
+  \caption{The value of $\frac{\Theta_D}{T}$ can be read off this table. To do so, the closest value for $C_V$ has to be found within the table. Then, $\frac{\Theta_D}{T} = \textit{row}.\textit{column}$}
   \label{fig:debye}
 \end{figure}
 

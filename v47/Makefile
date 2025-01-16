@@ -22,7 +22,6 @@ build/v47.pdf: FORCE | build
 	  --halt-on-error \
 	v47.tex
 	cp build/v47.pdf v47.pdf
-	cp build/v47.pdf ../PDFs/47.pdf
 
 build:
 	mkdir -p build

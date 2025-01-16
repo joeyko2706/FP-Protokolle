@@ -20,7 +20,7 @@
 \label{sec:goal}
 The goal of this experiment is to measure the molar heat of copper as a function of temperature.
 To explain the temperature dependence, different models are compared.
-Finally, the Debye temperature $\theta_D$ is determined.
+Finally, the Debye temperature $\thewta_D$ is determined.
 
 \section{Theory}
 \label{sec:theory}
@@ -89,15 +89,15 @@ Thus, the heat capacity at constant volume $C_V$ is given by
 \end{align}
 Expression (\ref{eq:cv_einstein}) can be simplified using the \textit{Einstein-temperature} $\theta_E=\hbar\omega_E/k_B$ as
 \begin{align}
-    C_V^E=3Nk_B\left(\frac{\theta_e}{T}\right)^2 \cdot 
-    \frac{\exp\left(\frac{\theta_e}{T}\right)}{\left[\exp\left(\frac{\theta_e}{T}\right)-1\right]^2}.
+    C_V^E=3Nk_B\left(\frac{\theta_E}{T}\right)^2 \cdot 
+    \frac{\exp\left(\frac{\theta_E}{T}\right)}{\left[\exp\left(\frac{\theta_E}{T}\right)-1\right]^2}.
     \label{eq:cv_einstein_simplified}
 \end{align}
 As approximation for low and high temperatures, the following limits are calculated using equation (\ref{eq:cv_einstein_simplified})
 \begin{align}
     C_V^E=\begin{cases}
-        3Nk_B\left(\frac{\theta_e}{T}\right)^2e^{-\frac{\theta_e}{T}} &,\text{for } T\ll\theta_e, \\
-        3Nk_B &,\text{for } T\gg\theta_e.
+        3Nk_B\left(\frac{\theta_E}{T}\right)^2e^{-\frac{\theta_E}{T}} &,\text{for } T\ll\theta_E, \\
+        3Nk_B &,\text{for } T\gg\theta_E.
         \end{cases}
     \label{eq:cv_einstein_limits}
 \end{align}

@@ -1,8 +1,8 @@
-import matplotlib.pyplot as plt
-import numpy as np
-import uncertainties.unumpy as unp
-from uncertainties import ufloat
-from scipy.optimize import curve_fit
+import matplotlib.pyplot as plt         # type: ignore
+import numpy as np                      # type: ignore
+import uncertainties.unumpy as unp      # type: ignore
+from uncertainties import ufloat        # type: ignore
+from scipy.optimize import curve_fit    # type: ignore
 
 
 #######################################################
@@ -227,34 +227,18 @@ k = 2*np.pi/lambda_ka   # Wellenvektor
 n1 = 1
 d1 = 0
 
-# d_poly = 1.2e-6 # 1. Schicht des Poiysterols
-# d_Sili = 1.6e-6 # 1. Schicht des Siliziums
-# b_poly = 2e-8
-# b_sili = 9e-6
-# d = 8.5e-8                                          # Erhöht die Frequenz der Peaks, je kleiner die Werte sind
-# sigma_poly = 4e-10                                 # Erhöht die Höhe der Peaks, je höher die Werte sind
-# sigma_sili = 3e-10                                  # Zieht die Kurve gegen Ende nach oben, je höher die Werte sind
-
 theta_min = 0.2     #Startwert Fit
 theta_max = 0.8     #Endwert Fit
 x = np.linspace(0,1.5,1000)
 
 
-# d_poly = 7.95697e-6 # 1. Schicht Polysterol
-# d_Sili = 1.9556487691546e-6 # 2. Schicht Silizium
-# b_poly = .475864561213455e-8
-# b_sili = 1.46459454691654781564468489486465789649846e-5
-# d = 5.5487568618974561896e-8
-# sigma_poly = 2.23654852385236e-9
-# sigma_sili = 4.878964513689745168974651896513249123469123496513264132649132054e-10
-
-d_poly = 8.5e-6 # 1. Schicht Polysterol
-d_Sili = 8.5e-6 # 2. Schicht Silizium
-b_poly = 2.7e-8
-b_sili = 9.8e-7
-d = 7.5e-8
-sigma_poly = 4e-10
-sigma_sili = 3e-10
+d_poly = 1.7e-6 # 1. Schicht Polysterol
+d_Sili = 8.0e-6 # 2. Schicht Silizium
+b_poly = d_poly / 200
+b_sili = d_Sili / 400
+d = 9.0e-8
+sigma_poly = 5.2e-10
+sigma_sili = 7.8e-10
 
 start_params = [d_poly, d_Sili, b_poly, b_sili, d, sigma_poly, sigma_sili]
 boundaries = ([1e-7, 1e-7, 1e-10, 1e-10, 1e-9, 5e-12, 5e-12], 
@@ -262,8 +246,8 @@ boundaries = ([1e-7, 1e-7, 1e-10, 1e-10, 1e-9, 5e-12, 5e-12],
 
 delta_Sili = ufloat(params[1], errors[1])
 delta_poly = ufloat(params[0], errors[0])
-crit_winkel_sili = unp.sqrt(2*delta_Sili)*np.pi/180
-crit_winkel_poly = unp.sqrt(2*delta_poly)*np.pi/180
+crit_winkel_sili = unp.sqrt(2*delta_Sili)#*np.pi/180
+crit_winkel_poly = unp.sqrt(2*delta_poly)#*np.pi/180
 
 
 def parratt(alpha, delta2, delta3, b2, b3, d2, sigma1, sigma2):
@@ -301,7 +285,7 @@ def parratt(alpha, delta2, delta3, b2, b3, d2, sigma1, sigma2):
 
 plt.plot(x, parratt(x, *start_params), label="Parratt-Algorithmus", color="b")
 plt.plot(x, fresnel_ideal(x), label="Fresnelreflektivität", color="gray", linestyle="dashed", alpha=.8)
-plt.errorbar(thetaReflect[-len(thetaReflect)+1:], reflectivity_corrected[-len(reflectivity_corrected)+1:], label="Reflektivität mit Korrekturfaktor", color="red")
+plt.errorbar(thetaReflect[-len(thetaReflect)+1:], reflectivity_corrected[-len(reflectivity_corrected)+1:]*.1, label="Reflektivität mit Korrekturfaktor", color="red")
 
 
 # err = np.sqrt(np.diag(covariance))
@@ -348,15 +332,15 @@ Delta alpha:    (5.12+/-0.49)e-02
 Schichtdicke:   (8.62+/-0.82)e-08
 ---------------------------------------------------
 -----------------Parratt-Algorithmus-----------------------
-delta Silizium:                 1.25e-05
-delta Poly:                     1.28e-05
-b Silizium:                     1.00e-10
-b Poly:                         2.44e-08
-d:                              4.04e-08
-sigma Silizium:                 1.36e-10
-sigma Polysterol:               9.80e-10
-Kritischer Winkel Silizium:     0.0047+/-0.0000
-Kritischer Winkel Polysterol:   0.0013+/-0.0001
+delta Silizium:                 1.67e-06
+delta Poly:                     8.89e-06
+b Silizium:                     -2.41e-08
+b Poly:                         5.39e-11
+d:                              1.21e-07
+sigma Silizium:                 -7.94e-08
+sigma Polysterol:               3.43e-11
+Kritischer Winkel Silizium:     0.27+/-0.00
+Kritischer Winkel Polysterol:   0.073+/-0.006
 '''
 
 # print(("-------------------------------------------------------"))

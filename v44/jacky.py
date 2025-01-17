@@ -33,13 +33,13 @@ n1 = 1
 d1 = 0
 
 ##### Startparameter für den Fit #####
-d_poly = 4.2e-6 # 1. Schicht Polysterol
-d_Sili = 1.6e-5 # 2. Schicht Silizium
-b_poly = 1.8e-10
-b_sili = .25e-5
-d = 8.5e-8
-sigma_poly = 4e-10
-sigma_sili = 3e-10
+d_poly = 1.7e-6 # 1. Schicht Polysterol
+d_Sili = 8.0e-6 # 2. Schicht Silizium
+b_poly = d_poly / 200
+b_sili = d_Sili / 400
+d = 9.0e-8
+sigma_poly = 5.2e-10
+sigma_sili = 7.8e-10
 ######################################
 
 
@@ -85,32 +85,14 @@ def parratt(alpha, delta2, delta3, b2, b3, d2, sigma1, sigma2):
     return np.abs((r12 + exp_factor3 * r23) / (1 + r12 * exp_factor3 * r23))**2
 
 
-# plt.plot(x, parratt(x, *start_params), label="Parratt-Algorithmus", color="b")
-# plt.plot(x, fresnel_ideal(x), label="Fresnelreflektivität", color="gray", linestyle="dashed", alpha=.8)
-# plt.errorbar(thetaReflect[-len(thetaReflect)+1:], reflectivity_corrected[-len(reflectivity_corrected)+1:], label="Reflektivität mit Korrekturfaktor", color="red")
+plt.plot(x, parratt(x, *start_params), label="Parratt-Algorithmus", color="b")
+plt.plot(x, fresnel_ideal(x), label="Fresnelreflektivität", color="gray", linestyle="dashed", alpha=.8)
+plt.errorbar(thetaReflect[-len(thetaReflect)+1:], reflectivity_corrected[-len(reflectivity_corrected)+1:]*.1, label="Reflektivität mit Korrekturfaktor", color="red")
 
-# plt.xlabel(r"$\theta\,/\, \text{DEG}$")
-# plt.ylabel(r"$R$")
-# plt.xlim(0,1.5)
-# plt.grid()
-# plt.legend(loc="best")
-# plt.yscale("log")
-# plt.savefig("Parratt.pdf")
-
-
-fig, axs = plt.subplots(3, 3, figsize=(15, 15))
-axs = axs.flatten()
-
-for i, ax in enumerate(axs):
-    ax.plot(x, parratt(x, *start_params[i]), label="Parratt-Algorithmus", color="b")
-    ax.plot(x, fresnel_ideal(x), label="Fresnelreflektivität", color="gray", linestyle="dashed", alpha=.8)
-    ax.errorbar(thetaReflect[-len(thetaReflect)+1:], reflectivity_corrected[-len(reflectivity_corrected)+1:], label="Reflektivität mit Korrekturfaktor", color="red")
-    ax.set_xlabel(r"$\theta\,/\, \text{DEG}$")
-    ax.set_ylabel(r"$R$")
-    ax.set_xlim(0,1.5)
-    ax.grid()
-    ax.legend(loc="best")
-    ax.set_yscale("log")
-
-plt.tight_layout()
+plt.xlabel(r"$\theta\,/\, \text{DEG}$")
+plt.ylabel(r"$R$")
+plt.xlim(0,1.5)
+plt.grid()
+plt.legend(loc="best")
+plt.yscale("log")
 plt.savefig("Parratt.pdf")

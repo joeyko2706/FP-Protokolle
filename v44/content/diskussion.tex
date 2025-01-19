@@ -8,81 +8,33 @@ In einem nächsten Schritt wurde ein Z-Scan durchgeführt, um die Strahlbreite d
 Eine grafische Darstellung der Messdaten und der eingezeichneten Strahlbreite ist in \autoref{fig:ZScan} zu sehen.
 Diese wurde durch den charakteristischen Abfall der Intensität in Abhängigkeit der Position der Probe auf $d\approx\SI{0.2}{\milli\meter}$ bestimmt.
 Um in diesem Schritt die Unsicherheit auf der festgestellten Strahlbreite zu verringern, könnte die Schrittweite pro Messschritt verringert werden. \newline
-Der Geometriewinkel wurde durch einen Rockingscan bestimmt, der in \autoref{fig:RockingScan} abgebildet ist und ergab sich zu $\alpha_{\text{G}}=\SI{0.014}{\degree}$ weicht von dem theoretischen Wert von $\alpha_{\text{G,\text{Theorie}}}=\SI{0.01}{\degree}$ um $\SI{71.43}{\percent}$ ab.
+Der Geometriewinkel wurde durch einen Rockingscan bestimmt, der in \autoref{fig:RockingScan} abgebildet ist und sich zu $\alpha_{\text{G}}=\SI{0.4}{\degree}$ ergab, weicht von dem theoretischen berechneten Wert von $\alpha_{\text{G,\text{Theorie}}}=\SI{0.57}{\degree}$ um $\SI{70.18}{\percent}$ ab.
 Durch die Abhängigkeit des theoretischen Geometriewinkels von dem zuvor gemessenen Strahlbreite, könnte die Unsicherheit auf den Geometriewinkel durch eine genauere Bestimmung der Strahlbreite verringert werden und somit näher an dem experimentellen Wert liegen.
 Aus diesem Grund wurde der experimentelle Wert für fortlaufende Auswertungen verwendet. \newline
 Nach den Auswertung der Justierungen folgte die Auswertung der Dispersion und der Rauigkeit des Siliziumwafers.
 Die in Reflektivitätsscans gemessenen Daten wurden in \autoref{fig:Reflektivität}, \autoref{fig:Reflektivität2} und \autoref{fig:Reflektivität3} dargestellt.
-Sie zeigen klar zu erkennende Kiessing-Oszillation, die auf eine Schichtdicke von $d = \SI{8.62(0.75)e-8}{\meter}$ rückschließen ließen.\newline
+Sie zeigen klar zu erkennende Kiessing-Oszillation, die auf eine Schichtdicke von $d = \SI{8.62(0.82)e-8}{\meter}$ rückschließen ließen.\newline
 Der Parratt-Algorithmus wurde verwendet, um die Dispersion und die Rauigkeit des Siliziumwafers zu bestimmen.
 Er zeigt eine grobe Übereinstimmung mit den mit dem Korrekturfaktor bereinigten Messdaten, die in \autoref{fig:Reflektivität3} dargestellt sind. 
-Die aus dem Parrattalgorithmus bestimmten Parameter sind gemeinsam mit den Literaturwerten und den relativen Abweichungen in \autoref{tab:parratt} aufgeführt.
-
-% \begin{table}[h!]
-%     \centering
-%     \begin{tabular}{c c}
-%         \toprule
-%         \textbf{Parameter der Gaußfunktion} & \textbf{Wert} \\ 
-%         \midrule
-%         $\alpha_0$ & $\SI{2.6767(0.4602)e-3}{\degree}$ \\ 
-%         $\sigma$ & $\SI{3.6969(0.0041)e-2}{\degree}$ \\ 
-%         $I_0$ & $\SI{3.4247(0.0411)e4}{}$,\\
-%         $B$ & $\SI{5.1979(0.9718)e4}{}$ \\ 
-%         FWHM & $\SI{0.0871(0.0011)}{}$ \\ 
-%         \bottomrule
-%     \end{tabular}
-%     \caption{Parameter der Gaußfunktion}
-%     \label{tab:gauss}
-% \end{table}
-
-% \begin{table}[h!]
-%     \centering
-%     \begin{tabular}{c c}
-%         \toprule
-%         \textbf{Geometriewinkel} & \textbf{Wert} \\ 
-%         \midrule
-%         Experiment & $\SI{0.014}{\degree}$ \\ 
-%         Theorie & $\SI{0.01}{\degree}$ \\ 
-%         \bottomrule
-%     \end{tabular}
-%     \caption{Geometriewinkel}
-%     \label{tab:geometriewinkel}
-% \end{table}
-
-% \begin{table}[h!]
-%     \centering
-%     \begin{tabular}{c c}
-%         \toprule
-%         \textbf{Schichtdicke} & \textbf{Wert} \\ 
-%         \midrule
-%         $\upDelta \alpha$ & $\SI{5.12(0.45)e-02}{}$ \\ 
-%         Schichtdicke & $\SI{8.62 (0.75)e-08}{}$ \\ 
-%         \bottomrule
-%     \end{tabular}
-%     \caption{Schichtdicke}
-\begin{table}[h!]
-    \centering
-    \begin{tabular}{c c c c}
-        \toprule
-        \textbf{Parameter} & \textbf{Experiment} & \textbf{Literaturwert} & \textbf{Relative Abweichung} \\
-        \midrule
-        $\delta_{\text{Silizium}}$      & $\SI{9.53e-06}{}$         & $\SI{7.6e-06}{}$         & $\SI{25.39}{\percent}$ \\ 
-        $\delta_{\text{Poly}}$          & $\SI{8.44e-06}{}$         & $\SI{3.5e-06}{}$         & $\SI{141.14}{\percent}$ \\ 
-        $\alpha_{c,\text{Sili}}$        & $\SI{0.0047}{\degree}$    & $\SI{0.174}{\degree}$    & $\SI{97.30}{\percent}$ \\ 
-        $\alpha_{c,\text{Poly}}$        & $\SI{0.0013}{\degree}$    & $\SI{0.153}{\degree}$    & $\SI{99.15}{\percent}$ \\ 
-        \bottomrule
-    \end{tabular}
-    \caption{Parratt-Algorithmus}
-    \label{tab:parratt}
-\end{table}
-\noindent
-Die Schichtdicke wurde durch den Parrattalgorithmus zu $d = \SI{2.40e-08}{\meter}$ bestimmt und weicht somit um $\SI{72.17}{\percent}$ von dem im Reflektivitätsscan bestimmten Wert $d = \SI{8.62(0.75)e-8}{\meter}$ ab.
+% Die aus dem Parrattalgorithmus bestimmten Parameter sind gemeinsam mit den Literaturwerten und den relativen Abweichungen in \autoref{tab:parratt} aufgeführt.
+Diese Übererinstimmung ist allerdings nur für Winkel bis $\alpha \approx \SI{0.6}{\degree}$ gegeben, da ab diesem Winkel die Messdaten und der Algorithmus stark voneinander abweichen.
+Diese Abweichung könnte mit einer genaueren Justierung der Parameter des Parrattalgorithmus verringert werden.
+Da allerdings der wichtigste Bereich des Algorithmus bis $\alpha \approx \SI{0.6}{\degree}$ gut übereinstimmt, kann die Auswertung des Parrattalgorithmus als relativ genau angesehen werden. \newline
+Die Schichtdicke wurde durch den Parrattalgorithmus zu $d = \SI{1.21e-7}{\meter}$ bestimmt und weicht somit um $\SI{45.43}{\percent}$ von dem im Reflektivitätsscan bestimmten Wert $d = \SI{8.62(0.75)e-8}{\meter}$ ab.
 Die Rauigkeiten wurden zu $\sigma_{\text{Luft, Poly}} = \SI{2.9e-10}{}$ und $\sigma_{\text{Poly, SI}} = \SI{1.4e-11}{}$ bestimmt.
-Der Parrattalgorithmus zeigt aufgrund der hohen Abweichungen der Parameter von den Literaturwerten eine schlechte Übereinstimmung mit den Messdaten auf.
+Mithilfe des Parrattalgorithmus wurden ebenfalls die kritischen Winkel für Polysterol und Silizium zu $\alpha_{c,\text{Poly}} = \SI{0.073}{\degree}$ und $\alpha_{c,\text{Sili}} = \SI{0.27}{\degree}$ bestimmt und weichen damit von den Literaturwerten $\alpha_{c,\text{Poly}} = \SI{0.152}{\degree}$ und $\alpha_{c,\text{Sili}} = \SI{0.224}{\degree}$ \cite{GISAXS} um $\SI{48.03}{\percent}$ und $\SI{20.54}{\percent}$ ab.
+Der Parrattalgorithmus zeigt aufgrund der hohen Abweichungen der Parameter von den Literaturwerten eine ungenaue Übereinstimmung mit den Messdaten auf.
 Dies kann mehrere Ursachen haben, wie zum Beispiel eine ungenaue Justierung des Detektors oder des Winkels des Röntgenstrahls.
 Aufgrund der vorgenommenen Auswertungen der Justage ist dies allerdings unwahrscheinlich.
 Es kann aber auch auf eine mit Staub und anderen Verunreinigungen behaftete Probe zurückzuführen sein, die die Messdaten verfälscht haben könnte.
-Der Parrattalgorithmus ist ein sehr komplexes Verfahren, das eine Vielzahl von Parametern benötigt, die alle mit Unsicherheiten behaftet sind, was ebenfalls zu den Abweichungen führen kann. \newline
+Der Parrattalgorithmus ist ein sehr komplexes Verfahren, das eine Vielzahl von Parametern benötigt, die alle unterschiedliche Auswirkungen auf das Endergebnis haben.
+So führt zum Beispiel das Verändern der Dispersionen zu einer Verschiebung des gesamten Plots, während das Verändern der Rauigkeiten zu einer Veränderung in dem Abfall der Reflekivität führt.
+Durch die Schichtdicke wird die Periodizität der Kiessing-Oszillationen beeinflusst.
+Durch die Absorptionsparameter wird beeinflusst, wie stark die Reflektivität abfällt, was im Extremfall zu einer Reflektivität führen kann, die nach dem kritischen Winkel linear abfällt.
+Die Rauigkeitsparameter beeinflussen, wie stark die Reflektivität an den Grenzflächen abfällt.
+Die Schwierigkeit beim anpassen der Parameter besteht allerdings darin, dass die Parameter nicht unabhängig voneinander sind, sondern sich zum Teil gegenseitig beeinflussen.
+Ist somit ein Teil des Algorithmus gut eingestellt, kann das Verändern eines anderen Parameters dazu führen, dass der zuvor gut eingestellte Teil des Algorithmus nicht mehr gut eingestellt ist.
+Außerdem ist das feine Abstimmen der Parameter schwierig, da eine leichte Veränderung der Parameter manchmal gar nichts und manchmal eine starke Veränderung des Plots zur Folge hat. \newline
 Abschließend lässt sich sagen, dass die Justierungen des Versuches gut verliefen und die Auswertungen der Justierungen genau waren.
 Es konnte außerdem eine Schichtdicke der Probe bestimmt werden.
 Die Auswertung des Parrattalgorithmus war allerdings weniger genau und wies hohe Abweichungen von den Literatur- und zuvor bestimmten Werten auf, weshalb die Auswertung des Parrattalgorithmus als weniger genau angesehen werden kann.

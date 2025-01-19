@@ -1,6 +1,23 @@
 \section{Theorie}
 \label{sec:Theorie}
-Die folgende Theorie ist auf \cite{Anleitung44}. 
+Die folgende Theorie ist auf \cite{Anleitung44} basiert.
+
+\subsection{Die Röntgenröhre}
+\label{subsec:Röntgenröhre}
+In diesem Versuch wird eine Röntgenröhre mit Cu-Anode verwendet. In dieser werden Elektronen aus einer Glühkathode in Richtung Cu-Anode beschleunigt. Die in die Cu-Anode einschlagenden Elektronen interagieren dann mit dem Kupfer, und zwar auf zweierlei Arten: Durch Stöße mit den Elektronen in den Kupferatomen werden diese auf höhere Niveaus angeregt. meistens werden die Atome sogar ionisiert. Dies macht Plätze auf niedrigeren Niveaus frei und führt damit dazu, dass Elektronen höherer Niveaus unter Emission von Röntgenstrahlung auf auf diese niedrigeren Niveaus zurückfallen. Außerdem wird bei der Bewegung der Elektronen im elektrischen Feld innerhalb des Kupfers Bremsstrahlung emittiert.\\
+In diesem Versuch wird die $\text{K}_\alpha$-Linie von Kupfer verwendet, also jene Röntgenstrahlung, welche beim Niveauübergang von der zweiten auf die erste Schale entsteht. Sie besitzt eine Wellenlänge von $\lambda=1.54\text{Å}$. Um diese aus dem restlichen Spektrum der Röntgenröhre herauszufiltern, wird ein \textit{Göbelspiegel} verwendet. Dieser bündelt die Strahlung und filtert alle anderen Linien aus der Strahlung heraus.\\
+Die Strahlung fällt nach dem Göbelspiegel auf eine Blende, dann auf die Probe und dann auf eine weitere Blende. Die Blenden dienen dazu, den eingestellten Glanzwinkel der einfallenden und den gemessenen Glanzwinkel der ausfallenden Strahlung zu variieren.\\
+\\
+Bei sehr geringen Winkeln (kleiner als $\alpha_g$) schießt die Strahlung über die Probe hinaus. Dies äußert sich in einem reskalierenden Faktor vor der gemessenen reflektierten Intensität, dem \textit{Geometriefaktor} 
+\begin{aquation}
+    G &\coloneqq \left\{ \begin{matrix}
+        \frac{D \sin{\alpha_i}}{d_0} & \alpha_i < \alpha_g \\
+        1 & \text{sonst}
+    \end{matrix} \right. \tc
+    \label{eq:Geometriefaktor}
+\end{aquation}
+mit der Probenlänge $D$ und der Strahlbreite $d_0$.
+
 \subsection{Der komplexe Brechungsindex}
 Dringt elektromagnetische Strahlung in ein nicht absorbierendes Material ein, so nimmt der Brechungsindex einen reellen Wert an. Die Dispersionsrelation nimmt dann die Form 
 \begin{aquation}
@@ -54,7 +71,13 @@ Dieses Interferenzverhalten schlägt sich in der Reflektivität nieder. Diese is
 \begin{aquation}
     R &= \frac{I_\text{r}}{I_\text{tot}}
 \end{aquation}
-mit der totalen Intensität des emittierten Strahls $I_\text{tot}$. Nach den Gesetzen der Trigonometrie resultiert eine Änderung des Einfallswinkels in einer Änderung des Gangunterschieds. Wird also ein hinreichend großer Winkelbereich abgefahren, sollten mehrere Interferenzmini- und -maxima auftreten. Diese Schwingungen werden \textit{Kiessig-Oszillationen} genannt.
+mit der totalen Intensität des emittierten Strahls $I_\text{tot}$. Nach den Gesetzen der Trigonometrie resultiert eine Änderung des Einfallswinkels in einer Änderung des Gangunterschieds. Wird also ein hinreichend großer Winkelbereich abgefahren, sollten mehrere Interferenzmini- und -maxima auftreten. Diese Schwingungen werden \textit{Kiessig-Oszillationen} genannt. Ein Beispielplot f[r diese ist in \autoref{fig:kiessig} zu sehen.
+\begin{figure}
+    \centering
+    \includegraphics[width=\textwidth]{figures/kiessig.png}
+    \caption{Kiessig-Oszillationen für einen Silizium-Wafer mit einer $800\si{\angstrom}$ dicken Polysterol-Schicht.}
+    \label{fig:kiessig}
+\end{figure} 
 
 \subsection{Bestimmung der Schichtdicke}
 Um die Dicke einer einzelnen Schicht zu bestimmen, wird die \textit{Bragg-Bedingung} 
@@ -80,7 +103,15 @@ ist, während
 \begin{aquation}
     r_{j,j+1} &= \frac{k_{z,j} - k_{z,j+1}}{k_{z,j} + k_{z,j+1}}
 \end{aquation}
-der bereits zuvor definierte, diesmal jedoch durch die Wellenzahlen vor und nach der Streuung an der Grenzfläche ausgedrückt Fresnel-Reflexionskoeffizient, ist.
+der bereits zuvor definierte, diesmal jedoch durch die Wellenzahlen vor und nach der Streuung an der Grenzfläche ausgedrückt Fresnel-Reflexionskoeffizient, ist.\\
+Zur Veranschaulichung der Schichtdurchgänge, welche durch den Parratt-Algorithmus berechnet werden können, dient \autoref{fig:parratt}.
+
+\begin{figure}
+    \centering
+    \includegraphics[width=\textwidth]{figures/parratt.png}
+    \caption{Veranschaulichung der wiederholten Reflexionen bei mehreren internen Schichtübergängen, welche durch den Parratt-Algorithmus berechnet werden können.}
+    \label{fig:parratt}
+\end{figure}
 
 \subsection{Messung der Rauigkeit}
 Die bisherigen Überlegungen wurden alle unter der Annahme angestellt, dass die einzelnen Oberflächen alle ideal glatt sind. In der Realität besitzen Oberflächen jedoch kleine Unebenheiten, welche sie rau machen. Diese Rauigkeit sorgt für eine Abweichung vom von der Theorie postulierten Endergebnis. Um diese Abweichung zu berücksichtigen, wird eine weitere Größe eingeführt: Die \textit{Rauigkeit}

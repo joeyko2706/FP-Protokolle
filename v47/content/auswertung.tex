@@ -17,7 +17,7 @@ as has been noted in \autoref{eq:cp-cv}.\\
 The resulting heat capacities can be found in \autoref{fig:molar_heat}.\\
 \begin{figure}
   \centering
-  \includegraphics[width=\textwidth]{figures/CVvsCP.png}
+  \includegraphics[width=0.8\textwidth]{figures/CVvsCP.png}
   \caption{Comparison between $C_v$ and $C_p$}
   \label{fig:molar_heat}
 \end{figure}
@@ -39,7 +39,7 @@ The results for the heat capacities can be found in \autoref{tab:Cp+CV}.
 \subsection{The Debye Temperature}
 The Debye temperature can be computed via the table in \autoref{fig:debye}. The first column is the significand and the first line is the mantisse of $\frac{\Theta_D}{T}$. The remaining values are the corresponding heat capacities $C_V$. Thus, to find a $\frac{\Theta_D}{T}$-value for a $C_V$, the closest $C_V$ has to be found within the table, which makes it possible to read the value from the table.\\
 The Debye temperature can then be derived by simply multiplying the value from the table with the according $T$. Doing so results in the values depicted in \autoref{tab:debye_results}. Only values $T<170\text{K}$ have been considered.\\
-The mean value for the Debye-temperature is then $\Theta_D = 330.42 \pm 7.11 \text{K}$.
+The mean value for the Debye-temperature is then $\Theta_D = (330.42 \pm 7.11) \text{K}$.
 \begin{figure}[h!]
   \centering
   \includegraphics[width=\textwidth]{figures/Debye_values.png}
@@ -49,7 +49,7 @@ The mean value for the Debye-temperature is then $\Theta_D = 330.42 \pm 7.11 \te
 
 \begin{table}
   \centering
-  \input{results/T_Debye_table_modded.tex}
+  \input{results/T_Debye_table.tex}
   \caption{Resulting Debye temperature $\Theta_D$}
   \label{tab:debye_results}
 \end{table}

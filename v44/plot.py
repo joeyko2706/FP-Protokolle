@@ -195,7 +195,7 @@ for i in range(6,len(thetaReflect)):
 plt.errorbar(thetaReflect[-len(thetaReflect)+1:], reflectivity[-len(reflectivity)+1:], label="Reflect ohne Korrekturfaktor", color="r")
 plt.errorbar(thetaReflect[-len(thetaReflect)+1:], reflectivity_corrected[-len(reflectivity_corrected)+1:], label="Reflektivität mit Korrekturfaktor", color="darkred", linestyle="dashed", alpha=0.7)
 plt.plot(x, fresnel_ideal(x), label="Fresnelreflektivität", color="b")
-plt.plot(thetaReflect[minima], reflectivity[minima], "x", color="k", label="Minima")
+plt.plot(thetaReflect[minima], reflectivity_corrected[minima], "x", color="k", label="Minima")
 plt.vlines(critical_angle, 0, np.max(reflectivity_corrected), color="gray", linestyle="dashed", label=r"Kritischer Winkel $\alpha_c$")
 
 plt.xlim(0,1.5)
@@ -326,26 +326,17 @@ Strahlbreite: 0.2 mm
 -----------------Geometriewinkel-----------------------
 Experiment: 0.4°
 Theorie:    0.57°
--------------------------------------------------------
 -----------------Schichtdicke-----------------------
 Delta alpha:    (5.12+/-0.49)e-02
 Schichtdicke:   (8.62+/-0.82)e-08
----------------------------------------------------
 -----------------Parratt-Algorithmus-----------------------
 delta Silizium:                 1.67e-06
 delta Poly:                     8.89e-06
 b Silizium:                     -2.41e-08
-b Poly:                         5.39e-11
+b Poly:                         5.05e-10
 d:                              1.21e-07
 sigma Silizium:                 -7.94e-08
-sigma Polysterol:               3.43e-11
+sigma Polysterol:               3.59e-11
 Kritischer Winkel Silizium:     0.27+/-0.00
 Kritischer Winkel Polysterol:   0.073+/-0.006
 '''
-
-# print(("-------------------------------------------------------"))
-# print(geom_factor)
-# print(thetaReflect)
-# print(reflectivity_corrected)
-
-# np.savetxt("build/thetaReflect_reflectivity_corrected.txt", np.column_stack((thetaReflect, reflectivity_corrected)), header="thetaReflect reflectivity_corrected", comments='')

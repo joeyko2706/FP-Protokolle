@@ -59,7 +59,7 @@ For the following measurements, the polarisation angle is set to $\SI{135}{\degr
 \label{subsec:refraction_glass}
 
 In order to analyse the refractive index of the glass, a total of five series of measurements were carried out in which the angle of the glass plate was varied by $\SI{10}{\degree}$.
-The measurements of the refraction index of glass are shown in table \ref{tab:refraction_glass}, giving a mean value of $\#M=\num{33.4\pm1.4}$.
+The measurements of the refraction index of glass are shown in table \ref{tab:refraction_glass}, giving a mean value of $\overline M=\num{33.4\pm1.4}$.
 \begin{table}[H]
     \centering
     \begin{tabular}{c c c}
@@ -77,13 +77,12 @@ The measurements of the refraction index of glass are shown in table \ref{tab:re
     \label{tab:refraction_glass}
 \end{table}
 \noindent
-To calculate the refraction index of glass, equation (\ref{eq:interference_maxima}) is simplified using $\delta=\sfrac{2\pi}{\lambda_{\text{vac}}}\cdot(n-1)T$ to the form
+To calculate the refraction index of glass, equation (\ref{eq:interference_maxima}) and equation (\textbf{HIER DIE ANDERE FORMEL EINFÜGEN!!!}) is simplified to the form
 \begin{align}
-    % \bar M = \frac{d}{4\pi^2\lambda}\cdot \left(\frac{n-1}{2n}\cdot \Theta^2 \cdot \underbrace{\theta}_{\text{tilted glass plate}}\right),
-    n = 1+ \frac{\#M\cdot\lambda}{d}
+    n = \frac{1}{1-\frac{M\lambda_{\text{vacuum}}}{2d\theta^2}}
 \end{align}
-where $d$ denotes the thickness of the glass plate, $\lambda$ the wavelength of the light in vacuum and $\#M$ the measured maxima.
-The refraction index of glass is then calculated to be $n=\num{1.0211\pm 9e-4}$. %$M=\num{4.074\pm0.005}$.
+where $d$ denotes the thickness of the glass plate, $\lambda$ the wavelength of the light in vacuum and $M$ the measured maxima.
+The refraction index of glass is then calculated to be $n=\num{1.531 \pm 0.034}$.
 
 \subsection{Refraction index of air}
 \label{subsec:refraction_air}
@@ -123,7 +122,7 @@ The original measurement values are shown in figure \ref{fig:original_data} in a
 \noindent
 The refraction indices are then calculated using the formula
 \begin{align}
-    n_{\text{air}} = 1 + \frac{\#M\cdot\lambda}{L},
+    n_{\text{air}} = 1 + \frac{M\cdot\lambda}{L},
 \end{align}
 where $L$ denotes the length of the air cell and $\lambda$ the wavelength of the light in vacuum.
 The calculated values are shown in figure \ref{fig:refraction_index}.
@@ -141,12 +140,10 @@ The fit yields the parameters
     a = \SI{0\pm 10e-5}{\per\milli\bar} \quad \text{and} \quad b = 1 - \num{7\pm5e-7}.
 \end{align*}
 Thus, the experimental value for the refraction index of air is $n_{\text{air, exp}}=1-\num{7\pm5e-7}$.
-Similarly, the refraction index of glass at atmospheric pressure $p_0=\SI{1013.25}{\milli\bar}$ and room temperature $T_0=\SI{288.15}{\kelvin}$ is calculated to be $n_{\text{glass, exp}}=\num{1\pm 6e-5}$.
-
-
+Similarly, the refraction index of air at standard conditions, namely an atmospheric pressure of $p_0=\SI{1013.25}{\milli\bar}$ and a room temperature of $T_0=\SI{288.15}{\kelvin}$, is calculated using the same measurements to be $n_{\text{air, standard}}=1\pm\num{6e-5}$.
 \begin{figure}[H]
     \centering
     \includegraphics[width=0.75\textwidth]{build/refraction_index.pdf}
     \caption{Graphical representation of the refraction index of air in dependence of the pressure.}
     \label{fig:refraction_index}
-  \end{figure}
+\end{figure}

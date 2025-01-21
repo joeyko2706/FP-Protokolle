@@ -67,6 +67,7 @@ lamda = 632.99e-9   # wavelength of the laser (meter)
 L = ufloat(0.1, 0.1e-3)
 d = 1e-3            # thickness of the glass plate (meter)
 n_glas_theory = 1.4570  #https://refractiveindex.info
+m_bar = ufloat(33.4, 1.4)  # Mittelwert und Standardabweichung der Counts der Messung vom Glas
 
 
 def n_air_exp(M):
@@ -77,11 +78,9 @@ def refraction_index(p, a, b, T=T, R=R):
     return 3/2 * p/(T*R) * a + b
 
 
-def refraction_index_glass(n):
-    # return d/lamda * (n-1)/(2*n) * (np.radians(10))**3
-    return 1+(n*lamda)/d
-    # return (lamda*n)/(2*np.pi)
-    # return (d/lamda) * ((n-1)/(2*n)) * (np.radians(10))**3
+def refraction_index_glass(M, theta):
+    theta = np.radians(theta)
+    return 1/(1-(M*lamda)/(2*d*theta**2))
 
 
 counting_rate = unumpy.uarray(counts, std)
@@ -102,19 +101,19 @@ plt.savefig('build/refraction_index.pdf')
 # plt.show()
 
 n_air_exp = 1- refraction_index(0, ufloat(popt[0], np.sqrt(pcov[0,0])), ufloat(popt[1], np.sqrt(pcov[1,1])))
-
+n_glass_exp = refraction_index_glass(m_bar, 10)
 
 print('--------Brechungsindexbestimmung--------')
-print(f'n_glass = {refraction_index_glass(n_glass)}')
+print(f'n_glass_exp = {n_glass_exp}')
 print(f'a = {ufloat(popt[0], np.sqrt(pcov[0,0]))}')
 print(f'b = 1 - {1-ufloat(popt[1], np.sqrt(pcov[1,1]))}')
 print(f'n_air_exp = 1 - {n_air_exp}')
 print(f'n_standard_air = {refraction_index(1013, ufloat(popt[0], np.sqrt(pcov[0,0])), ufloat(popt[1], np.sqrt(pcov[1,1])), T=288.15)}')
-
 print('--------Relative Abweichungen--------')
 print(f'Kontrast: {100*(k_0-1)/1:.2f}%')
-print(f'Brechungsindex Glas: {100*(refraction_index_glass(n_glass)-1)/n_glas_theory:.2f}%')
-print(f'Brechungsindex Luft: {100*(refraction_index(0, *popt)-1)/1.00027653:.8f}%')
+print(f'Brechungsindex Glas: {100*(n_glass_exp/n_glas_theory-1):.2f}%')
+print(f'Brechungsindex Luft, normal: {100*(refraction_index(0, *popt)-1)/1.00027653:.8f}%')
+print(f'Brechungsindex Luft, standard: {100*(1-refraction_index(1013, ufloat(popt[0], np.sqrt(pcov[0,0])), ufloat(popt[1], np.sqrt(pcov[1,1])), T=288.15)/1.00027653)}')
 
 
 # '''Print the data to use in Latex table'''

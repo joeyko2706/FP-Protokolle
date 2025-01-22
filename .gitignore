@@ -138,3 +138,5 @@ dmypy.json
 
 # nopdf
 *.pdf
+
+Makefile

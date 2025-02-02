@@ -1,7 +1,7 @@
 \section{Auswertung}
 \label{sec:Auswertung}
 
-\subsection{Invertierter Verstärker}
+\subsection{Invertierender Verstärker}
 \label{sec:Invertierter_Verstärker}
 Die Verstärkung des invertierenden Linearverstärkers ist definiert als der Quotient aus dem Widerstand vor dem Eingang und jenem aus der Feedback-Schlleife, wie in \autoref{eq:Verstärkung} beschrieben.\\
 Dadurch ergeben sich für die drei verwendeten Kombinationen aus Widerständen die Verstärkungen $V_{220} = 220$, $V_{150} = 150$ und $V_{100} = 100$.\\
@@ -86,3 +86,27 @@ und
         \caption{Doppelt logarithmische Plots der Verstärkung gegen die Frequenz bei Integrator und Differentiator.}
     \label{fig:integrator_differentiator}
 \end{figure}
+
+\subsection{Der Schmitt-Trigger}
+Der Schmitt-Trigger hat zwei diskrete Zustände. Bei Eingangsspannungen $U_0$ unterhalb eines Schwellenwerts nimmt er seeinen Low-Zustand an. Ab dem Schwellenwert wechselt er unstetig auf den High-Zustand.\\
+Im vorliegenden Experiment wurde der Schmitt-Trigger mit Widerständen $R_1 = 10 \text{k$\Omega$}$ und $R_2 = !00 \text{k$\Omega$}$ untersucht.\\
+Bei diesem ergaben sich für die beiden Zustände die Spannungen $U_\text{low} = 4.6\text{V}$ und $U_\text{high} = 28.5\text{V}$.\\
+Nach \autoref{eq:schmitt} ist mit der Sättigungsspannung $U_\text{B,$\pm$} = \pm 15\text{V}$ des Verstärkers die theoretisch Schwellenspannung $U_\text{T,$\pm$,theo} = \pm 1.5\text{V}$ und damit die Hysterese $\Delta U_\text{T,theo} = U_\text{T,$+$,theo} - U_\text{T,$-$,theo} = 3\text{V}$.\\
+Aus \autoref{fig:schmitt} lassen sich die Schwellenspannungen dann ablesen zu 
+\begin{aquation}
+    U_\text{T,$+$} &= 1.50\text{V} \\
+    U_\text{T,$-$} &= -1.61\text{V} \tp
+\end{aquation}
+Damit ergibt sich für die Hysterese 
+\begin{aquation}
+    \Delta U_{T} &= 3.11 \text{V} \tp
+\end{aquation}
+
+\begin{figure}
+    \centering
+    \includegraphics[width=0.7\linewidth]{data/scope_8.png}
+    \caption{Oszilloskopbild des Schmitt-Triggers. Skala des Eingangssignals (gelb): $5\text{V}$, Skala des Ausgangssignals (grün): $0.92\text{V}$.}
+    \label{fig:schmitt}
+\end{figure}
+
+\subsection{Der Generator}

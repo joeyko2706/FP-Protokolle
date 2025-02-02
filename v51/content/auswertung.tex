@@ -6,7 +6,7 @@
 Die Verstärkung des invertierenden Linearverstärkers ist definiert als der Quotient aus dem Widerstand vor dem Eingang und jenem aus der Feedback-Schlleife, wie in \autoref{eq:Verstärkung} beschrieben.\\
 Dadurch ergeben sich für die drei verwendeten Kombinationen aus Widerständen die Verstärkungen $V_{220} = 220$, $V_{150} = 150$ und $V_{100} = 100$.\\
 Zur Bestimmung der Cutoff-Frequenzen der drei Aufbauten müssen die Daten zur unverstärkten und zur verstärkten Amplitude zur Bestimmung der Verstärkung mittels \autoref{eq:Verstärkung} herangezogen werden. Diese werden in einem doppelt logarithmischen Plot gegen die Frequenz aufgetragen.\\
-Wie in \autoref(hier plot einfügen) zu sehen ist, bleibt logarithmische Verstärkung bis zu einer gewissen Frequenz weitgehend konstant, bis sie einen gewissen Grenzfrequenzwert $f_\text{Grenz}$ erreicht. Ab diesem Wert fällt sie gegen die logarithmische Frequenz konstant ab.\\
+Wie in \autoref{tab:ergebnisse_verstärkung_inverted} zu sehen ist, bleibt logarithmische Verstärkung bis zu einer gewissen Frequenz weitgehend konstant, bis sie einen gewissen Grenzfrequenzwert $f_\text{Grenz}$ erreicht. Ab diesem Wert fällt sie gegen die logarithmische Frequenz konstant ab.\\
 Um die Cutoff-Frequenz zu bestimmen, müssen daher beiden Unterbereiche linear gefittet werden. Durch die Forderung, dass die beiden Ausgleichsgeraden sich bei der Cutoff-Frequenz treffen, ergibt sich für diese der Wert
 \begin{aquation}
     \ln{\text{Grenz}} &= \frac{b-b^\prime}{a^\prime-a}
@@ -20,7 +20,23 @@ Für den Fehler der Frequenz ergibt sich nach den Regeln der Differentialrechnun
     \Delta f_\text{Grenz} &= \sqrt{\sum_{x = a^{(\prime)}, b^{(\prime)}} \left(\frac{\partial f_\text{Grenz}}{\partial x}\Delta x\right)^2} \tp
 \end{aquation}
 Die Leerlaufverstärkung $V_L$ ergibt sich als der Mittelwert der Messwerte bis zur Cutoff-Frequenz.\\
-In \autoref{tab:ergebnisse_verstärkung_inverted} finden sich die Ergebnisse der zuvor genannten Überlegungen.
+In \autoref{tab:ergebnisse_verstärkung_inverted} finden sich die Ergebnisse der so bestimmten Werte.
+
+\begin{figure}
+    \centering
+    \includegraphics[width=\linewidth]{figures/inverted_gain.png}
+        \caption{Doppelt logarithmische Plots der Verstärkung gegen die Frequenz beim invertierenden Verstärker. Der Widerstand $R_1$ in \autoref{fig:inverting-OpAmp} ist in allen Fällen $R_1 = 1\text{k$\Omega$}$.}
+    \label{tab:ergebnisse_verstärkung_inverted}
+\end{figure}
+
+Die Phasen für den invertierten Verstärker sind in \autoref{tab:ergebnisse_phase_inverted} zu sehen.
+
+\begin{figure}
+    \centering
+    \includegraphics[width=0.6\linewidth]{figures/inverted_phase.png}
+        \caption{Logarithmischer Plot der Phasen für die verschiedenen Widerstände gegen die Frequenz beim invertierenden Verstärker. Der Widerstand $R_1$ in \autoref{fig:inverting-OpAmp} ist in allen Fällen $R_1 = 1\text{k$\Omega$}$.}
+    \label{tab:ergebnisse_phase_inverted}
+\end{figure}
 
 \begin{table}[h!]
     \centering

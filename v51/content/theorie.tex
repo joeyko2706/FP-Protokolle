@@ -154,7 +154,7 @@ Die Schwellspannung kann mithilfe von
     \label{eq:schmitt}
     U_\pm = \pm\frac{R_1}{R_2}U_\text{B}
 \end{align}
-berechnet werden, wobei ein überschreiten eines Wertes zum Umschalten des Ausgangssignals auf den Maximalwert und ein Unterschreiten auf den Minimalwert des Schmitt-Triggers führt.
+mit der Sättigungsspannung des Operationsverstärkers $U_B$ berechnet werden, wobei ein überschreiten eines Wertes zum Umschalten des Ausgangssignals auf den Maximalwert und ein Unterschreiten auf den Minimalwert des Schmitt-Triggers führt.
 Dies wird erst durch die Einführung der Hysterese möglich, die durch die positive Rückkopplung des Ausgangssignals auf den nicht-invertierenden Eingang erzeugt wird und somit erst dazu führt, dass ein maximaler/minimaler Wert angenommen wird.
 Ohne die Hysterese würde der Schmitt-Trigger bereits bei geringen Schwankungen des Eingangssignals umschalten und somit oszillieren.
 Die Ausgangsspannung eines Schmitt-Triggers ist immer eine Rechteckspannung.
@@ -174,8 +174,9 @@ Ein Schaltplan eines Generators ist in \autoref{fig:Generator_einzeln} dargestel
 Die Rechteckspannung des Schmitt-Triggers wird durch den Integrator in eine Dreieckspannung umgewandelt und dann wiederum auf den Eingang des Schmitt-Triggers zurückgeführt.
 Dadurch entsteht ein periodisches Signal mit Frequenz $\nu_a$, die durch 
 \begin{align}
+    \label{eq:generator}
     \nu_a &= \frac{R_2}{4CR_1R_3}\label{eq:FrequenzGenerator}, \\
-    U_0 &= U_{\text{max}}\frac{R_1}{R_2}\label{eq:AmplitudeGenerator},
+    U_1 &= U_{\text{B}}\frac{R_1}{R_2}\label{eq:AmplitudeGenerator},
 \end{align}
 beschrieben werden kann.
 Während bei einem solchen Generator das Schwingverhalten erst angeregt durch Ein- und Ausschalten angeregt werden muss, kann ein Generator mit variierender Amplitude auch ohne externe Anregung schwingen.

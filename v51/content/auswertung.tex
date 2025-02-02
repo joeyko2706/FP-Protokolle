@@ -13,6 +13,7 @@ Um die Cutoff-Frequenz zu bestimmen, müssen daher beiden Unterbereiche linear g
 \end{aquation}
 mit den Fitparametern $a^{(\prime)}$ und $b^{(\prime)}$ aus der Geradengleichung
 \begin{aquation}
+    \label{eq:linear_fit}
     \ln{V} &= a^{(\prime)}ln{f} + b^{(\prime)} \tp
 \end{aquation}
 Für den Fehler der Frequenz ergibt sich nach den Regeln der Differentialrechnung für die Cutoff-Frequenz der fortgepflanzte Fehler
@@ -51,3 +52,37 @@ Die Phasen für den invertierten Verstärker sind in \autoref{tab:ergebnisse_pha
     \caption{Titel der Tabelle}
     \label{tab:ergebnisse_verstärkung_inverted}
 \end{table}
+
+\subsection{Integrator und Differentiator}
+Für den Integrator ergibt sich mit $R = 10\text{k$\Omega$}$ und $C = 100 \text{nF}$ die theoretische Zeitkonstante 
+\begin{aquation}
+    {RC}_\text{$\int$,theo} &= 1 \text{ms} \tp
+\end{aquation}
+Für den Differentiator ergibt sich als Theoriewert mit $R = 10\text{k$\Omega$}$ $C = 22 \text{nF}$
+\begin{aquation}
+    {RC}_\text{$\partial$,theo} &= 22 \text{ms} \tp
+\end{aquation}
+Durch Fitten der Daten in einem doppelt logarithmischen Plot nach \autoref{eq:linear_fit}, wie in \autoref{fig:integrator_differentiator} gezeigt, ergibt sich für die Berechnung der Zeitkonstante des Integrators 
+\begin{aquation}
+    RC &= e^{-b} &= (8.90 \pm 0.27) \text{ms}
+\end{aquation}
+und für die Zeitkonstante des Differentiators analog 
+\begin{aquation}
+    RC &= e^{b} &= (79.85 \pm 10.98) \text{ms} \tp 
+\end{aquation}
+Die Fitparameter sind 
+\begin{aquation}
+    a_{\int} &= -0.84 \pm 0.03 \\
+    b_{\int} &= 4.72 \pm 0.03
+\end{aquation}
+und 
+\begin{aquation}
+    a_\partial &= 1.04 \pm 0.10 \\
+    b_\partial &= 2.53 \pm 0.14 \tp
+\end{aquation}
+\begin{figure}
+    \centering
+    \includegraphics[width=\linewidth]{figures/Int+Diff.png}
+        \caption{Doppelt logarithmische Plots der Verstärkung gegen die Frequenz bei Integrator und Differentiator.}
+    \label{fig:integrator_differentiator}
+\end{figure}

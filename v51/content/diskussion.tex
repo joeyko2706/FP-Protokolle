@@ -1,2 +1,49 @@
 \section{Diskussion}
 \label{sec:Diskussion}
+\subsection{Der invertierende Verstärker}
+Die gemessenen Leerlaufverstärkungen liegen alle außerhalb der Standardabweichung. Da die Abweichung jedoch bei allen drei Widerständen um eine ähnliche Abweichung niedriger als der Theoriewert ist, liegt der Schluss nahe, dass der Gesamtwiderstand im Bereich des Widerstandes $R_1$ (vgl. \autoref{fig:inverting-OpAmp}) nicht vernachlässigbar ist.\\
+Denn zum Einen würde ein erhöhter Widerstand im Bereich von $R_2$ die Abweichung nach unten weiter erhöhen, statt sie zu verringern, wie leicht aus der so modifizierten Verstärkung 
+\begin{aquation}
+    V &= \frac{R_2}{R_1} \rightarrow \frac{R_2 + R_\text{sys}}{R_1}
+\end{aquation}
+zu erkennen ist.\\
+Eine Abweichung im Bereich von $R_1$, sodass 
+\begin{aquation}
+    V &= \frac{R_2}{R_1} \rightarrow \frac{R_2}{R_1 + R_\text{sys}}
+\end{aquation}
+hingegen würde auch erklären, warum die relative Abweichung mit abnehmendem $R_2$ kleiner wird, denn je kleiner $R_2$, desto schwächer wird in diesem Fall die Gewichtung bei der Berechnung der relativen Abweichung.\\
+Eine Überschlagsrechnung mit geschätzten Werten ergibt, dass eine Modifikation des Theoriewerts von $R_1$ um $R_\text{sys} = 0.25 \kOhm$  den größten Teil der Abweichung tatsächlich sehr gut erklären kann.\\
+\begin{table}[h!]
+    \centering
+    \begin{tabular}{|>{$}c<{$}|>{$}c<{$}|>{$}c<{$}|}
+    \hline
+    V_{\text{Theorie}} & V_{\text{Leerlauf}} & \text{relative Abweichung} \\ \hline
+    220 & 174.64 \pm 2.61 & 20.6\% \\
+    150 & 123.26 \pm 1.29 & 17.8\% \\
+    100 & 84.70 \pm 1.04 & 15.3\% \\
+    \hline
+    \end{tabular}
+    \caption{Vergleich der Ergebnisse des invertierenden Verstärkers}
+    \label{tab:ergebnisse_verstärkung_vergleich}
+\end{table}
+Da die Grenzfrequenz von der Verstärkung abhängt und die Bandbreite von der Grenzfrequenz, pflanzt sich dieser Fehler in diese fort, sodass sie ebenfalls angepasst werden müssen.
+
+\subsection{Integrator und Differentiator}
+Die Messungen der Zeitkonstante des Integrators und des Differentiators sind beide weit abseits der theoretischen Prognosen. Ein sehr naheliegender Grund dafür könnten falsch eingebaute Bauteile sein. Unter den vorhandenen Bauteilen befanden sich nämlich Widerstände mit $10\kOhm$ und $100\kOhm$ und Kondensatoren mit $22 \text{nF}$ und $100 \text{nF}$.\\
+Beim Integrator würde der versehentliche Einbau eines Widerstandes mit $100\kOhm$ statt, wie geplant eines Widerstandes mit $10\kOhm$ die Abweichung in Kombination mit dem aus der Abweichung des invertierenden Verstärkers geschlossenen abweichenden Widerstand des Gesamtaufbaus relativ gut erklären, denn damit würde
+\begin{aquation}
+    {RC}_\text{$\int$,theo} &= 1 \text{ms} &\rightarrow 10 \text{ms} &\tc\\
+    {RC}_\text{exp} &= (8.90 \pm 0.27) \text{ms} \tp
+\end{aquation}
+Für den Differentiator würde ein falsches Bauteil, nämlich der Vertausch eines Kondensators mit $C = 22 \text{nF} \rightarrow 100 \text{nF}$
+\begin{aquation}
+    {RC}_\text{$\partial$,theo} &= 22 \text{ms} &\rightarrow 100 \text{ms}&\tc \\
+    {RC}_\text{exp} &= (79.85 \pm 10.98) \text{ms}
+\end{aquation}
+ebenfalls gut erklären.
+
+\subsection{Der Schmitt-Trigger}
+Beim Schmitt-Trigger sind die experimentellen Ergebnisse sehr nah an den theoretisch prognostizierten.
+
+\subsection{Der (variable) Generator}
+Da die Messdaten für den nicht variablen Generator fehlten, wurden hier alle möglichen Daten aus dem Variablen bestimmt.

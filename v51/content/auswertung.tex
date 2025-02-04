@@ -18,6 +18,7 @@ mit den Fitparametern $a^{(\prime)}$ und $b^{(\prime)}$ aus der Geradengleichung
 \end{aquation}
 Für den Fehler der Frequenz ergibt sich nach den Regeln der Differentialrechnung für die Cutoff-Frequenz der fortgepflanzte Fehler
 \begin{aquation}
+    \label{eq:fehler}
     \Delta f_\text{Grenz} &= \sqrt{\sum_{x = a^{(\prime)}, b^{(\prime)}} \left(\frac{\partial f_\text{Grenz}}{\partial x}\Delta x\right)^2} \tp
 \end{aquation}
 Die Leerlaufverstärkung $V_L$ ergibt sich als der Mittelwert der Messwerte bis zur Cutoff-Frequenz.\\
@@ -127,6 +128,26 @@ Eigentlich sollte diese aus einem Bild des ungedämpften Oszillators bestimmt we
 \begin{aquation}
     T &= (5.58 \pm 0.19) \text{ms} \tp
 \end{aquation}
+Die Gleichung zur Berechnung der Zerfallskonstante ist laut \autoref{eq:ZeitkonstanteGenerator}
+\begin{aquation}
+    \tau &= \frac{20 R C}{|\eta|} \tp
+\end{aquation}
+Um die Dämpfung $\eta$ zu bestimmen, müssen die maximalen Amplituden der gedämpften Schwingungen halblogarithmisch geplottet werden. Durch einen Fit mittels der Geradengleichung 
+\begin{aquation}
+    \ln(U_a(t)) &= b - \eta t
+\end{aquation}
+lässt sich dann $\eta$ bestimmen.\\
+Mit den vorhandenen Daten konnten zwei Fits erstellt werden, welche in \autoref{fig:generator_fits} zu finden sind. Durch Mitteln über die aus diesen Fits gewonnenen Dämpfungsfaktoren ergibt sich für die Gesamtdämpfung der Wert 
+\begin{aquation}
+    \eta &= 0.618 \pm 0.010 \tp
+\end{aquation}
+Da sowohl die Zerfallskonstante, als auch $T$ proportional zur Zeitkonstante sind, lässt sich diese sich unter Verwendung einer zu \autoref{eq:fehler} analogen Fehlerformel bestimmen zu 
+\begin{aquation}
+    \tau &= \frac{10 T}{\pi |\eta|} &= (0.111 \pm 0.004) \text{ms}\tp
+\end{aquation}
+
+
+
 \begin{figure}
     \centering
     \begin{subfigure}{\textwidth}
@@ -141,4 +162,11 @@ Eigentlich sollte diese aus einem Bild des ungedämpften Oszillators bestimmt we
         \caption{Plot der Daten beider aufgenommenen Perioden des gedämpft oszillierenden variablen Generators mit eingezeichneten Maxima.}
         \label{fig:generator_gedampft_plot}
     \end{subfigure}
+\end{figure}
+
+\begin{figure}
+    \centering
+    \includegraphics[width=0.85\linewidth]{figures/generator_dampened_fit.png}
+    \caption{Halblogarithmische Fits der Maxima der beiden aufgenommenen gedämpften Schwingungen.}
+    \label{fig:generator_fits}
 \end{figure}

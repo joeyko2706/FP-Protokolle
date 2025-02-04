@@ -109,10 +109,36 @@ Damit ergibt sich für die Hysterese
     \label{fig:schmitt}
 \end{figure}
 
-\subsection{Der Generator}
-Beim Aufbau des Generators wurden die Widerstände $R_1 = 10 \kOhm$, $R_2 = 100 \kOhm$, $R_3 = 1 \kOhm$, sowie der Kondensator $C = 1\text{$\mu$F}$ verwendet.\\
+\subsection{Der (variable) Generator}
+Beim Aufbau des nach \autoref{fig:Generator_einzeln} Generators wurden die Widerstände $R_1 = 10 \kOhm$, $R_2 = 100 \kOhm$, $R_3 = 1 \kOhm$, sowie der Kondensator $C = 1\text{$\mu$F}$ verwendet.\\
 Als Theoriewerte ergeben sich damit gemäß \autoref{eq:generator} 
 \begin{aquation}
-    \nu_a &= 25\kHz \\
+    \nu_a &= 25 \kHz \\
     U_1 &= 1.5 \text{V} \tp
 \end{aquation}
+Experimentell hierzu konnte nicht bestimmt werden, da die Daten für den Generator fehlen.\\
+\\
+Der variable Generator wurde nach \autoref{fig:Generator-varyingAmplitudes} aufgebaut. Die verwendeten Kondensatoren hatten die Kapazität $C = 100\text{nF}$, während für den Widerstand $R = 10\kOhm$ gewählt wurde.\\
+Für die Periodendauer ergibt sich nach \autoref{eq:PeriodendauerGenerator} der Theoriewert 
+\begin{aquation}
+    T_\text{theo} &= 6.28 \text{ms} \tp
+\end{aquation}
+Eigentlich sollte diese aus einem Bild des ungedämpften Oszillators bestimmt werden. Da jedoch auch dieses Bild fehlt und da die theoretisch prognostizierete Periodendauer des gedämpften Oszillators die selbe ist, wurde die Periodendauer hier aus Letzterem bestimmt. Dessen Bild ist in \autoref{fig:generator_gedampft} zu sehen. Die Periodendauer ergibt sich zu
+\begin{aquation}
+    T &= (5.58 \pm 0.19) \text{ms} \tp
+\end{aquation}
+\begin{figure}
+    \centering
+    \begin{subfigure}{\textwidth}
+        \centering
+        \includegraphics[width=0.7\linewidth]{data/scope_14.png}
+        \caption{Oszilloskopbild des gedämpft oszillierenden variablen Generators.}
+        \label{fig:generator_gedampft}
+    \end{subfigure}
+    \begin{subfigure}{\textwidth}
+        \centering
+        \includegraphics[width=0.85\linewidth]{figures/generator_dampened.png}
+        \caption{Plot der Daten beider aufgenommenen Perioden des gedämpft oszillierenden variablen Generators mit eingezeichneten Maxima.}
+        \label{fig:generator_gedampft_plot}
+    \end{subfigure}
+\end{figure}

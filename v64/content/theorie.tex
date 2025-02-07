@@ -23,15 +23,84 @@ In this experiment, the contrast will be measured dependent on the phase angle o
 K &= A|\sin(2\varphi + \delta)| \tp
 \end{aquation}
 
+\subsection{Interference}
+Before going through interference itself, some general remarks on a wave's intensity should be made.\\
+To get the intensity of any wave (which is what is measured buy a photo diode), the formula 
+\begin{aquation}
+  I \coloneqq \varepsilon_0 c \langle | \vec{E}\left(z, t\right) |^2 \rangle
+\end{aquation}
+has to be applied. Here, 
+\begin{aquation}
+  \langle f(t) \rangle &\coloneqq \frac{1}{T}\int_{t_0}^{t_0 + T} f(t)
+\end{aquation}
+is the time average of a function $f(t)$ with period $T$, while 
+\begin{aquation}
+  \vec{E} &\coloneqq \text{Re}\left(\left[E_x \vec{e}_x + E_y \vec{e}_y e^{i \delta}\right] e^{i k z - i \omega t}\right) \\
+  &= E_x \vec{e}_x \cos(k x - \omega t) + E_y \vec{e}_y \cos(k y - \omega t + \delta)
+\end{aquation}
+is the wave's electric field component, with any phase $\delta$, which determines a wave's initial polarisation (ellipticity and its special cases). This phasee is a relative phase between the $x$- and $y$-part of a wave's electric field. In other conventions, the above expression might occur in a symmetrised form, assigning a phase $\delta_{x,y}$ to each of the respective electric field's components.\\
+Since the time average of any squared cosine is $\frac{1}{2}$, the intensity becomes 
+\begin{aquation}
+  \label{eq:single_beam}
+  I &= \varepsilon_0 c \frac{E_0^2}{2}
+\end{aquation}
+with $E_0^2 \coloneqq E_x^2 + E_y^2$.\\
+But interference occurs only when two coherent beams with a relative phase shift $\varphi$ overlap, since the total electric field of the combined beam is the superposition of the single beams. Mathematically, this makes the intensity
+\begin{aquation}
+  I &= \varepsilon_0 c \langle | \vec{E}_1\left(z, t\right) + \vec{E}_2\left(z, t, \varphi\right) |^2 \rangle \tp
+\end{aquation}
+Factorising the absolute value there are two field squares of the type $\vec{E}_i^2$ occuring, which leads to two terms like the one derived earlier for each single beam. But in addition to this, there is a mixed term between the two waves, which is called an \textit{interference term} for a reason.\\
+Using the fact that the time average does not care about the occurence of a total phase $\delta$ in both cosines in the cosine-product, the total mixed amplitude then reads 
+\begin{aquation}
+  \label{eq:double_beam}
+  I &= \varepsilon_0 c \left( \varepsilon_0 c \langle | \vec{E}_2\left(z, t\right) |^2 \rangle + \langle | \vec{E}_2\left(z, t, \varphi\right) |^2 \rangle + 2 \langle \vec{E}_1\left(z, t\right) \cdot \vec{E}_2\left(z, t, \varphi\right) \rangle \right) \\
+  &= \varepsilon_0 c \left(\frac{E_1^2 + E_2^2}{2} + \left(E_{1 x} E_{2 x} + E_{1 y} E_{2 y}\right) \cos\left(\phi\right)\right) \tp
+\end{aquation}
+This is the general formula for an arbitrary beam split and relative phase (since $E_{1,2}^0$ and $\varphi$ can be chosen arbitrarily).\\
+To become more specific, the special case of a $50/50$  beam split (meaning $\vec{E}_1^0 = \vec{E}_2^0 \eqqcolon \vec{E}_\text{split}$, $\varphi=0$) without a relative phase shift will be considered. In this case, using \autoref{eq:single_beam} for the beam before splitting and \autoref{eq:double_beam} for the beams after splitting, demanding that the total intensity is the same in both instances, it follows that 
+\begin{aquation}
+  \vec{E}_\text{split} &= \frac{\vec{E}_0}{\sqrt{2}} \tp
+\end{aquation}
+It does not matter if there is going to be a phase shift later in the beam - at the splitting point, this equation of continuity always holds.
+\begin{aquation}
+  I &= \varepsilon_0 c \left(\frac{E_0^2}{2} + \frac{E_0^2}{2} \cos\left( \varphi \right) \right) \tp
+\end{aquation}
+For this phase-dependent intensity, the minimal/maximal intensity occur at the cosine's extrema. The maximum lies at $\varphi=0$, while the minimum is at $\varphi=\pi$, yielding
+\begin{aquation}
+  I_\text{max} &= E_0 \tc \\
+  I_\text{min} &= 0 \tc
+\end{aquation}
+which is exactly what is expected for these cases.\\
+It can also be noted that this is completely independent of the $z$-coordinate, since it is integrated out in the process of taking the time average. However, the equation would become space dependent if the beams are not perfectly aligned, since in that case the non-$z$-dependent part of the wave would not vanish during time averaging. This effect is crucial to understand because during adjustment, a tilt like this will result in interference fringes after the beams have been 'aligned', which have to be removed to reach true alignment as the final step of adjustment.
+
 \subsection{The Refraction Index}
 The refraction index of a medium is a measure for how fast light travels inside that medium. It is manifest in the dispersion relation inside the medium, effectively scaling the speed of light's vacuum value. This means that 
 \begin{aquation}
-  n &= \frac{c_\text{medium}}{c_\text{vacuum}} \tp 
+  n &= \frac{c_\text{med}}{c_\text{vac}} \tp 
 \end{aquation}
 Plugging this into the vacuum dispersion relation, the resulting refraction index inside the medium, depending on the wave number inside the medium, is
 \begin{aquation}
-  n &= \frac{\lambda_\text{vacuum} k}{2\pi} \tp
+  n &= \frac{\lambda_\text{vac} k}{2\pi} \tp
 \end{aquation}
+In any medium with refractive index $n$, the phase shift that occurs when a beam has moved a distance $L$ is 
+\begin{aquation}
+  \phi &= \frac{2\pi}{\lambda} n L \tp
+\end{aquation}
+Both beams will have such a phase shift after moving through the distance $L$, and the phase shift will be different since the media are different. But their relative phase shift is just the difference between the total phases. For this reason, the phase shift caused by one beam traveling through a medium of length $L$ while the other travels through a medium with $n \approx 1$ (like the vacuum or air) will be 
+\begin{aquation}
+  \label{eq:phase_shift}
+  \varphi &= \frac{2\pi}{\lambda} (n - 1) L \tp
+\end{aquation}
+The number of interference maxima that occurs due to a phase shift is 
+\begin{aquation}
+  N &= \frac{\varphi}{2\pi} \tp
+\end{aquation}
+Plugging \autoref{eq:phase_shift} into this equation yields 
+\begin{aquation}
+  n &= 1 + \frac{N\lambda}{L} \tc
+\end{aquation}
+which makes it possible to determine the refractive index when $L$, $\lambda$ and $N$ are known.
+
 \subsubsection{Gaseous Medium}
 To measure this index, one of the beam is lead through a gas cell. The difference in the speed of light inside the cell yields a phase difference 
 \begin{aquation}
@@ -67,8 +136,8 @@ A beam of light is refracted when entering a medium. For this reason, the way tr
 With this, the phase difference for a solid body, which can not be determined as easily as with the gas via its pressure and temperature is
 \begin{aquation}
 \label{eq:phase-difference_solid}
-  \Delta \varphi &= \frac{2 \pi}{\lambda_\text{vacuum}} \lbr n_\text{medium} b - a \rbr \\
-  		&=v \frac{2 \pi T}{\lambda_\text{vacuum}} \lbr \frac{n-\cos(\theta^\prime - \theta)}{\cos(\theta^\prime)}\rbr \tp
+  \Delta \varphi &= \frac{2 \pi}{\lambda_\text{vac}} \lbr n_\text{medium} b - a \rbr \\
+  		&=v \frac{2 \pi T}{\lambda_\text{vac}} \lbr \frac{n-\cos(\theta^\prime - \theta)}{\cos(\theta^\prime)}\rbr \tp
 \end{aquation}
 The angles are related via Snellius' formula
 \begin{aquation}
@@ -76,7 +145,7 @@ The angles are related via Snellius' formula
 \end{aquation}
 However in this experiment, the medium has been inserted into both beams. It consisted of two glass plates of identical thickness that were mounted on a rotation holder at an angle of $20$ degrees. For this reason, the refraction indices in the above formula become the same, and the formula can be symmetrised. Going through the previous steps again for each beam, at angles $\theta_\pm \coloneqq \theta \pm \theta_0$, with $\theta_0 = 20 \text{degree}$, the final expression for the number of interference maxima is 
 \begin{aquation}
-  M &= \frac{T}{\lambda_\text{vacuum}} \lbr \frac{n - \cos\lbr\theta_+ - \arcsin\lbr \frac{\sin(\theta_+)}{n} \rbr\rbr}{\cos\lbr\arcsin\lbr\frac{\sin(\theta_+)}{n}\rbr\rbr} - \frac{n - \cos\lbr\theta_- - \arcsin\lbr \frac{\sin(\theta_-)}{n} \rbr\rbr}{\cos\lbr\arcsin\lbr\frac{\sin(\theta_-)}{n}\rbr\rbr}\rbr
+  M &= \frac{T}{\lambda_\text{vac}} \lbr \frac{n - \cos\lbr\theta_+ - \arcsin\lbr \frac{\sin(\theta_+)}{n} \rbr\rbr}{\cos\lbr\arcsin\lbr\frac{\sin(\theta_+)}{n}\rbr\rbr} - \frac{n - \cos\lbr\theta_- - \arcsin\lbr \frac{\sin(\theta_-)}{n} \rbr\rbr}{\cos\lbr\arcsin\lbr\frac{\sin(\theta_-)}{n}\rbr\rbr}\rbr
 \end{aquation}
 
 

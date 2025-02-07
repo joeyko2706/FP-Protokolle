@@ -1,4 +1,4 @@
-Frequenz [Hz] & verstärkte Amplitude [V] & Nicht-verstärkte Amplitude [mV] & Phasenverschiebung [DEG] # R1 = 1 kOhm; R2= 100kOhm; An Phasengenerator eingestellte Amplitude: 100 mV
+Frequenz [Hz] & verstärkte Amplitude [V] & Nicht-verstärkte Amplitude [mV] & Phasenverschiebung [DEG]
 10.00 ; 14.9 ; 123 ; 177
 15.44 ; 14.9 ; 123 ; 178
 23.85 ; 14.9 ; 123; 180

@@ -87,6 +87,25 @@ und
         \caption{Doppelt logarithmische Plots der Verstärkung gegen die Frequenz bei Integrator und Differentiator.}
     \label{fig:integrator_differentiator}
 \end{figure}
+Eine grafische Darstellung der Integrations- und Differentiationsfunktion ist in \autoref{fig:integrator_differentiator} zu finden.
+\begin{figure}
+    \centering
+    \begin{subfigure}{\textwidth}
+        \centering
+        \includegraphics[width=0.7\linewidth]{data/scope_7.png}
+        \caption{Die Dreieckspannung wird vom Integrator zu Parabeln mit jeweils positivem/negativem Vorzeichen (welches der Steigung der Geraden entspricht) integriert.}
+        \label{fig:generator_gedampft}
+    \end{subfigure}
+    \begin{subfigure}{\textwidth}
+        \centering
+        \includegraphics[width=0.7\linewidth]{data/scope_2.png}
+        \caption{Der Sinus wird vom Differentiator um $90\textdegree$ zu einem Cosinus phasenverschoben.}
+        \label{fig:generator_gedampft_plot}
+    \end{subfigure}
+    \caption{Graphische Darstellung der Integrations- und Differentiationswirkung von Integrator und Differentiator.}
+    \label{fig:integrator_differentiator}
+\end{figure}
+
 
 \subsection{Der Schmitt-Trigger}
 Der Schmitt-Trigger hat zwei diskrete Zustände. Bei Eingangsspannungen $U_0$ unterhalb eines Schwellenwerts nimmt er seeinen Low-Zustand an. Ab dem Schwellenwert wechselt er unstetig auf den High-Zustand.\\

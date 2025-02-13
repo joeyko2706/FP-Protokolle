@@ -43,7 +43,7 @@ im Zusammenhang.
 Bei einer niedrigen Verstärkung kann der OpAmp effektiver über einen größeren Frequenzbereich eingesetzt werden.
 Bei hohen Frequenzen kann der Verstärker keine stabile Verstärkung mehr liefern, da interne Kapazitäten und endliche Geschwindigkeiten der Komponenten die Verstärkung beeinflussen. \newline
 Um mit einem OpAmp analoge Signale verarbeiten zu können, die sowohl positive, als auch negative Komponenten enthalten, werden zwei Versorgungsspannungen benötigt.
-Damit diese eine gleichmäßige Ausgabe ermöglichen und unerwarteten Offets vorbeugen, werden die beiden Spannungen symmetrisch um die Nullspannung, meist $\pm U_\text{B}=\SI{15}{\volt}$, gewählt.
+Damit diese eine gleichmäßige Ausgabe ermöglichen und unerwarteten Offets vorbeugen, werden die beiden Spannungen symmetrisch um die Nullspannung, bspw. $\pm U_\text{B}=\SI{15}{\volt}$, gewählt.
 Dadurch ist die Amplitude des Ausgangssignals 
 \begin{align}
     U_\text{A}=V\cdot(U_+-U_-),
@@ -127,6 +127,8 @@ Bei hohen Frequenzen nimmt die Verstärkung ab.
 \subsubsection{Der Differenzierer}\label{subsubsec:Differenzierer}        %%%%%%%%%%%%%%%% Differenzierer %%%%%%%%%%%%%%%%%%%%%
 Der Differenzierer ist in der Schaltung ein Integrator, bei dem der Kondensator $C$ und der Widerstand $R$ vertauscht sind.
 In \autoref{fig:Differentiator} ist der Schaltplan eines Differenzierers dargestellt.
+Ein Differentiator wird im Gegensatz zum Integrator bei hohen Frequenzen eingesetzt, da hohe Frequenzanteile stärker differenziert werden können und somit einen größeren Einfluss auf die Ausgangsspannung haben.
+Niedrige Frequenzen werden vom Differentiator nicht so gut angesprochen und sind durch Rauscheffekten gar problematisch.\\
 Aus der Beziehung zwischen Ladungsmenge $Q$ und Spannung $U$ des Kondensators $C$ folgt für die Spannung $U_\text{A}$ ein differenzierter Ausdruck, weshalb die Schaltung als Differenzierer bezeichnet wird.
 Es folgt für die Ausgangsspannung
 \begin{align}
@@ -158,8 +160,6 @@ mit der Sättigungsspannung des Operationsverstärkers $U_B$ berechnet werden, w
 Dies wird erst durch die Einführung der Hysterese möglich, die durch die positive Rückkopplung des Ausgangssignals auf den nicht-invertierenden Eingang erzeugt wird und somit erst dazu führt, dass ein maximaler/minimaler Wert angenommen wird.
 Ohne die Hysterese würde der Schmitt-Trigger bereits bei geringen Schwankungen des Eingangssignals umschalten und somit oszillieren.
 Die Ausgangsspannung eines Schmitt-Triggers ist immer eine Rechteckspannung.
-Ein Differentiator, wird im Gegensatz zum Integrator, bei hohen Frequenzen eingesetzt, da hohe Frequenzanteile stärker differenziert werden können und somit einen größeren Einfluss auf die Ausgangsspannung haben.
-Niedrige Frequenzen werden vom Differentiator nicht so gut angesprochen und sind durch Rauscheffekten gar problematisch.
 \begin{figure}[H]
 	\centering
     \includegraphics[width=0.6\linewidth]{figures/Schmitt-Trigger.png}
@@ -179,7 +179,9 @@ Dadurch entsteht ein periodisches Signal mit Frequenz $\nu_a$, die durch
     U_1 &= U_{\text{B}}\frac{R_1}{R_2},
 \end{align}
 beschrieben werden kann.
-Während bei einem solchen Generator das Schwingverhalten erst angeregt durch Ein- und Ausschalten angeregt werden muss, kann ein Generator mit variierender Amplitude auch ohne externe Anregung schwingen.
+
+\subsubsection{Der variable Generator}
+Während beim einfachen Generator das Schwingverhalten erst durch wiederholtes Einschalten der Betriebsspannung angeregt werden muss, kann ein Generator mit variierender Amplitude auch ohne externe Anregung schwingen.
 Ein Schaltplan eines solchen Generators ist in \autoref{fig:Generator-varyingAmplitudes} aufgezeichnet.
 Das Schwingungsverhalten dieses Generators kann über die Differentialgleichung eines gedämpften harmonischen Oszillators beschrieben werden,
 \begin{align}

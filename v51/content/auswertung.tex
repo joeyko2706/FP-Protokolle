@@ -6,8 +6,8 @@
 Die Verstärkung des invertierenden Linearverstärkers ist definiert als der Quotient aus dem Widerstand vor dem Eingang und jenem aus der Feedback-Schlleife, wie in \autoref{eq:Verstärkung} beschrieben.\\
 Dadurch ergeben sich für die drei verwendeten Kombinationen aus Widerständen die Verstärkungen $V_{220} = 220$, $V_{150} = 150$ und $V_{100} = 100$.\\
 Zur Bestimmung der Cutoff-Frequenzen der drei Aufbauten müssen die Daten zur unverstärkten und zur verstärkten Amplitude zur Bestimmung der Verstärkung mittels \autoref{eq:Verstärkung} herangezogen werden. Diese werden in einem doppelt logarithmischen Plot gegen die Frequenz aufgetragen.\\
-Wie in \autoref{tab:ergebnisse_verstärkung_inverted} zu sehen ist, bleibt logarithmische Verstärkung bis zu einer gewissen Frequenz weitgehend konstant, bis sie einen gewissen Grenzfrequenzwert $f_\text{Grenz}$ erreicht. Ab diesem Wert fällt sie gegen die logarithmische Frequenz konstant ab.\\
-Um die Cutoff-Frequenz zu bestimmen, müssen daher beiden Unterbereiche linear gefittet werden. Durch die Forderung, dass die beiden Ausgleichsgeraden sich bei der Cutoff-Frequenz treffen, ergibt sich für diese der Wert
+Wie in \autoref{tab:ergebnisse_verstärkung_inverted} zu sehen ist, bleibt die Verstärkung bis zu einer gewissen Frequenz weitgehend konstant, bis die Frequenz einen gewissen Grenzwert $f_\text{Grenz}$ erreicht. Ab diesem Wert fällt sie gegen die Frequenz konstant ab.\\
+Um die Cutoff-Frequenz zu bestimmen, muss daher in beide Teilbereichen ein linearer Fit durchgeführt werden. Durch die Forderung, dass die beiden Ausgleichsgeraden sich bei der Cutoff-Frequenz treffen, ergibt sich für diese der Wert
 \begin{aquation}
     \ln{f_\text{Grenz}} &= \frac{b-b^\prime}{a^\prime-a}
 \end{aquation}
@@ -94,7 +94,11 @@ Eine grafische Darstellung der Integrations- und Differentiationsfunktion ist in
         \centering
         \includegraphics[width=0.7\linewidth]{data/scope_7.png}
         \caption{Die Dreieckspannung wird vom Integrator zu Parabeln mit jeweils positivem/negativem Vorzeichen (welches der Steigung der Geraden entspricht) integriert.}
-        \label{fig:generator_gedampft}
+    \end{subfigure}
+    \begin{subfigure}{\textwidth}
+        \centering
+        \includegraphics[width=0.7\linewidth]{data/scope_3.png}
+        \caption{Integration eine konstanten Funktion.}
     \end{subfigure}
     \begin{subfigure}{\textwidth}
         \centering
@@ -108,8 +112,8 @@ Eine grafische Darstellung der Integrations- und Differentiationsfunktion ist in
 
 
 \subsection{Der Schmitt-Trigger}
-Der Schmitt-Trigger hat zwei diskrete Zustände. Bei Eingangsspannungen $U_0$ unterhalb eines Schwellenwerts nimmt er seeinen Low-Zustand an. Ab dem Schwellenwert wechselt er unstetig auf den High-Zustand.\\
-Im vorliegenden Experiment wurde der Schmitt-Trigger mit Widerständen $R_1 = 10 \text{k$\Omega$}$ und $R_2 = !00 \text{k$\Omega$}$ untersucht.\\
+Der Schmitt-Trigger hat zwei diskrete Zustände. Bei Eingangsspannungen $U_0$ unterhalb eines Schwellenwerts nimmt er seinen Low-Zustand an. Ab dem Schwellenwert wechselt er unstetig auf den High-Zustand.\\
+Im vorliegenden Experiment wurde der Schmitt-Trigger mit Widerständen $R_1 = 10 \text{k$\Omega$}$ und $R_2 = 100 \text{k$\Omega$}$ untersucht.\\
 Bei diesem ergaben sich für die beiden Zustände die Spannungen $U_\text{low} = 4.6\text{V}$ und $U_\text{high} = 28.5\text{V}$.\\
 Nach \autoref{eq:schmitt} ist mit der Sättigungsspannung $U_\text{B,$\pm$} = \pm 15\text{V}$ des Verstärkers die theoretisch Schwellenspannung $U_\text{T,$\pm$,theo} = \pm 1.5\text{V}$ und damit die Hysterese $\Delta U_\text{T,theo} = U_\text{T,$+$,theo} - U_\text{T,$-$,theo} = 3\text{V}$.\\
 Aus \autoref{fig:schmitt} lassen sich die Schwellenspannungen dann ablesen zu 
@@ -129,7 +133,7 @@ Damit ergibt sich für die Hysterese
     \label{fig:schmitt}
 \end{figure}
 
-\subsection{Der (variable) Generator}
+\subsection{Der Generator}
 Beim Aufbau des nach \autoref{fig:Generator_einzeln} Generators wurden die Widerstände $R_1 = 10 \kOhm$, $R_2 = 100 \kOhm$, $R_3 = 1 \kOhm$, sowie der Kondensator $C = 1\text{$\mu$F}$ verwendet.\\
 Als Theoriewerte ergeben sich damit gemäß \autoref{eq:generator} 
 \begin{aquation}
@@ -137,7 +141,8 @@ Als Theoriewerte ergeben sich damit gemäß \autoref{eq:generator}
     U_1 &= 1.5 \text{V} \tp
 \end{aquation}
 Experimentell hierzu konnte nicht bestimmt werden, da die Daten für den Generator fehlen.\\
-\\
+
+\subsection{Der variable Generator}
 Der variable Generator wurde nach \autoref{fig:Generator-varyingAmplitudes} aufgebaut. Die verwendeten Kondensatoren hatten die Kapazität $C = 100\text{nF}$, während für den Widerstand $R = 10\kOhm$ gewählt wurde.\\
 Für die Periodendauer ergibt sich nach \autoref{eq:PeriodendauerGenerator} der Theoriewert 
 \begin{aquation}
@@ -151,18 +156,19 @@ Die Gleichung zur Berechnung der Zerfallskonstante ist laut \autoref{eq:Zeitkons
 \begin{aquation}
     \tau &= \frac{20 R C}{|\eta|} \tp
 \end{aquation}
-Um die Dämpfung $\eta$ zu bestimmen, müssen die maximalen Amplituden der gedämpften Schwingungen halblogarithmisch geplottet werden. Durch einen Fit mittels der Geradengleichung 
+Um die Dämpfung $\eta$ zu bestimmen, müssen die maximalen Amplituden der gedämpften Schwingungen halblogarithmisch geplottet werden. Die Einh[llende einer ged'mpften Schwingung geht mit der Funktion $\exp(-\frac{t}{\tau}$. Durch einen Fit mittels der Geradengleichung 
 \begin{aquation}
-    \ln(U_a(t)) &= b - \eta t
+    \ln(U_a(t)) &= b - \frac{t}{\tau} \\
+    &= b - \frac{|\eta|}{20 R C} t
 \end{aquation}
 lässt sich dann $\eta$ bestimmen.\\
 Mit den vorhandenen Daten konnten zwei Fits erstellt werden, welche in \autoref{fig:generator_fits} zu finden sind. Durch Mitteln über die aus diesen Fits gewonnenen Dämpfungsfaktoren ergibt sich für die Gesamtdämpfung der Wert 
 \begin{aquation}
-    \eta &= 0.618 \pm 0.010 \tp
+    \eta &= 30.89 \pm 25.27 \tp
 \end{aquation}
 Da sowohl die Zerfallskonstante, als auch $T$ proportional zur Zeitkonstante sind, lässt sich diese sich unter Verwendung einer zu \autoref{eq:fehler} analogen Fehlerformel bestimmen zu 
 \begin{aquation}
-    \tau &= \frac{10 T}{\pi |\eta|} &= (0.111 \pm 0.004) \text{ms}\tp
+    \tau &= \frac{10 T}{\pi |\eta|} &= (32.36 \pm 0.03) \text{ms}\tp
 \end{aquation}
 
 

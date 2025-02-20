@@ -22,7 +22,7 @@ build/v64.pdf: FORCE | build
 	  --halt-on-error \
 	v64.tex
 	cp build/v64.pdf v64.pdf
-	# cp build/v64.pdf ../PDFs/v64.pdf
+	cp build/v64.pdf ../PDFs/v64.pdf
 
 build:
 	mkdir -p build

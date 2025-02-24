@@ -1,6 +1,6 @@
 \section{Zielsetzung}\label{sec:Zielsetzung}
 
-Ziel dieses Versuches ist es die Lebensdauer kosmischer Myonen zu bestimmen, um dabei grundlegende Detektorkomponenten näher kennen zu lernen.
+Ziel dieses Versuches ist es die mittlere Lebensdauer kosmischer Myonen zu bestimmen, um dabei grundlegende Detektorkomponenten näher kennen zu lernen.
 
 \section{Theorie}\label{sec:Theorie}
 
@@ -28,24 +28,24 @@ Sie folgt über das Zerfallsgesetz
     N(t)=N_0e^{-\lambda t},
 \end{align}
 wobei $N(t)$ die Anzahl der noch nicht zerfallenen Teilchen zum Zeitpunkt $t$ ist und $N_0$ die Anzahl der Teilchen zum Zeitpunkt $t=0$.
-Die Zerfallskonstante $\lambda$ ist dabei ein Proportionalitätsfaktor, der für jedes Teilchen unterscheidlich ist.
-Mithilfe des Zerfallsgesetzes kann nun die mittlere Lebensdauer $\tau$ eines Teilchens durch zeitliches Ableiten und umstellen bestimmt werden,
+Die Zerfallskonstante $\lambda$ ist dabei ein Proportionalitätsfaktor, der für jedes Teilchen unterschiedlich ist.
+Mithilfe des Zerfallsgesetzes kann die mittlere Lebensdauer $\tau$ eines Teilchens durch zeitliches Ableiten und umstellen bestimmt werden,
 \begin{align}
     \frac{N(t)}{N_0}&=\lambda e^{-\lambda t}\text dt, \\
     \tau = \braket t &= \int_0^\infty t\lambda e^{-\lambda t}\text dt = \frac{1}{\lambda}.
 \end{align}
-Dass die Myonen auf der Erde auftreffenn lässt sich nach dem klassischen Modell der Physik nicht beschreiben, da die Lebensdauer der Myonen von $\SI{2.197}{\micro\second}$ zu kurz wäre, um die Erde zu erreichen,
+Dass die Myonen auf der Erde auftreffen lässt sich nach dem klassischen Modell der Physik nicht beschreiben, da die Lebensdauer der Myonen von $\SI{2.197}{\micro\second}$ zu kurz wäre, um die Erde zu erreichen,
 \begin{align*}
-    s = v\cdot t\approx \SI{3e8}{\meter\per\second}\cdot \SI{2.196e-6}{\second}\approx \SI{660}{\meter}.
+    s = v\cdot t\approx \SI{3e8}{\meter\per\second}\cdot \SI{2,196e-6}{\second}\approx \SI{660}{\meter}.
 \end{align*}
 Die Myonen erreichen die Erde jedoch, da sie aufgrund ihrer hohen Geschwindigkeit eine Zeitdilatation erfahren, die nach der speziellen Relativitätstheorie von Albert Einstein beschrieben wird,
 \begin{align*}
-    \gamma = \frac{E}{m_\mu c^2} = \frac{10\cdot 10^9}{105,66\cdot 10^6}\approx94.7, \\
-    \rightarrow s = vt\cdot\gamma\approx \SI{3e8}{\meter\per\second}\cdot \SI{2.196e-6}{\second} \cdot 94.7\approx \SI{62.4}{\kilo\meter}.
+    \gamma &= \frac{E}{m_\mu c^2} = \frac{10\cdot 10^9}{105,66\cdot 10^6}\approx94.7, \\
+    \rightarrow s = vt\cdot\gamma&\approx \SI{3e8}{\meter\per\second}\cdot \SI{2.196e-6}{\second} \cdot 94.7\approx \SI{62.4}{\kilo\meter}.
 \end{align*}
 Somit bestimmt sich die Wahrscheinlichkeit für ein Myon auf der Erde aufzutreffen zu
 \begin{align*}
     P&=e^{-\sfrac{L}{s}}\ \text{mit}\ L=\SI{15}{\kilo\meter}, \\
-    P_{\text{klassisch}} &= e^{-\sfrac{L}{\SI{660}{\meter}}}\approx 1.3\cdot 10^{-10}, \\
-    P_{\text{relativistisch}} &= e^{-\sfrac{L}{\SI{62.4}{\kilo\meter}}}\approx 78.63\%.
+    P_{\text{klassisch}} &= e^{-\sfrac{L}{\SI{660}{\meter}}}\approx 1,3\cdot 10^{-10}\%, \\
+    P_{\text{relativistisch}} &= e^{-\sfrac{L}{\SI{62.4}{\kilo\meter}}}\approx 78,63\%.
 \end{align*}

@@ -19,25 +19,46 @@ with minimal and maximal intensities $I_\text{min}$ and $I_\text{max}$.\\
 The closer the contrast is to $1$, the better it is. On the other hand, it is worse the lower it is. The ideal contrast therefore occurs for $I_\text{min}=0$, while the worst case is that there are no minima/maxima, meaning that $I_\text{min}=I_\text{max}$.\\
 In this experiment, the contrast will be measured dependent on the phase angle of a polarisation filter that has been positioned in the beam's path. For this, the contrast takes the form 
 \begin{aquation}
-K &= A|\sin(2\phi + \delta)| \tp
+K &= A|\sin(2\varphi + \delta)| \tp
 \end{aquation}
 
-
 \subsection{Interference}
-For interference to happen, the linearly polarised beam emitted by the HeNe laser is split by a polarising beam splitter cube (PBSC). The coordinate system is chosen at the PBSC so that the beam hitting the cube is moving in the $z$-direction, with the $x$-coordinate lying in the experiment's optical plane. The laser is positioned in such a way that its linear polarisation lies in the optical plane.\\
-Before the beam enters the PBSC, it moves through a polarisation filter. The filter's rotation angle is posed to match the traditional polar angle $\phi$ in the $x y$-plane.\\
-This way, the beam leaving the polariser has the electric field
-\begin{align}
+The HeNe laser used in this experiment emits linearly polarised light. For this reason, the derivation for the interference occuring in this experiment will be started with light that is linearly polarised in the $x$-direction, while the beam is moving in the $z$-direction. In this case, the electric field is 
+\begin{aquation}
+  \label{eq:beam_x}
+  \vec{E}\left(\vec x , t\right) &= Re\left( E_0 \vec{e}_x \exp\left(ikz - i\omega t\right)\right) \tp
+\end{aquation}
+To get the more general case of linear polarisation in any direction, the emitter can be rotated, which is equivalent to the application of the rotation operator
+\begin{aquation}
+  \hat M (\delta) &\coloneqq 
+  \begin{pmatrix}
+    \cos(\delta) & -\sin(\delta) \\
+    \sin(\delta) & \cos(\delta)
+  \end{pmatrix}
+\end{aquation}
+for a rotation angle of $\delta$.\\
+In the experiment, a polarisation filter will be placed between the laser beam and the PBSC. Using the condition that the polariser should neutralise the wave in the case of a polarisation angle perpendicular to the beam's polarisation angle $\delta$ ($\phi = \delta = \frac{\pi}{2}$) and preserve it if $\phi = \delta$, the filter's matrix representation can be derived to be 
+\begin{aquation}
+  \label{eq:polariser}
+  \hat P (\phi) &\coloneqq 
+  \begin{pmatrix}
+    \cos^2(\phi) & \sin(\phi)\cos(\phi) \\
+    \sin(\phi)\cos(\phi) & \sin^2(\phi)
+  \end{pmatrix} \tp
+\end{aquation}
+For simplicity, $E_x \coloneqq E_0 \cos(\delta)$ and $E_y \coloneqq E_0 \sin(\delta)$.\\
+Applying both these operators in order to wave in \autoref{eq:beam_x}, the beam that will enter the PBSC is
+\begin{aquation}
   \label{eq:E_pbsc}
-  \vec{E}_\text{PBSC} &= \frac{E_0}{\sqrt{2}} \cos\left(kz - \omega t\right) \left( \cos(\phi)\vec{e}_x + \sin(\phi) \vec{e}_y \right)
-\end{align}
-with the rotation angle of the polariser $\phi$.\\
+  &\vec{E}_\text{PBSC} &\coloneqq \hat P (\phi) \hat M (\delta) \vec{E} &= \left( \left(E_x\cos^2(\phi) + E_y\sin(\phi)\cos(\phi)\right) \vec{e}_x \right. \\
+  &&& \hspace{1.5mm} + \left.\left(E_x\sin(\phi)\cos(\phi) + E_y\sin^2(\phi) \right) \vec{e}_y \right) \cos\left(kz - \omega t\right) \tp
+\end{aquation}
 The next step is the splitting of the beam, after which one of the partial beams goes through a phase-shift before reuniting them.\\
-Inducing a phase shift $\delta$ in a beam is achieved by application of the translation operator 
-\begin{align}
-  \hat T(\delta) \coloneqq \exp\left(\frac{\delta}{\omega} \partial_t\right) \tp
-\end{align}
-But the PBSC does not only split the beam, but also splits its polarisations. In this experiment, the PBSC is positioned in a $\frac{\pi}{4}$ angle to the incoming beam, so that the intensities of the transmitted and that of the reflected polarisation are the same. For simplicity, the incoming beam's linear polarisation will be taken to have $\delta = \frac{\pi}{4}$, because this way, the $x$- and $y$-components have the same amplitude of $\frac{E_0}{\sqrt{2}}$. Due to the PBSC's tilt, the spllitting surface is aligned with the beam's $y$-component. This way, the $y$-component is transmitted, while the $x$-component undergoes reflection and phase-shift, which is why the full aperture from the PBSC to the interferometer's end also has to project the $x$- and $y$-components accordingly. For this, the parity operators 
+Inducing a phase shift $\varphi$ in a beam is achieved by application of the translation operator 
+\begin{aquation}
+  &\hat T(\varphi) \coloneqq \exp\left(\frac{\varphi}{\omega} \partial_t\right) \tp
+\end{aquation}
+But the PBSC does not only split the beam, but also splits its phases. In this experiment, the PBSC is positioned in a $\frac{\pi}{4}$ angle to the incoming beam. For simplicity, the incoming beam's linear polarisation will be taken to have $\delta = \frac{\pi}{4}$, because this way, the $x$- and $y$-components have the same amplitude of $\frac{E_0}{\sqrt{2}}$. Due to the PBSC's tilt, the spllitting surface is aligned with the beam's $y$-component. This way, the $y$-component is transmitted, while the $x$-component undergoes reflection and phase-shift, which is why the full aperture from the PBSC to the interferometer's end also has to project the $x$- and $y$-components accordingly. For this, the parity operators 
 \begin{align}
   \hat{P}_L &=
   \begin{pmatrix}
@@ -51,32 +72,62 @@ But the PBSC does not only split the beam, but also splits its polarisations. In
   \end{pmatrix}
 \end{align}
 are very useful. Using these, the combined projection and translation operator representing the aperture from PBSC to the leaving point of the interferometer can be written as 
-\begin{align}
-  \hat{T}_\text{Int}(\phi) \coloneqq \left(\hat T(0)\hat{P}_L + \hat T(\delta)\hat{P}_R\right) \tp
-\end{align}
+\begin{aquation}
+  &\hat{T}_\text{Int}(\phi) \coloneqq \left(\hat T(0)\hat{P}_L + \hat T(\varphi)\hat{P}_R\right) \tp
+\end{aquation}
 At this point, the requirement for the monochromaticity of the light used in interference experiments becomes manifest: The translation operator directly depends on the frequency $\omega$ (and therefore on the wavelength $\lambda$). For this reason multichromatic light would get a different phase shift for each colour, which would smear the interference pattern the further it derives from monochromaticity.\\
-Applying this translation operator on the electric field in \autoref{eq:E_pbsc} yields the split electric field 
+Applying this translation operator on the electric field in \autoref{eq:E_pbsc} yields
 \begin{align}
-  \vec{E}_\text{Int} &= \hat{T}_\text{Int}(\phi) E_\text{PBSC} &= \frac{E_0}{\sqrt{2}} \left( \cos\left(kz - \omega t\right) \cos(\phi)\vec{e}_x + \cos\left(kz - \omega t + \delta\right) \sin(\phi) \vec{e}_y \right) \tp
+  \vec{E}_\text{Int} &= \hat{T}_\text{Int}(\varphi) \vec{E}_\text{PBSC} \\
+                     &= \frac{E_0}{\sqrt{2}} \left[ \left(\cos^2(\phi) + \sin(\phi)\cos(\phi)\right) \vec{e}_x \cos\left(kz - \omega t + \varphi\right)\right. \\
+                     & \left.\hspace{9.2mm}+\left(\sin(\phi)\cos(\phi) + \sin^2(\phi) \right) \vec{e}_y \cos\left(kz - \omega t\right)\right] \tp
 \end{align}
-Now, there is only one thing that prohibits the two partial beams from interfering with each other: The fact that their polarisations are perpendicular to each other. To fix this, a final polarisation filter is placed in the reunited beams' path, at an angle of $\frac{\pi}{4}$. This reduces the respective amplitudes by a factor of $\odiv{\sqrt{2}}$. The final electric field is 
+Effectively, what the interferometer does is phase shifting the $x$-component relative to the $y$-component, so that the two of them can interfere with each other. However, they are still perpendicular to each other, which prevents interference. To make them interfere with each other, the final step is to apply a polarisation filter that lies at a $\frac{\pi}{4}$ angle between the beam's $x$- and $y$-axis. According to \autoref{eq:polariser}, this means multiplying the electric field by 
 \begin{align}
-  \vec{E} &= \frac{E_0}{2} \left( \vec{e}_x + \vec{e}_y \right) \left( \cos\left(kz - \omega t\right) \cos(\phi) + \cos\left(kz - \omega t + \delta\right) \sin(\phi) \right) \tp
+  \hat P \left(\frac{\pi}{4}\right) &=\oh
+  \begin{pmatrix}
+    1 & 1 \\
+    1 & 1 
+  \end{pmatrix}\tp
 \end{align}
-To get the intensity from this, the equation 
+This yields the final result 
 \begin{align}
-  I &\propto \langle \hspace{1mm} |\vec{E}|^2\rangle_t
+  \vec{E}_\text{Diode} &= \hat P\left(\frac{\pi}{4}\right) \vec{E}_\text{Int}\\
+                     &= \frac{E_0}{\sqrt{2}} \left[ \left(\cos^2(\phi) + \sin(\phi)\cos(\phi)\right) \cos\left(kz - \omega t + \varphi\right)\right. \\
+                     & \left.\hspace{9.2mm}+\left(\sin(\phi)\cos(\phi) + \sin^2(\phi) \right) \cos\left(kz - \omega t\right)\right]\left[\vec{e}_x + \vec{e}_y \right] \tp
 \end{align}
-with them time average operator $\langle\text{...}\rangle_t$ performing a time-integral over one period (here: $T = 2\pi$) is used.\\
-Computing this for the given case, the intensity becomes
+
+
+
+Now, the intensity needs to be computed.\\
+The formula for this is
 \begin{align}
-  I \propto \langle \hspace{1mm} |\cos\left(kz - \omega t\right) \cos(\phi) + \cos\left(kz - \omega t + \delta\right) \sin(\phi) |^2\rangle_t \tp
+  I &\propto \langle \hspace{1mm} |\vec{E}|^2\rangle_t \tc
 \end{align}
-Time averaging a $\cos^2$ gives $\oh$, while time averaging the product of two cosines gives the cosine of their phase difference, here $\cos(\delta)$. This yields the intensity 
+with them time average operator $\langle\text{...}\rangle_t$ performing a time-integral over one period (here: $T = 2\pi$).\\
+This operator only acts on the cosines. For the squared cosines, this gives $\oh$, while for the interference term $2\cos\left(kz - \omega t\right) \cos\left(kz - \omega t + \varphi\right)$, the time averaging gives $\cos(\varphi)$.
+
+
+
+
+Together, this results in the intensity
 \begin{align}
-  I \propto 1 + 2 \cos(\phi)\sin(\phi) \cos(\delta) \tp
+  I &\propto E_x^2 \left(\cos^2(\phi) + \sin(\phi)\cos(\phi)\right)^2 + E_y^2 \left(\sin(\phi)\cos(\phi) + \sin^2(\phi)\right)^2 \\
+    &+ 2 E_x E_y \cos(\varphi) \left(\cos^2(\phi) + \sin(\phi)\cos(\phi)\right)\left(\sin(\phi)\cos(\phi) + \sin^2(\phi)\right)
 \end{align}
-From this it follows that constructive interference happens at $\delta = 0$, while destructive interference happens at $\delta = \pi$.
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+% To get interference to work, it is necessary that the light used is coherent. Coherence is essentially a property of light that makes it possible to have two phase-correlated beams, even after splitting the beam. Coherenct light is monochromatic.\\
+% The polarisation of light moving in the $z$ direction is a relative phase-shift between its electrical field's $y$- and $x$-component, which means that the wave generally takes the form 
+% \begin{aquation}
+%   \vec{E} &\coloneqq \text{Re}\left(\left[E_x \vec{e}_x + E_y \vec{e}_y e^{i \delta}\right] e^{i k z - i \omega t}\right) \\
+%   &= E_x \vec{e}_x \cos(k x - \omega t) + E_y \vec{e}_y \cos(k y - \omega t + \delta) \tp
+% \end{aquation}
+% The general case is elliptic polarisation, which is for arbitrary phase $\delta$. The two special cases of elliptic polarisation are linear polarisation ($\delta = 0,\pi$) and circular polarisation ($\delta = \frac{\pi}{2},\frac{3\pi}{2}$). In this experiment, linearly polarised light will be used, which is generated by sending the initial laser beam through a linear polariser.\\
+% For two waves of light to interfere with each other, they must not have a phase-shift of exactly $\frac{\pi}{2}$. For example, s- and p-polarised beams can not interfere with each other for this reason. The further to parallel polarisation they get, the stronger the interference, because at any time, only the parallel components of the beams can interfere with each other.\\
+% To illustrate this, the effects of sending a beam of light at a surface that lies in the $x-z$-plane can be considered. Per Fresnel's law, the amplitudes of the reflected and transmitted light are handled separately for the s- and p-polarisation (s meaning perpendicular (here: along the $y$-axis) to the surface and p meaning parallel (here: in the $x-z$-plane)). The polarising beam splitter cube (PBSC) used in this experiment acts like a semi-transparent mirror that is at a $\frac{\pi}{4}$ angle to the beam, but also gives the reflected beam the full s-polarisation with no p-polarisation, while the transmitted beam gets it the other way around.\\
+% In this experiment, the incoming beam is polarised vertically, meaning that its only electric field component is in the $y$-direction. For an untilted PBSC (meaning that the splitting surface is in the $x-y$-plane), the beam's polarisation is already purely parallel to the plane. Since the cube transmits p-polarisation, the beam is transmitted without any reflection. Tilting the cube by $\frac{\pi}{4}$ around the $x$-axis changes the polarisation components relative to the surface. In fact, in this case, one half of the beam is s-polarised, while the other half is p-polarised. 
 
 
 \subsection{The Refraction Index}
@@ -92,7 +143,6 @@ In any medium with refractive index $n$, the phase shift that occurs when a beam
 \begin{aquation}
   \varphi &= \frac{2\pi}{\lambda} n L \tp
 \end{aquation}
-
 
 \subsection{Solid Medium}
 Now first consider the case of the aforementioned rotation holder holding only one glass plate, with the second beam going through air with $n \approx 1$. This case is shown in \autoref{fig:glasplaettchen}. The beam moving through air travels the optical length $\overline{\mathrm{AB}}$. The beam moving through the glass plate is refracted when entering and exiting the glas, causing it to travel on a different path with the optical length $\overline{\mathrm{CD}}$. This causes a phase difference for the beam moving through the medium compared to the direct path
@@ -119,6 +169,16 @@ This quantity is the phase shift that is achieved when rotating the rotation hol
   \caption{The Sagnac Interferometer}
   \label{fig:glasplaettchen}
 \end{figure}
+
+
+
+
+
+
+
+
+
+
 
 % Both beams will have such a phase shift after moving through the distance $L$, and the phase shift will be different since the media are different. But their relative phase shift is just the difference between the total phases. For this reason, the phase shift caused by one beam traveling through a medium of length $L$ while the other travels through a medium with $n \approx 1$ (like the vacuum or air) will be 
 % \begin{aquation}
@@ -156,3 +216,9 @@ Since the refraction index of air is $\approx 1$, it can be expanded, yielding
   n &= \approx \sqrt{1 + \frac{3 A p}{R T}} \tp
 \end{aquation}
 This means that the refraction index can be measured by varying the gas's pressure and/or temperature.
+
+% \subsubsection{Solid Medium}
+% saf
+
+
+

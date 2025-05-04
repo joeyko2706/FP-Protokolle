@@ -73,15 +73,15 @@ The measurements of the refraction index of glass are shown in table \ref{tab:re
         5 & 35 \\
         \bottomrule
     \end{tabular}
-    \caption{Measured counts for the refraction index of glass for different measurement series with $\upDelta \vartheta=\SI{10}{\degree}$.}
+    \caption{Measured counts for the refraction index of glass for different measurement series with $\theta_0=\SI{10}{\degree}$.}
     \label{tab:refraction_glass}
 \end{table}
 \noindent
-To calculate the refraction index of glass, equation (\ref{eq:interference_maxima}) and equation (\ref{eq:solid}) is simplified to the form
+To calculate the refraction index of glass, equation (\ref{eq:delta_tot}) is simplified using equation (\ref{eq:number_of_maxima}) to the form
 \begin{align}
-    n = \frac{1}{1-\frac{M\lambda_{\text{vacuum}}}{2 L\theta^2}}
+    n = \frac{1}{1-\frac{M\lambda_{\text{vac}}}{2 L(\theta^2 + \theta_0^2)}}
 \end{align}
-where $d$ denotes the thickness of the glass plate, $\lambda$ the wavelength of the light in vacuum and $M$ the measured maxima.
+where $L$ denotes the thickness of the glass plate, $\lambda_\text{vac}$ the wavelength of the light in vacuum and $M$ the measured maxima.
 The refraction index of glass is then calculated to be $n=\num{1.531 \pm 0.034}$.
 
 \subsection{Refraction index of air}

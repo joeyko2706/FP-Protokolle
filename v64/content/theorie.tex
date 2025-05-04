@@ -120,19 +120,21 @@ For two glass plates that are tilted wrt each other at an angle of $20\text{°}$
 \end{align}
 To get the total phase shift for two plates, these two have to be summed over to get
 \begin{align}
+  \label{eq:delta_tot}
   \Delta \delta_\text{tot}\brr{\theta} &= \frac{2\pi L}{\lambda_\text{vac}} \left(\frac{n-1}{2 n} \brr{\theta^2 + \theta_0^2} + \mathcal{O}\brr{\theta^4} \right) \tp
 \end{align}
 
 This quantity is the phase shift that is achieved when rotating the rotation holder over the angle $\theta$. It can exceed $2\pi$. Since the interference pattern measured by the photo diode is $2\pi$ periodic, it is possible that multiple maxima occur during this rotation. The number of maxima is 
-\begin{aquation}
-  N &= \frac{\Delta \varphi}{2\pi} \tp
-\end{aquation}
+\begin{align}
+  \label{eq:number_of_maxima}
+  M &= \frac{\Delta \varphi}{2\pi} \tp
+\end{align}
 
-\begin{figure}
-  \includegraphics[width=\linewidth]{./figures/glasplaettchen.pdf}
-  \caption{The Sagnac Interferometer}
-  \label{fig:glasplaettchen}
-\end{figure}
+% \begin{figure}
+%   \includegraphics[width=\linewidth]{./figures/glasplaettchen.pdf}
+%   \caption{The glass plate}
+%   \label{fig:glasplaettchen}
+% \end{figure}
 
 % Both beams will have such a phase shift after moving through the distance $L$, and the phase shift will be different since the media are different. But their relative phase shift is just the difference between the total phases. For this reason, the phase shift caused by one beam traveling through a medium of length $L$ while the other travels through a medium with $n \approx 1$ (like the vacuum or air) will be 
 % \begin{aquation}

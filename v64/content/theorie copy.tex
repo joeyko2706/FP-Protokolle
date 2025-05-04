@@ -10,6 +10,19 @@ To split the beam, it first goes through the PBSC at a $45$ degree angle to the 
 \label{fig:interferometer}
 \end{figure}
 If the interferometer is perfectly adjusted, the resulting beams will overlap at all stages of the interferometer. To manipulate each beam individually, it is necessary to separate their superposition. To do so the laser, or in this case the mirror between the laser and the second mirror, has to be moved in the direction that is shown by the arrow in the picture. This results in the two beams following different paths after entering the PBSC. During this stage, one of the beams can be sent through a medium, making it possible to measure the medium's refraction index.\\
+An important quantity for interferometers is the contrast. The name is self-explanatory: Just like in the case of colours, where the contrast between two colours is highest if they are opposite to each other (for example black and white) and lowest if both colours are the same, the contrast in an interference picture is defined as 
+\begin{aquation}
+  K &= \frac{I_\text{max}-I_\text{min}}{I_\text{max} + I_\text{min}} \tc
+  \label{eq:contrast}
+\end{aquation}
+with minimal and maximal intensities $I_\text{min}$ and $I_\text{max}$.\\
+The closer the contrast is to $1$, the better it is. On the other hand, it is worse the lower it is. The ideal contrast therefore occurs for $I_\text{min}=0$, while the worst case is that there are no minima/maxima, meaning that $I_\text{min}=I_\text{max}$.\\
+In this experiment, the contrast will be measured dependent on the phase angle of a polarisation filter that has been positioned in the beam's path. For this, the contrast takes the form 
+\begin{aquation}
+K &= |\sin(2\phi)| \tp
+\end{aquation}
+This is a result from the considerations in \autoref{sec:Interference} and can be rescaled by a factor $B \in [0,1]$ to account for physical effects that reduce the contrast, like imperfect polarisation overlap, reduced coherence, etc.
+
 
 \subsection{Interference}
 \label{sec:Interference}
@@ -41,7 +54,7 @@ But the PBSC does not only split the beam, but also splits its polarisations. In
 \end{align}
 are very useful. Using these, the combined projection and translation operator representing the aperture from PBSC to the leaving point of the interferometer can be written as 
 \begin{align}
-  \hat{T}_\text{Int}(\delta) \coloneqq \left(\hat T(0)\hat{P}_L + \hat T(\delta)\hat{P}_R\right) \tp
+  \hat{T}_\text{Int}(\phi) \coloneqq \left(\hat T(0)\hat{P}_L + \hat T(\delta)\hat{P}_R\right) \tp
 \end{align}
 At this point, the requirement for the monochromaticity of the light used in interference experiments becomes manifest: The translation operator directly depends on the frequency $\omega$ (and therefore on the wavelength $\lambda$). For this reason multichromatic light would get a different phase shift for each colour, which would smear the interference pattern the further it derives from monochromaticity.\\
 Applying this translation operator on the electric field in \autoref{eq:E_pbsc} yields the split electric field 
@@ -56,41 +69,16 @@ To get the intensity from this, the equation
 \begin{align}
   I &\propto \langle \hspace{1mm} |\vec{E}|^2\rangle_t
 \end{align}
-with them time average operator $\langle\text{F}\rangle_t \coloneqq \frac{1}{T}\int_0^T dt F$ performing a time-integral over one period (here: $T = 2\pi$) is used.\\
+with them time average operator $\langle\text{...}\rangle_t$ performing a time-integral over one period (here: $T = 2\pi$) is used.\\
 Computing this for the given case, the intensity becomes
 \begin{align}
-  I &\propto \langle \hspace{1mm} |\cos\left(kz - \omega t\right) \cos(\phi) + \cos\left(kz - \omega t + \delta\right) \sin(\phi) |^2\rangle_t \tp
+  I \propto \langle \hspace{1mm} |\cos\left(kz - \omega t\right) \cos(\phi) + \cos\left(kz - \omega t + \delta\right) \sin(\phi) |^2\rangle_t \tp
 \end{align}
-The absolutes do not have any influence, as their argument is real and the square makes them obsolete. Therefore, using the fact that 
-\begin{align}
-  \langle \cos^2(\omega t + K)\rangle_t = \oh
-\end{align}
-and \begin{align}
-  \langle \cos(\omega t + K)\cos(\omega t + K + \delta)\rangle_t = \cos{\delta}
-\end{align}
-for any $K$, the intensity becomes 
+Time averaging a $\cos^2$ gives $\oh$, while time averaging the product of two cosines gives the cosine of their phase difference, here $\cos(\delta)$. This yields the intensity 
 \begin{align}
   I \propto 1 + 2 \cos(\phi)\sin(\phi) \cos(\delta) \tp
 \end{align}
-From this it follows that constructive interference happens at $\delta = 0$, while destructive interference happens at $\delta = \pi$, so the minimum/maximum intensity is 
-\begin{align}
-  I_\text{min/max} \propto 1 \pm 2 \cos(\phi)\sin(\phi) \tp
-\end{align}
-
-
-\subsection{The Contrast}
-An important quantity for interferometers is the contrast. The name is self-explanatory: Just like in the case of colours, where the contrast between two colours is highest if they are opposite to each other (for example black and white) and lowest if both colours are the same, the contrast in an interference picture is defined as 
-\begin{align}
-  K &\coloneqq \frac{I_\text{max}-I_\text{min}}{I_\text{max} + I_\text{min}} \tc
-  \label{eq:contrast}
-\end{align}
-with minimal and maximal intensities $I_\text{min}$ and $I_\text{max}$.\\
-The closer the contrast is to $1$, the better it is. On the other hand, it is worse the lower it is. The ideal contrast therefore occurs for $I_\text{min}=0$, while the worst case is that there are no minima/maxima, meaning that $I_\text{min}=I_\text{max}$.\\
-In this experiment, the contrast will be measured dependent on the phase angle of a polarisation filter that has been positioned in the beam's path. For this, the contrast takes the form 
-\begin{align}
-K &= \sin(2\phi) \tp
-\end{align}
-This is a result from the considerations in \autoref{sec:Interference} and can be rescaled by a factor $B \in [0,1]$ to account for physical effects that reduce the contrast, like imperfect polarisation overlap, reduced coherence, etc.
+From this it follows that constructive interference happens at $\delta = 0$, while destructive interference happens at $\delta = \pi$.
 
 
 \subsection{The Refraction Index}
@@ -109,19 +97,21 @@ In any medium with refractive index $n$, the phase shift that occurs when a beam
 
 
 \subsection{Solid Medium}
-Now first consider the case of the aforementioned rotation holder holding only one glass plate, with the second beam going through air with $n \approx 1$. This case is shown in \autoref{fig:glasplaettchen}. The phase shift then is 
+Now first consider the case of the aforementioned rotation holder holding only one glass plate, with the second beam going through air with $n \approx 1$. This case is shown in \autoref{fig:glasplaettchen}. The beam moving through air travels the optical length $\overline{\mathrm{AB}}$. The beam moving through the glass plate is refracted when entering and exiting the glas, causing it to travel on a different path with the optical length $\overline{\mathrm{CD}}$. This causes a phase difference for the beam moving through the medium compared to the direct path
 \begin{align}
-  \Delta \delta\brr{\theta} &= \frac{2\pi T}{\lambda_\text{vac}} \left(\frac{n-1}{2 n} \theta^2 + \mathcal{O}\brr{\theta^4}\right) \tp
+  \label{eq:Delta_phi}
+  \Delta \delta &= \frac{2\pi}{\lambda} \left( n \cdot \overline{\mathrm{CD}} - \overline{\mathrm{AB}}\right) \tp
 \end{align}
-For two glass plates that are tilted wrt each other at an angle of $20\text{°}$, the phase shift takes a different form. Taking the angle $\theta \rightarrow \theta \pm \theta_0$ for the two cases (with $\theta_0 = 10 \text{°}$) yields the two phase shifts
+Doing the trigonometrics gives $\overline{\mathrm{AB}} = \overline{\mathrm{CD}}\cos(\theta - \theta^\prime)$ and $\overline{\mathrm{CD}} = \frac{T}{\cos(\theta^\prime)}$. Inserting these into \autoref{eq:Delta_phi}, 
 \begin{align}
-  \Delta \delta_\pm\brr{\theta} &= \frac{2\pi T}{\lambda_\text{vac}} \left(\frac{n-1}{2 n} \brr{\theta \pm \theta_0}^2 + \mathcal{O}\brr{\theta^4} \right) \tp
+  \Delta \delta &= \frac{2\pi}{\lambda} \left( \frac{n - \cos(\theta - \theta^\prime)}{\cos(\theta^\prime)}\right)
 \end{align}
-To get the total phase shift for two plates, these two have to be summed over to get
+is obtained.\\
+Now consider both beams moving through glass plates. The resulting phase difference is a superposition  of the two $\Delta \varphi$ for both beams. One could think that the two respective lengths $\overline{\mathrm{AB}}$ cancel each other out. However, this is not the case since this length depends on the angle $\theta + \theta^\prime$, which is different for both glass plates. The respective angles are obtained by making the replacement $\theta \rightarrow \theta_\pm = \theta \pm \theta_0$. Inputting Snellius' law $\sin(\theta) = n \sin(\theta^\prime)$ before making the replacement and substracting the two phase shifts yields
 \begin{align}
-  \Delta \delta_\text{tot}\brr{\theta} &= \frac{2\pi T}{\lambda_\text{vac}} \left(\frac{n-1}{2 n} \brr{\theta^2 + \theta_0^2} + \mathcal{O}\brr{\theta^4} \right) \tp
+  \Delta \varphi &= \frac{2\pi T}{\lambda_\text{vac}} \lbr \frac{n - \cos\lbr\theta_+ - \arcsin\lbr \frac{\sin(\theta_+)}{n} \rbr \rbr}{\cos\lbr \arcsin\lbr\frac{\sin(\theta_+)}{n}\rbr \rbr} - \frac{n - \cos\lbr\theta_- - \arcsin\lbr \frac{\sin(\theta_-)}{n} \rbr\rbr}{\cos\lbr\arcsin\lbr\frac{\sin(\theta_-)}{n}\rbr\rbr}\rbr \tp
+  \label{eq:solid}
 \end{align}
-
 This quantity is the phase shift that is achieved when rotating the rotation holder over the angle $\theta$. It can exceed $2\pi$. Since the interference pattern measured by the photo diode is $2\pi$ periodic, it is possible that multiple maxima occur during this rotation. The number of maxima is 
 \begin{aquation}
   N &= \frac{\Delta \varphi}{2\pi} \tp

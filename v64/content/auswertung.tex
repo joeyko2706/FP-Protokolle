@@ -18,7 +18,7 @@ The mean values of the measurements and the with equation (\ref{eq:contrast}) ca
     \label{tab:values_polarisation}
     \begin{tabular}{c c c c}
         \toprule
-        $\vartheta \,/\, \si{\degree}$ & $I_{\text{max}}\,/\,\si{\volt}$ & $I_{\text{min}}\,/\,\si{\volt}$ & contrast \\
+        $\phi \,/\, \si{\degree}$ & $I_{\text{max}}\,/\,\si{\volt}$ & $I_{\text{min}}\,/\,\si{\volt}$ & contrast \\
         \midrule
         0.0 & $4.98$ & $4.52\pm0.01$ & $0.05$ \\
         15.0 & $4.37\pm0.02$ & $2.35\pm0.01$ & $0.30$ \\
@@ -40,12 +40,12 @@ The mean values of the measurements and the with equation (\ref{eq:contrast}) ca
 \noindent
 A graphical representation of the contrast in dependence on the polarisation angle is shown in figure \ref{fig:contrast}, while a theroetical prediction of the form
 \begin{align}
-    K = 2K_0\cdot|\sin(\vartheta-\delta)\cdot\cos(\vartheta-\delta)|
+    K = K_0\cdot|\sin^2(\phi-\kappa)|
 \end{align}
-is fitted to the data.
+is fitted to the data.\\
 The offset of $\delta$ that is used to compensate for deviations of the experimental setup and the amplitude $K_0$ are determined to be
 \begin{align*}
-    K_0=\SI{0.697\pm0.004}{} \quad \text{and} \quad \delta=\SI{1.620\pm0.010}{\degree}.
+    K_0=\SI{0.697\pm0.004}{} \quad \text{and} \quad \kappa=\SI{1.620\pm0.010}{\degree}.
 \end{align*}
 For the following measurements, the polarisation angle is set to $\SI{135}{\degree}$, as this angle provides the highest contrast.
 \begin{figure}[H]
@@ -79,7 +79,7 @@ The measurements of the refraction index of glass are shown in table \ref{tab:re
 \noindent
 To calculate the refraction index of glass, equation (\ref{eq:interference_maxima}) and equation (\ref{eq:solid}) is simplified to the form
 \begin{align}
-    n = \frac{1}{1-\frac{M\lambda_{\text{vacuum}}}{2d\theta^2}}
+    n = \frac{1}{1-\frac{M\lambda_{\text{vacuum}}}{2 L\theta^2}}
 \end{align}
 where $d$ denotes the thickness of the glass plate, $\lambda$ the wavelength of the light in vacuum and $M$ the measured maxima.
 The refraction index of glass is then calculated to be $n=\num{1.531 \pm 0.034}$.

@@ -88,9 +88,10 @@ with minimal and maximal intensities $I_\text{min}$ and $I_\text{max}$.\\
 The closer the contrast is to $1$, the better it is. On the other hand, it is worse the lower it is. The ideal contrast therefore occurs for $I_\text{min}=0$, while the worst case is that there are no minima/maxima, meaning that $I_\text{min}=I_\text{max}$.\\
 In this experiment, the contrast will be measured dependent on the phase angle of a polarisation filter that has been positioned in the beam's path. For this, the contrast takes the form 
 \begin{align}
+  \label{eq:contrast}
 K &= \sin(2\phi) \tp
 \end{align}
-This is a result from the considerations in \autoref{sec:Interference} and can be rescaled by a factor $B \in [0,1]$ to account for physical effects that reduce the contrast, like imperfect polarisation overlap, reduced coherence, etc.
+This is a result from the considerations in \autoref{sec:Interference} and can be rescaled by a factor $K_0 \in [0,1]$ to account for physical effects that reduce the contrast, like imperfect polarisation overlap, reduced coherence, etc.
 
 
 \subsection{The Refraction Index}
@@ -111,15 +112,15 @@ In any medium with refractive index $n$, the phase shift that occurs when a beam
 \subsection{Solid Medium}
 Now first consider the case of the aforementioned rotation holder holding only one glass plate, with the second beam going through air with $n \approx 1$. This case is shown in \autoref{fig:glasplaettchen}. The phase shift then is 
 \begin{align}
-  \Delta \delta\brr{\theta} &= \frac{2\pi T}{\lambda_\text{vac}} \left(\frac{n-1}{2 n} \theta^2 + \mathcal{O}\brr{\theta^4}\right) \tp
+  \Delta \delta\brr{\theta} &= \frac{2\pi L}{\lambda_\text{vac}} \left(\frac{n-1}{2 n} \theta^2 + \mathcal{O}\brr{\theta^4}\right) \tp
 \end{align}
 For two glass plates that are tilted wrt each other at an angle of $20\text{°}$, the phase shift takes a different form. Taking the angle $\theta \rightarrow \theta \pm \theta_0$ for the two cases (with $\theta_0 = 10 \text{°}$) yields the two phase shifts
 \begin{align}
-  \Delta \delta_\pm\brr{\theta} &= \frac{2\pi T}{\lambda_\text{vac}} \left(\frac{n-1}{2 n} \brr{\theta \pm \theta_0}^2 + \mathcal{O}\brr{\theta^4} \right) \tp
+  \Delta \delta_\pm\brr{\theta} &= \frac{2\pi L}{\lambda_\text{vac}} \left(\frac{n-1}{2 n} \brr{\theta \pm \theta_0}^2 + \mathcal{O}\brr{\theta^4} \right) \tp
 \end{align}
 To get the total phase shift for two plates, these two have to be summed over to get
 \begin{align}
-  \Delta \delta_\text{tot}\brr{\theta} &= \frac{2\pi T}{\lambda_\text{vac}} \left(\frac{n-1}{2 n} \brr{\theta^2 + \theta_0^2} + \mathcal{O}\brr{\theta^4} \right) \tp
+  \Delta \delta_\text{tot}\brr{\theta} &= \frac{2\pi L}{\lambda_\text{vac}} \left(\frac{n-1}{2 n} \brr{\theta^2 + \theta_0^2} + \mathcal{O}\brr{\theta^4} \right) \tp
 \end{align}
 
 This quantity is the phase shift that is achieved when rotating the rotation holder over the angle $\theta$. It can exceed $2\pi$. Since the interference pattern measured by the photo diode is $2\pi$ periodic, it is possible that multiple maxima occur during this rotation. The number of maxima is 

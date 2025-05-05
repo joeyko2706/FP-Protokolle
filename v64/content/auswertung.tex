@@ -20,19 +20,19 @@ The mean values of the measurements and the with equation (\ref{eq:contrast}) ca
         \toprule
         $\phi \,/\, \si{\degree}$ & $I_{\text{max}}\,/\,\si{\volt}$ & $I_{\text{min}}\,/\,\si{\volt}$ & contrast \\
         \midrule
-        0.0 & $4.98$ & $4.52\pm0.01$ & $0.05$ \\
-        15.0 & $4.37\pm0.02$ & $2.35\pm0.01$ & $0.30$ \\
-        30.0 & $3.91$ & $1.15\pm0.01$ & $0.55$ \\
-        45.0 & $4.45$ & $0.81$ & $0.69$ \\
-        60.0 & $5.86\pm0.01$ & $1.07\pm0.01$ & $0.69$ \\
-        75.0 & $6.53\pm0.05$ & $2.29\pm0.01$ & $0.48$ \\
-        90.0 & $7.10\pm0.05$ & $5.38\pm0.04$ & $0.14$ \\
+        0.0 & $4.98\pm0$ & $4.52\pm0.01$ & $0.05\pm0$ \\
+        15.0 & $4.37\pm0.02$ & $2.35\pm0.01$ & $0.30\pm0$ \\
+        30.0 & $3.91\pm0$ & $1.15\pm0.01$ & $0.55\pm0$ \\
+        45.0 & $4.45\pm0$ & $0.81\pm0$ & $0.69\pm0$ \\
+        60.0 & $5.86\pm0.01$ & $1.07\pm0.01$ & $0.69\pm0$ \\
+        75.0 & $6.53\pm0.05$ & $2.29\pm0.01$ & $0.48\pm0$ \\
+        90.0 & $7.10\pm0.05$ & $5.38\pm0.04$ & $0.14\pm0$ \\
         105.0 & $9.92\pm0.11$ & $4.42\pm0.07$ & $0.38\pm0.01$ \\
-        120.0 & $13.15\pm0.13$ & $2.71\pm0.04$ & $0.66$ \\
-        135.0 & $17.61\pm1.42$ & $1.65$ & $0.83\pm0.01$ \\
-        150.0 & $12.94\pm0.10$ & $2.53\pm0.01$ & $0.67$ \\
-        165.0 & $9.87\pm0.08$ & $3.86\pm0.03$ & $0.44$ \\
-        180.0 & $5.33\pm0.04$ & $4.78\pm0.01$ & $0.05$ \\
+        120.0 & $13.15\pm0.13$ & $2.71\pm0.04$ & $0.66\pm0$ \\
+        135.0 & $17.61\pm1.42$ & $1.65\pm0$ & $0.83\pm0.01$ \\
+        150.0 & $12.94\pm0.10$ & $2.53\pm0.01$ & $0.67\pm0$ \\
+        165.0 & $9.87\pm0.08$ & $3.86\pm0.03$ & $0.44\pm0$ \\
+        180.0 & $5.33\pm0.04$ & $4.78\pm0.01$ & $0.05\pm0$ \\
         \bottomrule
     \end{tabular}
 \end{table}
@@ -43,7 +43,7 @@ A graphical representation of the contrast in dependence on the polarisation ang
     K = K_0\cdot|\sin^2(\phi-\kappa)|
 \end{align}
 is fitted to the data.\\
-The offset of $\delta$ that is used to compensate for deviations of the experimental setup and the amplitude $K_0$ are determined to be
+The offset of $\kappa$ that is used to compensate for deviations of the experimental setup and the amplitude $K_0$ are determined to be
 \begin{align*}
     K_0=\SI{0.697\pm0.004}{} \quad \text{and} \quad \kappa=\SI{1.620\pm0.010}{\degree}.
 \end{align*}
@@ -95,26 +95,26 @@ The original measurement values are shown in figure \ref{fig:original_data} in a
         \toprule
         pressure / $\si{\milli\bar}$  & counts \\    
         \midrule
-        50.0 & $2.0$\\
-        100.0 & $4.0$\\
-        150.0 & $6.0$\\
-        200.0 & $8.0$\\
-        250.0 & $10.0$\\
-        300.0 & $12.0$\\
-        350.0 & $14.0$\\
-        400.0 & $16.0$\\
+        50.0 & $2.0\pm0$\\
+        100.0 & $4.0\pm0$\\
+        150.0 & $6.0\pm0$\\
+        200.0 & $8.0\pm0$\\
+        250.0 & $10.0\pm0$\\
+        300.0 & $12.0\pm0$\\
+        350.0 & $14.0\pm0$\\
+        400.0 & $16.0\pm0$\\
         450.0 & $18.5\pm0.6$\\
-        500.0 & $21.0$\\
-        550.0 & $23.0$\\
-        600.0 & $25.0$\\
-        650.0 & $27.0$\\
-        700.0 & $29.0$\\
+        500.0 & $21.0\pm0$\\
+        550.0 & $23.0\pm0$\\
+        600.0 & $25.0\pm0$\\
+        650.0 & $27.0\pm0$\\
+        700.0 & $29.0\pm0$\\
         750.0 & $31.0\pm0.6$\\
         800.0 & $33.0\pm0.6$\\
-        850.0 & $36.0$\\
-        900.0 & $38.0$\\
-        950.0 & $40.0$\\
-        1000.0 & $42.0$\\
+        850.0 & $36.0\pm0$\\
+        900.0 & $38.0\pm0$\\
+        950.0 & $40.0\pm0$\\
+        1000.0 & $42.0\pm0$\\
     \end{tabular}
     \caption{Measured counts for the refraction index of air in dependence of the pressure.}
     \label{tab:refraction_air}
@@ -132,18 +132,18 @@ The Lorentz-Lorenz law from equation (\ref{eq:Lorentz-Lorenz}) can bew simplifie
 \end{align}
 This way the refraction index of air can be determined via a linear fit to the data of the form
 \begin{align}
-    n(p, T\equiv T_0=\SI{288.15}{\kelvin}) = \frac 32 \frac{p}{R\cdot T_0}\cdot a + b,
+    n(p, T=\SI{293.35}{\kelvin}) = \frac 32 \frac{p}{R\cdot T_0}\cdot a + b,
 \end{align}
 with the free parameters $a$ and $b$.
 The fit yields the parameters
 \begin{align*}
-    a = \SI{0\pm 10e-5}{\per\milli\bar} \quad \text{and} \quad b = 1 - \num{7\pm5e-7}.
+    a = 0\pm (2.4\cdot 10^{-5})\, \frac1{\text{mbar}} \quad \text{and} \quad b = 1 - \num{7\pm5e-7}.
 \end{align*}
-Thus, the experimental value for the refraction index of air is $n_{\text{air, exp}}=1-\num{7\pm5e-7}$.
-Similarly, the refraction index of air at standard conditions, namely an atmospheric pressure of $p_0=\SI{1013.25}{\milli\bar}$ and a room temperature of $T_0=\SI{288.15}{\kelvin}$, is calculated using the same measurements to be $n_{\text{air, standard}}=1\pm\num{6e-5}$.
+Thus, the experimental value for the refraction index of air is $n_{\text{air, exp}}=1-\num{7\pm5e-7}$. \newline
+Similarly, the refraction index of air at standard conditions, namely an atmospheric pressure of $p_0=\SI{1013.25}{\milli\bar}$ and a room temperature of $T_0=\SI{288.15}{\kelvin}$, is calculated using the same measurements to be $n_{\text{air, standard}}=1\pm(\num{6e-5})$.
 \begin{figure}[H]
     \centering
     \includegraphics[width=0.75\textwidth]{build/refraction_index.pdf}
-    \caption{Graphical representation of the refraction index of air in dependence of the pressure.}
+    \caption{Graphical representation of the refraction index of air in dependence of the pressure at the measured room temperature of $\SI{20.2}{\celsius}$.}
     \label{fig:refraction_index}
 \end{figure}

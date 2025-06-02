@@ -100,20 +100,22 @@ plt.tight_layout()
 plt.savefig('build/refraction_index.pdf')
 # plt.show()
 
-n_air_exp = 1- refraction_index(0, ufloat(popt[0], np.sqrt(pcov[0,0])), ufloat(popt[1], np.sqrt(pcov[1,1])))
+# print(refraction_index(1013.25, popt[0], popt[1], T=-288.15, R=constants.R))
+n_air_ex = refraction_index(1000, *popt)
+n_air_std = refraction_index(1013.25, 1, 1, T=288.15, R=constants.R)
 n_glass_exp = refraction_index_glass(m_bar, 10)
 
 print('--------Brechungsindexbestimmung--------')
 print(f'n_glass_exp = {n_glass_exp}')
 print(f'a = {ufloat(popt[0], np.sqrt(pcov[0,0]))}')
-print(f'b = 1 - {1-ufloat(popt[1], np.sqrt(pcov[1,1]))}')
-print(f'n_air_exp = 1 - {n_air_exp}')
-print(f'n_standard_air = {refraction_index(1013, ufloat(popt[0], np.sqrt(pcov[0,0])), ufloat(popt[1], np.sqrt(pcov[1,1])), T=288.15)}')
+print(f'b = {ufloat(popt[1], np.sqrt(pcov[1,1]))}')
+print(f'n_air_exp = {n_air_ex:.10f}')
+print(f'n_standard_air = {refraction_index(1013.25, ufloat(popt[0], np.sqrt(pcov[0,0])), ufloat(popt[1], np.sqrt(pcov[1,1])), T=-288.15, R=constants.R):.10f}')
 print('--------Relative Abweichungen--------')
 print(f'Kontrast: {100*(k_0-1)/1:.2f}%')
 print(f'Brechungsindex Glas: {100*(n_glass_exp/n_glas_theory-1):.2f}%')
-print(f'Brechungsindex Luft, normal: {100*(refraction_index(0, *popt)-1)/1.00027653:.8f}%')
-print(f'Brechungsindex Luft, standard: {100*(1-refraction_index(1013, ufloat(popt[0], np.sqrt(pcov[0,0])), ufloat(popt[1], np.sqrt(pcov[1,1])), T=288.15)/1.00027653)}')
+print(f'Brechungsindex Luft, normal: {100*(n_air_ex-1)/1.00027653:.8f}%')
+print(f'Brechungsindex Luft, standard: {100*(1-refraction_index(1013, ufloat(popt[0], np.sqrt(pcov[0,0])), ufloat(popt[1], np.sqrt(pcov[1,1])), T=-288.15)/1.00027653):.3f}%')
 
 
 # '''Print the data to use in Latex table'''

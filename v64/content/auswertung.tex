@@ -79,7 +79,7 @@ The measurements of the refraction index of glass are shown in table \ref{tab:re
 \noindent
 To calculate the refraction index of glass, equation (\ref{eq:delta_tot}) is simplified using equation (\ref{eq:number_of_maxima}) to the form
 \begin{align}
-    n = \frac{1}{1-\frac{M\lambda_{\text{vac}}}{2 L(\theta^2 + \theta_0^2)}}
+    n = \frac{1}{1-\frac{M\lambda_{\text{vac}}}{2 L(2\theta \cdot \theta_0)}}
 \end{align}
 where $L$ denotes the thickness of the glass plate, $\lambda_\text{vac}$ the wavelength of the light in vacuum and $M$ the measured maxima.
 The refraction index of glass is then calculated to be $n=\num{1.531 \pm 0.034}$.
@@ -137,9 +137,9 @@ This way the refraction index of air can be determined via a linear fit to the d
 with the free parameters $a$ and $b$.
 The fit yields the parameters
 \begin{align*}
-    a = 0\pm (2.4\cdot 10^{-5})\, \frac1{\text{mbar}} \quad \text{and} \quad b = 1 - \num{7\pm5e-7}.
+    a = 0\pm (2.4\cdot 10^{-11})\, \frac1{\text{mbar}} \quad \text{and} \quad b = 0.9999993 \pm 0.00000035.
 \end{align*}
-Thus, the experimental value for the refraction index of air is $n_{\text{air, exp}}=1-\num{7\pm5e-7}$. \newline
+Thus, the experimental value for the refraction index of air is $n_{\text{air, exp}}=\num{1.000276\pm0.000005}$. \newline
 Similarly, the refraction index of air at standard conditions, namely an atmospheric pressure of $p_0=\SI{1013.25}{\milli\bar}$ and a room temperature of $T_0=\SI{288.15}{\kelvin}$, is calculated using the same measurements to be $n_{\text{air, standard}}=1\pm(\num{6e-5})$.
 \begin{figure}[H]
     \centering

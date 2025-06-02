@@ -26,7 +26,7 @@ Inducing a phase shift $\delta$ in a beam is achieved by application of the tran
 \begin{align}
   \hat T(\delta) \coloneqq \exp\left(\frac{\delta}{\omega} \partial_t\right) \tp
 \end{align}
-But the PBSC does not only split the beam, but also splits its polarisations. In this experiment, the PBSC is positioned in a $\frac{\pi}{4}$ angle to the incoming beam, so that the intensities of the transmitted and that of the reflected polarisation are the same. For simplicity, the incoming beam's linear polarisation will be taken to have $\delta = \frac{\pi}{4}$, because this way, the $x$- and $y$-components have the same amplitude of $\frac{E_0}{\sqrt{2}}$. Due to the PBSC's tilt, the spllitting surface is aligned with the beam's $y$-component. This way, the $y$-component is transmitted, while the $x$-component undergoes reflection and phase-shift, which is why the full aperture from the PBSC to the interferometer's end also has to project the $x$- and $y$-components accordingly. For this, the parity operators 
+But the PBSC does not only split the beam, but also splits its polarisations. In this experiment, the PBSC is positioned in a $\frac{\pi}{4}$ angle to the incoming beam, so that the intensities of the transmitted and that of the reflected polarisation are the same. For simplicity, the incoming beam's linear polarisation will be taken to have $\frac{\pi}{4}$, because this way, the $x$- and $y$-components have the same amplitude of $\frac{E_0}{\sqrt{2}}$. Due to the PBSC's tilt, the spllitting surface is aligned with the beam's $y$-component. This way, the $y$-component is transmitted, while the $x$-component undergoes reflection and phase-shift, which is why the full aperture from the PBSC to the interferometer's end also has to project the $x$- and $y$-components accordingly. For this, the parity operators 
 \begin{align}
   \hat{P}_L &=
   \begin{pmatrix}
@@ -46,7 +46,7 @@ are very useful. Using these, the combined projection and translation operator r
 At this point, the requirement for the monochromaticity of the light used in interference experiments becomes manifest: The translation operator directly depends on the frequency $\omega$ (and therefore on the wavelength $\lambda$). For this reason multichromatic light would get a different phase shift for each colour, which would smear the interference pattern the further it derives from monochromaticity.\\
 Applying this translation operator on the electric field in \autoref{eq:E_pbsc} yields the split electric field 
 \begin{align}
-  \vec{E}_\text{Int} &= \hat{T}_\text{Int}(\phi) E_\text{PBSC} &= \frac{E_0}{\sqrt{2}} \left( \cos\left(kz - \omega t\right) \cos(\phi)\vec{e}_x + \cos\left(kz - \omega t + \delta\right) \sin(\phi) \vec{e}_y \right) \tp
+  \vec{E}_\text{Int} &= \hat{T}_\text{Int}(\delta) E_\text{PBSC} &= \frac{E_0}{\sqrt{2}} \left( \cos\left(kz - \omega t\right) \cos(\phi)\vec{e}_x + \cos\left(kz - \omega t + \delta\right) \sin(\phi) \vec{e}_y \right) \tp
 \end{align}
 Now, there is only one thing that prohibits the two partial beams from interfering with each other: The fact that their polarisations are perpendicular to each other. To fix this, a final polarisation filter is placed in the reunited beams' path, at an angle of $\frac{\pi}{4}$. This reduces the respective amplitudes by a factor of $\odiv{\sqrt{2}}$. The final electric field is 
 \begin{align}
@@ -121,13 +121,13 @@ For two glass plates that are tilted wrt each other at an angle of $20\text{°}$
 To get the total phase shift for two plates, these two have to be summed over to get
 \begin{align}
   \label{eq:delta_tot}
-  \Delta \delta_\text{tot}\brr{\theta} &= \frac{2\pi L}{\lambda_\text{vac}} \left(\frac{n-1}{2 n} \brr{\theta^2 + \theta_0^2} + \mathcal{O}\brr{\theta^4} \right) \tp
+  \Delta \delta_\text{tot}\brr{\theta} &= \frac{2\pi L}{\lambda_\text{vac}} \left(\frac{n-1}{n} \theta \theta_0 + \mathcal{O}\brr{\theta^4} \right) \tp
 \end{align}
 
 This quantity is the phase shift that is achieved when rotating the rotation holder over the angle $\theta$. It can exceed $2\pi$. Since the interference pattern measured by the photo diode is $2\pi$ periodic, it is possible that multiple maxima occur during this rotation. The number of maxima is 
 \begin{align}
   \label{eq:number_of_maxima}
-  M &= \frac{\Delta \varphi}{2\pi} \tp
+  M &= \frac{\Delta \delta}{2\pi} \tp
 \end{align}
 
 % \begin{figure}
@@ -154,11 +154,11 @@ This quantity is the phase shift that is achieved when rotating the rotation hol
 \subsection{Gaseous Medium}
 To measure this index, one of the beam is lead through a gas cell. The difference in the speed of light inside the cell yields a phase difference 
 \begin{aquation}
-  \Delta \varphi &= \frac{2 \pi L}{\lambda_\text{vac}}\left(n-1\right)
+  \Delta \delta &= \frac{2 \pi L}{\lambda_\text{vac}}\left(n-1\right)
 \end{aquation}
 between the two beams, which results in them interfering with each other after being reunited. The number of maxima of interference is proportional to the phase difference. It is 
 \begin{aquation}
-  M &= \frac{\Delta \varphi}{2 \pi} \tp
+  M &= \frac{\Delta \delta}{2 \pi} \tp
   \label{eq:interference_maxima}
 \end{aquation}
 The refractive index is pressure and temperature dependent. To relate it to these quantities, the Lorentz-Lorenz equation 

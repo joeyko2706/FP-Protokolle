@@ -26,7 +26,7 @@ Inducing a phase shift $\delta$ in a beam is achieved by application of the tran
 \begin{align}
   \hat T(\delta) \coloneqq \exp\left(\frac{\delta}{\omega} \partial_t\right) \tp
 \end{align}
-But the PBSC does not only split the beam, but also splits its polarisations. In this experiment, the PBSC is positioned in a $\frac{\pi}{4}$ angle to the incoming beam, so that the intensities of the transmitted and that of the reflected polarisation are the same. For simplicity, the incoming beam's linear polarisation will be taken to have $\frac{\pi}{4}$, because this way, the $x$- and $y$-components have the same amplitude of $\frac{E_0}{\sqrt{2}}$. Due to the PBSC's tilt, the spllitting surface is aligned with the beam's $y$-component. This way, the $y$-component is transmitted, while the $x$-component undergoes reflection and phase-shift, which is why the full aperture from the PBSC to the interferometer's end also has to project the $x$- and $y$-components accordingly. For this, the parity operators 
+But the PBSC does not only split the beam, but also splits its polarisations. In this experiment, the PBSC is positioned in a $\frac{\pi}{4}$ angle relative to the incoming beam, so that the intensities of the transmitted and that of the reflected polarisation are the same. Due to the PBSC's tilt, the spllitting surface is aligned with the beam's $y$-component. This way, the $y$-component is transmitted, while the $x$-component undergoes reflection and phase-shift, which is why the full aperture from the PBSC to the interferometer's end also has to project the $x$- and $y$-components accordingly. For this, the parity operators 
 \begin{align}
   \hat{P}_L &=
   \begin{pmatrix}
@@ -63,12 +63,12 @@ Computing this for the given case, the intensity becomes
 \end{align}
 The absolutes do not have any influence, as their argument is real and the square makes them obsolete. Therefore, using the fact that 
 \begin{align}
-  \langle \cos^2(\omega t + K)\rangle_t = \oh
+  \langle \cos^2(\omega t)\rangle_t = \oh
 \end{align}
 and \begin{align}
-  \langle \cos(\omega t + K)\cos(\omega t + K + \delta)\rangle_t = \cos{\delta}
+  \langle \cos(\omega t)\cos(\omega t + \delta)\rangle_t = \cos{\delta} \tc
 \end{align}
-for any $K$, the intensity becomes 
+the intensity becomes 
 \begin{align}
   I \propto 1 + 2 \cos(\phi)\sin(\phi) \cos(\delta) \tp
 \end{align}
@@ -105,7 +105,7 @@ Plugging this into the vacuum dispersion relation, the resulting refraction inde
 \end{aquation}
 In any medium with refractive index $n$, the phase shift that occurs when a beam has moved a distance $L$ is 
 \begin{aquation}
-  \varphi &= \frac{2\pi}{\lambda} n L \tp
+  \delta &= \frac{2\pi}{\lambda} n L \tp
 \end{aquation}
 
 
